@@ -44,10 +44,11 @@ class _HomePage extends State<HomePage>{
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
+          Padding(padding: EdgeInsets.all(100)),
           const Image(image: AssetImage("assets/images/place_holder.png"),width: 100, height: 100),
           Column(mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [ 
-          Padding(padding: EdgeInsets.all(200)),
+          Padding(padding: EdgeInsets.all(100)),
           ElevatedButton(onPressed: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => const Account()));
           } , child: Text("Sign In"),),
@@ -55,7 +56,7 @@ class _HomePage extends State<HomePage>{
           ElevatedButton(onPressed: (){
              Navigator.push(context, MaterialPageRoute(builder: (context) => const Account()));
           }, child: Text("Create Account")),
-          Padding(padding: EdgeInsets.all(30)),
+          Padding(padding: EdgeInsets.all(20)),
           TextButton(onPressed: null,child: Text("Continue as Guest"))
           ],)
           ]
