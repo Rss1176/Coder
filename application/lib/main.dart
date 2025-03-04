@@ -11,9 +11,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Home Page',
+      title: 'Splash Screen',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue ),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 77, 175, 255)),
         useMaterial3: true,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
@@ -23,7 +23,19 @@ class MyApp extends StatelessWidget {
           )
         )
       ),
-      home: const HomePage(),
+      home: Scaffold(
+        body: Stack(
+          children: <Widget>[
+            Positioned.fill(
+              child: Image.asset(
+                "assets/images/Background Main_Dark Mode_No Scroll.png",
+                fit: BoxFit.cover,
+              ),
+            ),
+            const HomePage(),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -38,30 +50,46 @@ class HomePage extends StatefulWidget {
 class _HomePage extends State<HomePage>{
   @override
   Widget build(BuildContext context){
-    return Scaffold(
-      backgroundColor: Colors.blue,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-          Padding(padding: EdgeInsets.all(100)),
-          const Image(image: AssetImage("assets/images/place_holder.png"),width: 100, height: 100),
-          Column(mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [ 
-          Padding(padding: EdgeInsets.all(100)),
-          ElevatedButton(onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const Account()));
-          } , child: Text("Sign In"),),
-          Padding(padding: EdgeInsets.all(10)),
-          ElevatedButton(onPressed: (){
-             Navigator.push(context, MaterialPageRoute(builder: (context) => const Account()));
-          }, child: Text("Create Account")),
-          Padding(padding: EdgeInsets.all(20)),
-          TextButton(onPressed: null,child: Text("Continue as Guest"))
-          ],)
-          ]
-        )
-      )
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          SizedBox(height:150.0),
+          const Image(image: AssetImage("assets/images/logo_darkmode.png"), width: 800, height: 125),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              SizedBox(height:220.0),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const Account()));
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 77, 175, 255),
+                  minimumSize: Size(350, 50),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                ),
+                child: Text("Sign in", style: TextStyle(color: Colors.white)),
+              ),
+              SizedBox(height:8),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const Account()));
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 77, 175, 255),
+                  minimumSize: Size(350, 50),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                ),
+                child: Text("Create an Account", style: TextStyle(color: Colors.white)),
+              ),
+              SizedBox(height:25.0),
+              TextButton(onPressed: null, child: Text("Continue as Guest")),
+              SizedBox(height:2.0),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
