@@ -56,7 +56,7 @@ class _HomePage extends State<HomePage>{
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           SizedBox(height:150.0),
-          const Image(image: AssetImage("assets/images/logo_darkmode.png"), width: 800, height: 125),
+          const Image(image: AssetImage("assets/images/logo_darkmode.png"), width: 375, height: 125),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
