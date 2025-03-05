@@ -9,7 +9,7 @@ class Account extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const AccountPage(title: 'Account Page');
+    return const AccountPage(title: 'Login');
   }
 }
 
@@ -23,7 +23,19 @@ class AccountPage extends StatefulWidget {
 class _AccountPageState extends State<AccountPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return 
+    Scaffold(
+      body: Stack(
+        children: <Widget>[
+          Positioned.fill(
+            child: Image.asset(
+              "assets/images/Background Main_Dark Mode_No Scroll.png",
+              //can be changed for diff background
+              fit:BoxFit.cover
+            ),
+          )
+        ],
+      ),
       backgroundColor: Colors.blue,
       appBar: AppBar(
         backgroundColor: Colors.blue,

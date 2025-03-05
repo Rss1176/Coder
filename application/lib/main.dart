@@ -1,3 +1,4 @@
+import 'package:coder_application/Create.dart';
 import 'package:coder_application/account.dart';
 import 'package:flutter/material.dart';
 
@@ -74,7 +75,7 @@ class _HomePage extends State<HomePage>{
               SizedBox(height:8),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const Account()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const Create()));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 77, 175, 255),
