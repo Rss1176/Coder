@@ -53,42 +53,51 @@ class _HomePage extends State<HomePage>{
   Widget build(BuildContext context){
     return Center(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          SizedBox(height:150.0),
-          const Image(image: AssetImage("assets/images/logo_darkmode.png"), width: 375, height: 125),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              SizedBox(height:220.0),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const Account()));
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 77, 175, 255),
-                  minimumSize: Size(350, 50),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                ),
-                child: Text("Sign in", style: TextStyle(color: Colors.white)),
+          SizedBox(
+            height:180.0),
+          Image(
+            image: AssetImage("assets/images/image_welcometo.png"),
+            width: 375, 
+            height: 50),
+          Image(
+            image: AssetImage("assets/images/logo_darkmode.png"), 
+            width: 375, 
+            height: 125),
+            SizedBox(height:250.0),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const Account()));
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 77, 175, 255),
+                minimumSize: Size(350, 50),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
               ),
-              SizedBox(height:8),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const Create()));
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 77, 175, 255),
-                  minimumSize: Size(350, 50),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                ),
-                child: Text("Create an Account", style: TextStyle(color: Colors.white)),
+              child: Text("Sign in", 
+                style: TextStyle(color: Colors.white)),
+            ),
+            SizedBox(
+              height:8),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const Create()));
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 77, 175, 255),
+                minimumSize: Size(350, 50),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
               ),
-              SizedBox(height:25.0),
-              TextButton(onPressed: null, child: Text("Continue as Guest")),
-              SizedBox(height:2.0),
-            ],
-          ),
+              child: Text("Create an Account", style: TextStyle(color: Colors.white)),
+            ),
+            SizedBox(
+              height:25.0),
+            TextButton(
+              onPressed: null, 
+              child: Text("Continue as Guest")),
+            SizedBox(
+              height:2.0),
         ],
       ),
     );
