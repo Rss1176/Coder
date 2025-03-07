@@ -9,39 +9,75 @@ class Account extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const AccountPage(title: 'Login');
+    return Scaffold(
+        body: Stack(
+          children: <Widget>[
+            Positioned.fill(
+              child: Image.asset(
+                "assets/images/Background Main_Dark Mode_No Scroll.png",
+                fit: BoxFit.cover,
+              ),
+            ),
+            const LoginPage(),
+          ],
+        ),
+      );
   }
 }
 
-class AccountPage extends StatefulWidget {
-  const AccountPage({super.key, required this.title});
-  final String title;
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
-  State<AccountPage> createState() => _AccountPageState();
+  State<LoginPage> createState() => _LoginPage();
 }
 
-class _AccountPageState extends State<AccountPage> {
+class _LoginPage extends State<LoginPage>{
   @override
-  Widget build(BuildContext context) {
-    return 
-    Scaffold(
-      body: Stack(
+  Widget build(BuildContext context){
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Positioned.fill(
-            child: Image.asset(
-              "assets/images/Background Main_Dark Mode_No Scroll.png",
-              //can be changed for diff background
-              fit:BoxFit.cover
-            ),
-          )
+          SizedBox(
+            height:20.0),
+          FloatingActionButton(
+              onPressed: () {
+                Navigator.pop(context);},
+              shape: CircleBorder(),
+              backgroundColor: const Color.fromARGB(255, 77, 175, 255),
+              child: const Icon(Icons.close, color: Colors.white)),
+          SizedBox(
+            height:20),
+          SizedBox(height:50.0),
+          Padding(padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            child: TextFormField(
+              decoration: InputDecoration(
+                hintText: " ",
+                labelText: "Username or Email",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15.0))))),
+          SizedBox(height: 15.0),
+          Padding(padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            child: TextFormField(
+              decoration: InputDecoration(
+                hintText: " ",
+                labelText: "Password",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15.0))))),
+          SizedBox(height:15.0),
+          ElevatedButton(
+              onPressed: () {
+                // Navigator.push(context, MaterialPageRoute(builder: (context) => const Create()));
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 77, 175, 255),
+                minimumSize: Size(350, 50),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
+              child: Text("Sign in", style: TextStyle(color: Colors.white))),
+          SizedBox(height:15.0),
         ],
       ),
-      backgroundColor: Colors.blue,
-      appBar: AppBar(
-        backgroundColor: Colors.blue,
-        title: Text(widget.title),
-        leading: IconButton(icon: Icon(Icons.arrow_back), iconSize: 20, onPressed: (){Navigator.pop(context);},)
-      ),
-      );
+    );
   }
 }

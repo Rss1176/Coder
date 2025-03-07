@@ -20,8 +20,8 @@ flutter:
   assets:
   - assets/images/
   - assets/images/Background Main_Dark Mode_No Scroll.png
-  # - assets/fonts/LuckiestGuy-Regular.ttf
 
-  # fonts:
-  # - family: LuckiestGuy
- 
+fonts:
+  - family: LuckiestGuy
+    fonts:
+      - asset: assets/fonts/LuckiestGuy-Regular.ttf
