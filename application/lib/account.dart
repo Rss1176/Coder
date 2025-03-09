@@ -41,28 +41,43 @@ class _LoginPage extends State<LoginPage>{
         children: <Widget>[
           SizedBox(
             height:20.0),
-          FloatingActionButton(
-              onPressed: () {
-                Navigator.pop(context);},
-              shape: CircleBorder(),
-              backgroundColor: const Color.fromARGB(255, 77, 175, 255),
-              child: const Icon(Icons.close, color: Colors.white)),
+          Align(
+            alignment: Alignment.topRight,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: SizedBox(
+                height: 50.0,
+                width: 50.0,
+                child: FloatingActionButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  shape: CircleBorder(
+                    side: BorderSide(color: const Color.fromARGB(255, 56, 62, 65), width: 1.0),
+                  ),
+                  elevation: 0.0,
+                  backgroundColor: const Color.fromARGB(45, 255, 255, 255),
+                  child: const Icon(Icons.close, color: Color.fromARGB(255, 56, 62, 65)))))),
           SizedBox(
             height:20),
-          SizedBox(height:50.0),
           Padding(padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: TextFormField(
               decoration: InputDecoration(
                 hintText: " ",
                 labelText: "Username or Email",
+                filled: true,
+                fillColor: const Color.fromARGB(45, 255, 255, 255),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15.0))))),
           SizedBox(height: 15.0),
           Padding(padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: TextFormField(
+              obscureText: true,
               decoration: InputDecoration(
                 hintText: " ",
                 labelText: "Password",
+                filled: true,
+                fillColor: const Color.fromARGB(45, 255, 255, 255),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15.0))))),
           SizedBox(height:15.0),
@@ -75,7 +90,8 @@ class _LoginPage extends State<LoginPage>{
                 minimumSize: Size(350, 50),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
               child: Text("Sign in", style: TextStyle(color: Colors.white))),
-          SizedBox(height:15.0),
+          SizedBox(
+            height:300.0),
         ],
       ),
     );
