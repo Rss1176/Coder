@@ -5,6 +5,7 @@
 *.pbxuser
 *.perspectivev3
 **/*sync/
+.DS Store
 .sconsign.dblite
 .tags*
 **/.vagrant/
