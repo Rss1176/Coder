@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
             foregroundColor: Colors.blue,
             backgroundColor: Colors.black,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20), side: BorderSide.none)
-          )
+          ),
         )
       ),
       home: Scaffold(
