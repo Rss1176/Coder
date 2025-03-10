@@ -1,4 +1,8 @@
+import 'package:coder_application/create.dart';
+import 'package:coder_application/splash.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() {
   runApp(const Account());
@@ -18,7 +22,7 @@ class Account extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            const LoginPage(),
+            LoginPage(),
           ],
         ),
       );
@@ -33,6 +37,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPage extends State<LoginPage>{
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context){
     return Center(
@@ -60,30 +69,75 @@ class _LoginPage extends State<LoginPage>{
                   child: const Icon(Icons.close, color: Color.fromARGB(255, 56, 62, 65)))))),
           SizedBox(
             height:20),
-          Padding(padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: TextFormField(
-              decoration: InputDecoration(
-                hintText: " ",
-                labelText: "Username or Email",
-                filled: true,
-                fillColor: const Color.fromARGB(45, 255, 255, 255),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15.0))))),
-          SizedBox(height: 15.0),
-          Padding(padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: TextFormField(
-              obscureText: true,
-              decoration: InputDecoration(
-                hintText: " ",
-                labelText: "Password",
-                filled: true,
-                fillColor: const Color.fromARGB(45, 255, 255, 255),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15.0))))),
-          SizedBox(height:15.0),
-          ElevatedButton(
-              onPressed: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => const Create()));
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+             child: Column(
+              children: [
+                 Form(
+                  key: _formKey, 
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        controller: _emailController,
+                        decoration: InputDecoration(
+                          hintText: "Enter your email",
+                          labelText: "Email",
+                          filled: true,
+                          fillColor: const Color.fromARGB(45, 255, 255, 255),
+                          border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter a valid email';// tells user that their inputed value is not a valid email
+                            }
+                             return null;  // ensures that the form is not valid as the email is wrong
+                        },
+                      ),
+                      SizedBox(height: 15.0),
+            
+                      TextFormField(
+                        controller: _passwordController,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          hintText: " ",
+                          labelText: "Password",
+                          filled: true,
+                          fillColor: const Color.fromARGB(45, 255, 255, 255),
+                          border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                          ),
+                        ),
+                      validator: (value){
+                        if (value == null || value.isEmpty) {
+                          return "please enter password"; //same logic as above but for passwords
+                      }
+                      return null;
+                      },
+                      ),
+                      SizedBox(height:15.0),
+                    ],
+                  ),
+                 ),
+          
+          
+              ElevatedButton(
+              onPressed: () async {
+                try{
+                  await _auth.signInWithEmailAndPassword(
+                    email: _emailController.text,
+                    password: _passwordController.text,
+                  );
+                  final userDoc = await _firestore.collection('users').doc(_auth.currentUser!.uid).get();
+                  if (!userDoc.exists){
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Create()));
+                  } else {
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+                  }
+                } catch (e) {
+                  print(e);
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 77, 175, 255),
@@ -92,8 +146,19 @@ class _LoginPage extends State<LoginPage>{
               child: Text("Sign in", style: TextStyle(color: Colors.white))),
           SizedBox(
             height:300.0),
-        ],
-      ),
+        TextButton(
+          child: Text('Sign Up'),
+          onPressed: (){
+            Navigator.push(context,
+            MaterialPageRoute(builder:(context) => Create()),
+            );
+          },
+        )
+        ]
+        ),
+    )
+    ]
+    )
     );
   }
 }
