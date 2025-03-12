@@ -1,6 +1,7 @@
-import 'package:coder_application/account.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'account.dart';
 
 void main() {
   runApp(const Create());
@@ -39,6 +40,21 @@ class _CreatePageState extends State<CreatePage> {
   final _auth = FirebaseAuth.instance;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  // Function to create user document in Firestore
+  Future<void> _createUserDocument(User user) async {
+    final _firestore = FirebaseFirestore.instance;
+    try {
+      await _firestore.collection('users').doc(user.uid).set({
+        'email': user.email,
+        'uid': user.uid,
+      });
+    } catch (e) {
+      print("Error creating user document: $e");
+    }
+  }
+
+  
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -122,13 +138,17 @@ class _CreatePageState extends State<CreatePage> {
 
               ElevatedButton(onPressed: () async {
                 try {
-                    await _auth.createUserWithEmailAndPassword(
+                    UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
                     email: _emailController.text,
                     password: _passwordController.text,
                   );
+
+                  await _createUserDocument(userCredential.user!);
+
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Account()));
                 } catch (e) {
-                  print (e); 
+                  print (e)
+                  ; 
                 }
               }, 
               style: ElevatedButton.styleFrom(
