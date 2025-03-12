@@ -124,7 +124,7 @@ class _LoginPage extends State<LoginPage>{
           
               ElevatedButton(
               onPressed: () async {
-                try{
+                try{ // Try to sign in
                   await _auth.signInWithEmailAndPassword(
                     email: _emailController.text,
                     password: _passwordController.text,
@@ -135,8 +135,25 @@ class _LoginPage extends State<LoginPage>{
                   } else {
                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
                   }
-                } catch (e) {
-                  print(e);
+                } on FirebaseAuthException catch (e) { // catches the error for incorrect sign in
+                  String errorMessage = "";
+
+                  if (e.code == 'user-not-found'){
+                    errorMessage = "Incorrect Email.";
+                  } else if (e.code == 'wrong-password'){
+                    errorMessage = "Incorrect Password";
+                  } else if (e.code == 'invalid-email'){
+                    errorMessage = "Invalid Email";
+                  } else if (e.code == 'too-many-requests'){
+                    errorMessage = "too many sign in attempts";
+                  }
+
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(errorMessage)),
+                );
+                print(errorMessage);
+
+                } catch(e){ // catches all other errors to prevent crashes (this also catches firebase not being initialised - dont ask me why i know)
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text("Error: ${e.toString()}")));
                 }
