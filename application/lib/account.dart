@@ -1,8 +1,8 @@
 import 'package:coder_application/create.dart';
-import 'package:coder_application/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'home.dart';
 
 void main() {
   runApp(const Account());
@@ -133,10 +133,12 @@ class _LoginPage extends State<LoginPage>{
                   if (!userDoc.exists){
                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Create()));
                   } else {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
                   }
                 } catch (e) {
                   print(e);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("Error: ${e.toString()}")));
                 }
               },
               style: ElevatedButton.styleFrom(
