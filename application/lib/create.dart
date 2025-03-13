@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'account.dart';
+import 'login.dart';
 
 void main() {
   runApp(const Create());
@@ -38,8 +38,19 @@ class CreatePage extends StatefulWidget {
 class _CreatePageState extends State<CreatePage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
+  final _locationController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  String? _selectedPronoun;
+
+  // class _Week7State extends State<Week7> {
+  // final _formKey = GlobalKey<FormState>();
+  // String? _name;
+  // String? _selectedGender;
+  // int? _age;
+  // bool _agreeToTerms = false;
 
   // Function to create user document in Firestore
   Future<void> _createUserDocument(User user) async {
@@ -93,13 +104,125 @@ class _CreatePageState extends State<CreatePage> {
                 key: _formKey,
                 child: Column(
                   children: [
+                    Row(
+                      children: [
+                        Expanded(  
+                          child: TextFormField(
+                            controller: _firstNameController,
+                            decoration: InputDecoration(
+                              hintText: "",
+                              labelText: "First Name",
+                              floatingLabelBehavior: FloatingLabelBehavior.always, 
+                              floatingLabelStyle: TextStyle(fontSize: 20),
+                              filled: true,
+                              fillColor: const Color.fromARGB(11, 225, 225, 225),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                                
+                              ),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter a valid email'; //requires user enter a value for email
+                              }
+                              return null; // ensures the form is not inputed if invalid
+                            },
+                          ),
+                        ),
+                        SizedBox(width: 15.0),
+                        Expanded(
+                          child: DropdownButtonFormField<String>(
+                            value: _selectedPronoun,
+                            decoration: InputDecoration(
+                              hintText: "",
+                              labelText: "Pronouns",
+                              floatingLabelBehavior: FloatingLabelBehavior.always, 
+                              floatingLabelStyle: TextStyle(fontSize: 20),
+                              filled: true,
+                              fillColor: const Color.fromARGB(11, 225, 225, 225),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                            ),
+                            items: [
+                              DropdownMenuItem(value: 'He/Him', child: Text('He/Him')),
+                              DropdownMenuItem(value: 'She/Her', child: Text('She/Her')),
+                              DropdownMenuItem(value: 'They/Them', child: Text('They/Them')),
+                              DropdownMenuItem(value: 'Non-Bindary', child: Text('Non-binary')),
+                            ],
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedPronoun = value;
+                              });
+                            },
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter a valid middle name'; //requires user enter a value for middle name
+                              }
+                              return null; // ensures the form is not inputed if invalid
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 15.0
+                    ),
+                    TextFormField(
+                      controller: _lastNameController,
+                      decoration: InputDecoration(
+                        hintText: "",
+                        labelText: "Last Name",
+                        floatingLabelBehavior: FloatingLabelBehavior.always, 
+                        floatingLabelStyle: TextStyle(fontSize: 20),
+                        filled: true,
+                        fillColor: const Color.fromARGB(11, 225, 225, 225),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0)
+                        )
+                      ),
+                      validator: (value){
+                        if (value == null || value.isEmpty){
+                          return 'Please enter a valid email'; //requires user enter a value for email
+                        }
+                        return null; // ensures the form is not inputed if invalid
+                      },
+                    ),
+                    SizedBox(
+                      height: 15.0
+                    ),
+                    TextFormField(
+                      controller: _locationController,
+                      decoration: InputDecoration(
+                        hintText: "",
+                        labelText: "Location",
+                        floatingLabelBehavior: FloatingLabelBehavior.always, 
+                        floatingLabelStyle: TextStyle(fontSize: 20),
+                        filled: true,
+                        fillColor: const Color.fromARGB(11, 225, 225, 225),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0)
+                        )
+                      ),
+                      validator: (value){
+                        if (value == null || value.isEmpty){
+                          return 'Please enter a valid email'; //requires user enter a value for email
+                        }
+                        return null; // ensures the form is not inputed if invalid
+                      },
+                    ),
+                    SizedBox(
+                      height: 80.0
+                    ),
                     TextFormField(
                       controller: _emailController,
                       decoration: InputDecoration(
-                        hintText: "Enter your email",
+                        hintText: "",
                         labelText: "Email",
+                        floatingLabelBehavior: FloatingLabelBehavior.always, 
+                        floatingLabelStyle: TextStyle(fontSize: 20),
                         filled: true,
-                        fillColor: const Color.fromARGB(45, 225, 225, 225),
+                        fillColor: const Color.fromARGB(11, 225, 225, 225),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15.0)
                         )
@@ -116,8 +239,34 @@ class _CreatePageState extends State<CreatePage> {
                       controller: _passwordController,
                       obscureText: true,
                       decoration: InputDecoration(
-                        hintText: "Set Password",
+                        hintText: "",
                         labelText: "Password",
+                        floatingLabelBehavior: FloatingLabelBehavior.always, 
+                        floatingLabelStyle: TextStyle(fontSize: 20),
+                        filled: true,
+                        fillColor: const Color.fromARGB(11, 225, 225, 225),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        )
+                      ),
+                      validator: (value){
+                        if (value == null || value.isEmpty) {
+                          return "please set a password"; //same logic as above
+                      }
+                      return null;
+                      },
+                    ),
+                    SizedBox(
+                      height: 15.0
+                    ),
+                    TextFormField(
+                      controller: _passwordController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        hintText: "",
+                        labelText: "Confirm Password",
+                        floatingLabelBehavior: FloatingLabelBehavior.always, 
+                        floatingLabelStyle: TextStyle(fontSize: 20),
                         filled: true,
                         fillColor: const Color.fromARGB(45, 255, 255, 255),
                         border: OutlineInputBorder(
@@ -145,7 +294,7 @@ class _CreatePageState extends State<CreatePage> {
 
                   await _createUserDocument(userCredential.user!);
 
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Account()));
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login()));
                 } catch (e) {
                   print (e)
                   ; 
@@ -156,12 +305,11 @@ class _CreatePageState extends State<CreatePage> {
                 minimumSize: Size(350, 50),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
               child: Text("Create Account", style: TextStyle(color: Colors.white))),
-              SizedBox(height: 300),
+              SizedBox(height: 100),
             ]
           )
           )
         ]
-
       )
     );
   }

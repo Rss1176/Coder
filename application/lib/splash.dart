@@ -1,8 +1,11 @@
 import 'package:coder_application/Create.dart';
-import 'package:coder_application/account.dart';
+import 'package:coder_application/login.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'page_animation.dart';
+import 'create.dart';
+import 'login.dart';
 
 void main() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -72,7 +75,7 @@ class _HomePage extends State<HomePage>{
             SizedBox(height:250.0),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const Account()));
+              Navigator.of(context).push(createPageRoute(Login()));
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 77, 175, 255),
@@ -86,7 +89,7 @@ class _HomePage extends State<HomePage>{
               height:8),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const Create()));
+              Navigator.of(context).push(createPageRoute(Create()));
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 77, 175, 255),
