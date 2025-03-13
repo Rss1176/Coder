@@ -27,7 +27,7 @@ class Questions extends StatelessWidget {
 }
 
 class QuestionsPage extends StatefulWidget{
-  const QuestionsPage({super.key})
+  const QuestionsPage({super.key});
 
   @override
   State<QuestionsPage> createState() => _QuestionsPage();
