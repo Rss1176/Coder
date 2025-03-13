@@ -88,7 +88,7 @@ class _CreatePageState extends State<CreatePage> {
                 side: BorderSide(color: const Color.fromARGB(255, 56, 62, 65), width: 1.0)
               ),
               elevation: 0.0,
-              backgroundColor: const Color.fromARGB(45, 255, 255, 255),
+              backgroundColor: const Color.fromARGB(11, 255, 255, 255),
               child: const Icon(Icons.close, color: Color.fromARGB(255, 56, 62, 65)),
               ),
               )

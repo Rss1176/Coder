@@ -1,4 +1,4 @@
-import 'package:coder_application/Create.dart';
+import 'package:coder_application/create.dart';
 import 'package:coder_application/login.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -75,7 +75,7 @@ class _HomePage extends State<HomePage>{
             SizedBox(height:250.0),
             ElevatedButton(
               onPressed: () {
-              Navigator.of(context).push(createPageRoute(Login()));
+              Navigator.of(context).push(createPageRoute1(Login()));
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 77, 175, 255),
@@ -89,7 +89,7 @@ class _HomePage extends State<HomePage>{
               height:8),
             ElevatedButton(
               onPressed: () {
-              Navigator.of(context).push(createPageRoute(Create()));
+              Navigator.of(context).push(createPageRoute1(Create()));
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 77, 175, 255),
