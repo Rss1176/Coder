@@ -5,11 +5,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'home.dart';
 
 void main() {
-  runApp(const Account());
+  runApp(const Login());
 }
 
-class Account extends StatelessWidget {
-  const Account({super.key});
+class Login extends StatelessWidget {
+  const Login({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +42,7 @@ class _LoginPage extends State<LoginPage>{
   final _firestore = FirebaseFirestore.instance;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  
   @override
   Widget build(BuildContext context){
     return Center(
@@ -65,7 +66,7 @@ class _LoginPage extends State<LoginPage>{
                     side: BorderSide(color: const Color.fromARGB(255, 56, 62, 65), width: 1.0),
                   ),
                   elevation: 0.0,
-                  backgroundColor: const Color.fromARGB(45, 255, 255, 255),
+                  backgroundColor: const Color.fromARGB(11, 225, 225, 225),
                   child: const Icon(Icons.close, color: Color.fromARGB(255, 56, 62, 65)))))),
           SizedBox(
             height:20),
@@ -83,7 +84,7 @@ class _LoginPage extends State<LoginPage>{
                           hintText: "Enter your email",
                           labelText: "Email",
                           filled: true,
-                          fillColor: const Color.fromARGB(45, 255, 255, 255),
+                          fillColor: const Color.fromARGB(11, 225, 225, 225),
                           border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15.0),
                           ),
@@ -104,7 +105,7 @@ class _LoginPage extends State<LoginPage>{
                           hintText: " ",
                           labelText: "Password",
                           filled: true,
-                          fillColor: const Color.fromARGB(45, 255, 255, 255),
+                          fillColor: const Color.fromARGB(11, 225, 225, 225),
                           border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15.0),
                           ),
@@ -166,7 +167,7 @@ class _LoginPage extends State<LoginPage>{
           SizedBox(
             height:300.0),
         TextButton(
-          child: Text('Sign Up'),
+          child: Text('Create an account instead?'),
           onPressed: (){
             Navigator.push(context,
             MaterialPageRoute(builder:(context) => Create()),
