@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            const HomePage(),
+            const SplashScreen(),
           ],
         ),
       ),
@@ -48,14 +48,14 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<HomePage> createState() => _HomePage();
+  State<SplashScreen> createState() => _SplashScreen();
 }
 
-class _HomePage extends State<HomePage>{
+class _SplashScreen extends State<SplashScreen>{
   @override
   Widget build(BuildContext context){
     return Center(

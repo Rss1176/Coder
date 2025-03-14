@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'home.dart';
+import 'page_animation.dart';
+
 
 void main() {
   runApp(const Login());
@@ -18,7 +20,7 @@ class Login extends StatelessWidget {
           children: <Widget>[
             Positioned.fill(
               child: Image.asset(
-                "assets/images/Background Main_Dark Mode_No Scroll.png",
+                "assets/images/Background Main_Lighter_Dark Mode_No Scroll.png",
                 fit: BoxFit.cover,
               ),
             ),
@@ -42,7 +44,7 @@ class _LoginPage extends State<LoginPage>{
   final _firestore = FirebaseFirestore.instance;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  
+
   @override
   Widget build(BuildContext context){
     return Center(
@@ -50,39 +52,51 @@ class _LoginPage extends State<LoginPage>{
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           SizedBox(
-            height:20.0),
-          Align(
-            alignment: Alignment.topRight,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
-              child: SizedBox(
-                height: 50.0,
-                width: 50.0,
-                child: FloatingActionButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  shape: CircleBorder(
-                    side: BorderSide(color: const Color.fromARGB(255, 56, 62, 65), width: 1.0),
-                  ),
-                  elevation: 0.0,
-                  backgroundColor: const Color.fromARGB(11, 225, 225, 225),
-                  child: const Icon(Icons.close, color: Color.fromARGB(255, 56, 62, 65)))))),
+            height:50.0),
+          Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Let's Sign you in.",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 56, 62, 70),
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              FloatingActionButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                shape: CircleBorder(
+                side: BorderSide(color: const Color.fromARGB(255, 56, 62, 65), width: 1.0)
+                ),
+                elevation: 0.0,
+                backgroundColor: const Color.fromARGB(11, 255, 255, 255),
+                child: const Icon(Icons.close, color: Color.fromARGB(255, 56, 62, 65)),
+              ),
+            ],
+          ),
+        ),
           SizedBox(
-            height:20),
+            height:50),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
              child: Column(
               children: [
-                 Form(
-                  key: _formKey, 
+                Form(
+                key: _formKey, 
                   child: Column(
                     children: [
                       TextFormField(
                         controller: _emailController,
                         decoration: InputDecoration(
-                          hintText: "Enter your email",
-                          labelText: "Email",
+                          hintText: "",
+                          labelText: "Email or Username",
+                          floatingLabelBehavior: FloatingLabelBehavior.always, 
+                          floatingLabelStyle: TextStyle(fontSize: 20),
                           filled: true,
                           fillColor: const Color.fromARGB(11, 225, 225, 225),
                           border: OutlineInputBorder(
@@ -93,17 +107,20 @@ class _LoginPage extends State<LoginPage>{
                           if (value == null || value.isEmpty) {
                             return 'Please enter a valid email';// tells user that their inputed value is not a valid email
                             }
-                             return null;  // ensures that the form is not valid as the email is wrong
+                              return null;  // ensures that the form is not valid as the email is wrong
                         },
                       ),
-                      SizedBox(height: 15.0),
-            
+                      SizedBox(
+                        height: 15.0
+                        ),
                       TextFormField(
                         controller: _passwordController,
                         obscureText: true,
                         decoration: InputDecoration(
                           hintText: " ",
                           labelText: "Password",
+                          floatingLabelBehavior: FloatingLabelBehavior.always, 
+                          floatingLabelStyle: TextStyle(fontSize: 20),
                           filled: true,
                           fillColor: const Color.fromARGB(11, 225, 225, 225),
                           border: OutlineInputBorder(
@@ -117,12 +134,34 @@ class _LoginPage extends State<LoginPage>{
                       return null;
                       },
                       ),
-                      SizedBox(height:15.0),
                     ],
                   ),
-                 ),
-          
-          
+                ),
+              SizedBox(
+                height:320.0
+                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                Text("Don't have an account?",
+                  style: TextStyle(color: Color.fromARGB(180, 56, 62, 70))),
+                SizedBox(
+                  width:1.0
+                  ),
+                TextButton(
+                  child: Text("Register", 
+                  style: TextStyle(
+                  color: Color.fromARGB(180, 56, 62, 70),
+                  fontWeight: FontWeight.bold)),
+                  onPressed: (){
+                    Navigator.of(context).push(createPageRoute1(Create()));
+                  },
+                )
+                ]
+              ),
+              SizedBox(
+                height: 20,
+              ),
               ElevatedButton(
               onPressed: () async {
                 try{ // Try to sign in
@@ -160,20 +199,14 @@ class _LoginPage extends State<LoginPage>{
                 }
               },
               style: ElevatedButton.styleFrom(
+                alignment: Alignment.center,
                 backgroundColor: const Color.fromARGB(255, 77, 175, 255),
                 minimumSize: Size(350, 50),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
               child: Text("Sign in", style: TextStyle(color: Colors.white))),
           SizedBox(
-            height:300.0),
-        TextButton(
-          child: Text('Create an account instead?'),
-          onPressed: (){
-            Navigator.push(context,
-            MaterialPageRoute(builder:(context) => Create()),
-            );
-          },
-        )
+            height:30.0
+            ),
         ]
         ),
     )
