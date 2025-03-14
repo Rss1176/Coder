@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'login.dart';
+import 'page_animation.dart';
+
 
 void main() {
   runApp(const Create());
@@ -17,7 +19,7 @@ class Create extends StatelessWidget {
           children: <Widget>[
             Positioned.fill(
               child: Image.asset(
-                "assets/images/Background Main_Dark Mode_No Scroll.png",
+                "assets/images/Background Main_Lighter_Dark Mode_No Scroll.png",
                 fit: BoxFit.cover,
               ),
             ),
@@ -44,13 +46,6 @@ class _CreatePageState extends State<CreatePage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   String? _selectedPronoun;
-
-  // class _Week7State extends State<Week7> {
-  // final _formKey = GlobalKey<FormState>();
-  // String? _name;
-  // String? _selectedGender;
-  // int? _age;
-  // bool _agreeToTerms = false;
 
   // Function to create user document in Firestore
   Future<void> _createUserDocument(User user) async {
@@ -305,7 +300,15 @@ class _CreatePageState extends State<CreatePage> {
                 minimumSize: Size(350, 50),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
               child: Text("Create Account", style: TextStyle(color: Colors.white))),
-              SizedBox(height: 100),
+              SizedBox(
+                height: 30
+                ),
+              TextButton(
+                child: Text('Already got an account?'),
+                onPressed: (){
+                  Navigator.of(context).push(createPageRoute1(Login()));
+                },
+              ),
             ]
           )
           )
