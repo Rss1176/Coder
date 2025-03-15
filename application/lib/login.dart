@@ -49,10 +49,11 @@ class _LoginPage extends State<LoginPage>{
   Widget build(BuildContext context){
     return Center(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           SizedBox(
-            height:50.0),
+            height:80.0),
           Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25.0),
           child: Row(
@@ -70,7 +71,8 @@ class _LoginPage extends State<LoginPage>{
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                shape: CircleBorder(
+                shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
                 side: BorderSide(color: const Color.fromARGB(255, 56, 62, 65), width: 1.0)
                 ),
                 elevation: 0.0,
@@ -138,9 +140,12 @@ class _LoginPage extends State<LoginPage>{
                   ),
                 ),
               SizedBox(
-                height:320.0
+                height:380.0
                 ),
-              Row(
+              Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children:[
+                Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                 Text("Don't have an account?",
@@ -158,56 +163,55 @@ class _LoginPage extends State<LoginPage>{
                   },
                 )
                 ]
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-              onPressed: () async {
-                try{ // Try to sign in
-                  await _auth.signInWithEmailAndPassword(
-                    email: _emailController.text,
-                    password: _passwordController.text,
-                  );
-                  final userDoc = await _firestore.collection('users').doc(_auth.currentUser!.uid).get();
-                  if (!userDoc.exists){
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Create()));
-                  } else {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
-                  }
-                } on FirebaseAuthException catch (e) { // catches the error for incorrect sign in
-                  String errorMessage = "";
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    try{ // Try to sign in
+                      await _auth.signInWithEmailAndPassword(
+                        email: _emailController.text,
+                        password: _passwordController.text,
+                      );
+                      final userDoc = await _firestore.collection('users').doc(_auth.currentUser!.uid).get();
+                      if (!userDoc.exists){
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Create()));
+                      } else {
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
+                      }
+                    } on FirebaseAuthException catch (e) { // catches the error for incorrect sign in
+                      String errorMessage = "";
 
-                  if (e.code == 'user-not-found'){
-                    errorMessage = "Incorrect Email.";
-                  } else if (e.code == 'wrong-password'){
-                    errorMessage = "Incorrect Password";
-                  } else if (e.code == 'invalid-email'){
-                    errorMessage = "Invalid Email";
-                  } else if (e.code == 'too-many-requests'){
-                    errorMessage = "too many sign in attempts";
-                  }
+                      if (e.code == 'user-not-found'){
+                        errorMessage = "Incorrect Email.";
+                      } else if (e.code == 'wrong-password'){
+                        errorMessage = "Incorrect Password";
+                      } else if (e.code == 'invalid-email'){
+                        errorMessage = "Invalid Email";
+                      } else if (e.code == 'too-many-requests'){
+                        errorMessage = "too many sign in attempts";
+                      }
 
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(errorMessage)),
-                );
-                print(errorMessage);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(errorMessage)),
+                    );
+                    print(errorMessage);
 
-                } catch(e){ // catches all other errors to prevent crashes (this also catches firebase not being initialised - dont ask me why i know)
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Error: ${e.toString()}")));
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                alignment: Alignment.center,
-                backgroundColor: const Color.fromARGB(255, 77, 175, 255),
-                minimumSize: Size(350, 50),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
-              child: Text("Sign in", style: TextStyle(color: Colors.white))),
-          SizedBox(
-            height:30.0
-            ),
-        ]
+                    } catch(e){ // catches all other errors to prevent crashes (this also catches firebase not being initialised - dont ask me why i know)
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Error: ${e.toString()}")));
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    alignment: Alignment.center,
+                    backgroundColor: const Color.fromARGB(255, 77, 175, 255),
+                    minimumSize: Size(350, 50),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
+                  child: Text("Sign in", style: TextStyle(color: Colors.white))),
+              ]
+            )
+          ]
         ),
     )
     ]
