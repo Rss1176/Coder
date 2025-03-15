@@ -65,32 +65,40 @@ class _CreatePageState extends State<CreatePage> {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,        children: <Widget>[
           SizedBox(
-            height: 20.0
-          ),
-          Align(
-            alignment: Alignment.topRight,
-            child: Padding(padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: SizedBox(
-              height: 50.0,
-              width: 50.0,
-              child: FloatingActionButton(onPressed: (){
-                Navigator.pop(context);
-              },
-              shape: CircleBorder(
+            height:80.0),
+          Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Let's Get Started.",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 56, 62, 70),
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              FloatingActionButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
                 side: BorderSide(color: const Color.fromARGB(255, 56, 62, 65), width: 1.0)
+                ),
+                elevation: 0.0,
+                backgroundColor: const Color.fromARGB(11, 255, 255, 255),
+                child: const Icon(Icons.close, color: Color.fromARGB(255, 56, 62, 65)),
               ),
-              elevation: 0.0,
-              backgroundColor: const Color.fromARGB(11, 255, 255, 255),
-              child: const Icon(Icons.close, color: Color.fromARGB(255, 56, 62, 65)),
-              ),
-              )
-            ),
+            ],
           ),
+        ),
           SizedBox(
-            height: 20
+            height: 50
           ),
           Padding(padding: const EdgeInsets.symmetric(horizontal: 25.0),
           child: Column(
@@ -118,7 +126,7 @@ class _CreatePageState extends State<CreatePage> {
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter a valid email'; //requires user enter a value for email
+                                return 'Please enter a first name'; //requires user enter a value for email
                               }
                               return null; // ensures the form is not inputed if invalid
                             },
@@ -144,6 +152,7 @@ class _CreatePageState extends State<CreatePage> {
                               DropdownMenuItem(value: 'She/Her', child: Text('She/Her')),
                               DropdownMenuItem(value: 'They/Them', child: Text('They/Them')),
                               DropdownMenuItem(value: 'Non-Bindary', child: Text('Non-binary')),
+                              DropdownMenuItem(value: 'Other', child: Text('Other')),
                             ],
                             onChanged: (value) {
                               setState(() {
@@ -152,7 +161,7 @@ class _CreatePageState extends State<CreatePage> {
                             },
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter a valid middle name'; //requires user enter a value for middle name
+                                return 'Please make a selection'; //requires user enter a value for middle name
                               }
                               return null; // ensures the form is not inputed if invalid
                             },
@@ -178,7 +187,7 @@ class _CreatePageState extends State<CreatePage> {
                       ),
                       validator: (value){
                         if (value == null || value.isEmpty){
-                          return 'Please enter a valid email'; //requires user enter a value for email
+                          return 'Please enter a last name'; //requires user enter a value for email
                         }
                         return null; // ensures the form is not inputed if invalid
                       },
@@ -275,11 +284,30 @@ class _CreatePageState extends State<CreatePage> {
                       return null;
                       },
                     ),
-                    SizedBox(height: 15.0)
+                    SizedBox(height: 30.0)
                   ],
                 ),
               ),
-
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                Text("Already have an account?",
+                  style: TextStyle(color: Color.fromARGB(180, 56, 62, 70))),
+                SizedBox(
+                  width:1.0
+                  ),
+                TextButton(
+                  child: Text("Login", 
+                  style: TextStyle(
+                  color: Color.fromARGB(180, 56, 62, 70),
+                  fontWeight: FontWeight.bold)),
+                  onPressed: (){
+                    Navigator.of(context).push(createPageRoute1(Login()));
+                  },
+                )
+                ]
+                ),
+              SizedBox(height: 20),
               ElevatedButton(onPressed: () async {
                 try {
                     UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
@@ -301,16 +329,10 @@ class _CreatePageState extends State<CreatePage> {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
               child: Text("Create Account", style: TextStyle(color: Colors.white))),
               SizedBox(
-                height: 30
+                height: 0
                 ),
-              TextButton(
-                child: Text('Already got an account?'),
-                onPressed: (){
-                  Navigator.of(context).push(createPageRoute1(Login()));
-                },
-              ),
-            ]
-          )
+              ]
+            )
           )
         ]
       )
