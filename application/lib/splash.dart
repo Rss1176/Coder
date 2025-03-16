@@ -4,15 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'page_animation.dart';
+import 'loading_welcome.dart';
 
 void main() async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-    runApp(MyApp());
+    runApp(Splash());
 } 
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Splash extends StatelessWidget {
+  const Splash({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +74,7 @@ class _SplashScreen extends State<SplashScreen>{
             SizedBox(height:250.0),
             ElevatedButton(
               onPressed: () {
-              Navigator.of(context).push(createPageRoute1(Login()));
+              Navigator.of(context).push(createPageRoute2(Login()));
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 77, 175, 255),
@@ -87,7 +88,7 @@ class _SplashScreen extends State<SplashScreen>{
               height:8),
             ElevatedButton(
               onPressed: () {
-              Navigator.of(context).push(createPageRoute1(Create()));
+              Navigator.of(context).push(createPageRoute2(Create()));
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 77, 175, 255),
@@ -139,7 +140,7 @@ class _SplashScreen extends State<SplashScreen>{
                           ),
                           ElevatedButton(
                             onPressed: () {
-                            Navigator.of(context).push(createPageRoute1(Create()));
+                            Navigator.of(context).push(createPageRoute2(Create()));
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color.fromARGB(255, 77, 175, 255),
@@ -162,7 +163,7 @@ class _SplashScreen extends State<SplashScreen>{
                               ),
                               SimpleDialogOption(
                                 onPressed: () {
-                                  Navigator.of(context).pop('Cancel');
+                                  Navigator.of(context).push(createPageRoute2(Loading()));
                                 },
                                 child: const Text('Continue as Guest'),
                               ),
