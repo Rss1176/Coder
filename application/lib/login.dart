@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'home.dart';
 import 'page_animation.dart';
-
+import 'loading_welcome.dart';
 
 void main() {
   runApp(const Login());
@@ -159,7 +159,7 @@ class _LoginPage extends State<LoginPage>{
                   color: Color.fromARGB(180, 56, 62, 70),
                   fontWeight: FontWeight.bold)),
                   onPressed: (){
-                    Navigator.of(context).push(createPageRoute1(Create()));
+                    Navigator.of(context).push(createPageRoute2(Create()));
                   },
                 )
                 ]
@@ -176,7 +176,7 @@ class _LoginPage extends State<LoginPage>{
                       );
                       final userDoc = await _firestore.collection('users').doc(_auth.currentUser!.uid).get();
                       if (!userDoc.exists){
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Create()));
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Loading()));
                       } else {
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
                       }
