@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'page_animation.dart';
-import 'home.dart';
+import 'main.dart';
 import 'splash.dart';
 
 
