@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 Route createPageRoute1(Widget page) {
+  // Transition from Lower to Upper
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => page,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -17,7 +18,10 @@ Route createPageRoute1(Widget page) {
 }
 
 Route createPageRoute2(Widget page) {
+  // Fade Transition
   return PageRouteBuilder(
+    transitionDuration: Duration(milliseconds: 500),
+    reverseTransitionDuration: Duration(milliseconds: 500),
     pageBuilder: (context, animation, secondaryAnimation) => page,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       const begin = 0.0;
@@ -29,6 +33,27 @@ Route createPageRoute2(Widget page) {
 
       return FadeTransition(
         opacity: opacityAnimation,
+        child: child,
+      );
+    },
+  );
+}
+
+Route createPageRoute3(Widget page) {
+  return PageRouteBuilder(
+    transitionDuration: Duration(milliseconds: 1600),
+    reverseTransitionDuration: Duration(milliseconds: 1600),
+    pageBuilder: (context, animation, secondaryAnimation) => page,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const begin = Offset(0.0, -1.0);
+      const end = Offset.zero;
+      const curve = Curves.ease;
+
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+      var offsetAnimation = animation.drive(tween);
+
+      return SlideTransition(
+        position: offsetAnimation,
         child: child,
       );
     },

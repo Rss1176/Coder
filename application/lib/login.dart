@@ -67,7 +67,10 @@ class _LoginPage extends State<LoginPage>{
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              FloatingActionButton(
+              Container(
+                height: 40,
+                width: 40,
+              child: FloatingActionButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -78,6 +81,7 @@ class _LoginPage extends State<LoginPage>{
                 elevation: 0.0,
                 backgroundColor: const Color.fromARGB(11, 255, 255, 255),
                 child: const Icon(Icons.close, color: Color.fromARGB(255, 56, 62, 65)),
+              ),
               ),
             ],
           ),
@@ -95,8 +99,11 @@ class _LoginPage extends State<LoginPage>{
                       TextFormField(
                         controller: _emailController,
                         decoration: InputDecoration(
-                          hintText: "",
-                          labelText: "Email or Username",
+                          prefixIcon: Visibility(
+                            child: Icon(Icons.mail, color: const Color.fromARGB(255, 213, 213, 213))),
+                          hintText: "Email",
+                            hintStyle: TextStyle(color: Color.fromARGB(255, 168, 168, 168)),
+                          labelText: "",
                           floatingLabelBehavior: FloatingLabelBehavior.always, 
                           floatingLabelStyle: TextStyle(fontSize: 20),
                           filled: true,
@@ -119,8 +126,11 @@ class _LoginPage extends State<LoginPage>{
                         controller: _passwordController,
                         obscureText: true,
                         decoration: InputDecoration(
-                          hintText: " ",
-                          labelText: "Password",
+                          prefixIcon: Visibility(
+                            child: Icon(Icons.lock, color: const Color.fromARGB(255, 213, 213, 213))),
+                          hintText: "Password",
+                            hintStyle: TextStyle(color: Color.fromARGB(255, 168, 168, 168)),
+                          labelText: "",
                           floatingLabelBehavior: FloatingLabelBehavior.always, 
                           floatingLabelStyle: TextStyle(fontSize: 20),
                           filled: true,

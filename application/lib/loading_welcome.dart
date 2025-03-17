@@ -48,17 +48,47 @@ class _LoadingPage extends State<LoadingPage>{
             height:180
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: Container(
-              height: 350,
-              width: 350,
-              child: CircularProgressIndicator(
-                semanticsLabel: "Welcome Back!",
-                valueColor: AlwaysStoppedAnimation<Color>(Color.fromARGB(255, 77, 175, 255)),
-                backgroundColor: const Color.fromARGB(25, 0, 0, 0),
-                strokeWidth: 6.0,
-              )
-            ),
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Container(
+                      height: 350,
+                      width: 350,
+                      child: CircularProgressIndicator(
+                        semanticsLabel: "Welcome Back!",
+                        valueColor: AlwaysStoppedAnimation<Color>(Color.fromARGB(255, 77, 175, 255)),
+                        backgroundColor: const Color.fromARGB(25, 0, 0, 0),
+                        strokeWidth: 6.0,
+                      ),
+                    ),
+                    Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Welcome Back!",
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontFamily: 'LuckiestGuy',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          Text(
+                            "Name",
+                            style: TextStyle(
+                              fontSize: 30,
+                              color: Colors.black,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
           ),
           SizedBox(
             height: 180
@@ -73,7 +103,7 @@ class _LoadingPage extends State<LoadingPage>{
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
               ),
               child: Text("Lets Go!", style: TextStyle(color: Colors.white)),
-            ),
+          ),
           SizedBox(
             height: 20.0
           ),
@@ -82,7 +112,7 @@ class _LoadingPage extends State<LoadingPage>{
                   style: TextStyle(
                   color: Color.fromARGB(180, 56, 62, 70))),
                   onPressed: (){
-                    Navigator.of(context).push(createPageRoute1(SplashScreen()));
+                    Navigator.of(context).push(createPageRoute1(Splash()));
                   },
           )
         ]
