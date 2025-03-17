@@ -42,10 +42,10 @@ class _CreatePageState extends State<CreatePage> {
   final _auth = FirebaseAuth.instance;
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
-  final _locationController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   String? _selectedPronoun;
+  String? _selectedLocation;
 
   // Function to create user document in Firestore
   Future<void> _createUserDocument(User user) async {
@@ -66,7 +66,8 @@ class _CreatePageState extends State<CreatePage> {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,        children: <Widget>[
+        crossAxisAlignment: CrossAxisAlignment.center,        
+        children: <Widget>[
           SizedBox(
             height:80.0),
           Padding(
@@ -82,7 +83,10 @@ class _CreatePageState extends State<CreatePage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              FloatingActionButton(
+              Container(
+                height: 40,
+                width: 40,
+              child: FloatingActionButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -93,6 +97,7 @@ class _CreatePageState extends State<CreatePage> {
                 elevation: 0.0,
                 backgroundColor: const Color.fromARGB(11, 255, 255, 255),
                 child: const Icon(Icons.close, color: Color.fromARGB(255, 56, 62, 65)),
+              ),
               ),
             ],
           ),
@@ -113,15 +118,17 @@ class _CreatePageState extends State<CreatePage> {
                           child: TextFormField(
                             controller: _firstNameController,
                             decoration: InputDecoration(
-                              hintText: "",
-                              labelText: "First Name",
+                              prefixIcon: Visibility(
+                                child: Icon(Icons.account_box, color: const Color.fromARGB(255, 213, 213, 213))),
+                              hintText: "First Name",
+                              hintStyle: TextStyle(color: Color.fromARGB(255, 168, 168, 168)),
+                              labelText: "",
                               floatingLabelBehavior: FloatingLabelBehavior.always, 
                               floatingLabelStyle: TextStyle(fontSize: 20),
                               filled: true,
                               fillColor: const Color.fromARGB(11, 225, 225, 225),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15.0),
-                                
                               ),
                             ),
                             validator: (value) {
@@ -138,7 +145,7 @@ class _CreatePageState extends State<CreatePage> {
                             value: _selectedPronoun,
                             decoration: InputDecoration(
                               hintText: "",
-                              labelText: "Pronouns",
+                              labelText: "",
                               floatingLabelBehavior: FloatingLabelBehavior.always, 
                               floatingLabelStyle: TextStyle(fontSize: 20),
                               filled: true,
@@ -154,6 +161,10 @@ class _CreatePageState extends State<CreatePage> {
                               DropdownMenuItem(value: 'Non-Bindary', child: Text('Non-binary')),
                               DropdownMenuItem(value: 'Other', child: Text('Other')),
                             ],
+                            hint: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text('Pronouns', style: TextStyle(color: Color.fromARGB(255, 168, 168, 168))),
+                            ),
                             onChanged: (value) {
                               setState(() {
                                 _selectedPronoun = value;
@@ -175,8 +186,11 @@ class _CreatePageState extends State<CreatePage> {
                     TextFormField(
                       controller: _lastNameController,
                       decoration: InputDecoration(
-                        hintText: "",
-                        labelText: "Last Name",
+                        prefixIcon: Visibility(
+                          child: Icon(Icons.account_box, color: const Color.fromARGB(255, 213, 213, 213))),
+                        hintText: "Last Name",
+                        hintStyle: TextStyle(color: Color.fromARGB(255, 168, 168, 168)),
+                        labelText: "",
                         floatingLabelBehavior: FloatingLabelBehavior.always, 
                         floatingLabelStyle: TextStyle(fontSize: 20),
                         filled: true,
@@ -195,22 +209,52 @@ class _CreatePageState extends State<CreatePage> {
                     SizedBox(
                       height: 15.0
                     ),
-                    TextFormField(
-                      controller: _locationController,
+                    DropdownButtonFormField<String>(
+                      value: _selectedLocation,
                       decoration: InputDecoration(
-                        hintText: "",
-                        labelText: "Location",
+                        prefixIcon: Visibility(
+                          child: Icon(Icons.place, color: Color.fromARGB(255, 213, 213, 213)),
+                        ),
+                        
+                        hintText: "Location",
+                        hintStyle: TextStyle(color: Color.fromARGB(255, 168, 168, 168)),
+                        labelText: "",
                         floatingLabelBehavior: FloatingLabelBehavior.always, 
                         floatingLabelStyle: TextStyle(fontSize: 20),
                         filled: true,
                         fillColor: const Color.fromARGB(11, 225, 225, 225),
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0)
-                        )
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
                       ),
-                      validator: (value){
-                        if (value == null || value.isEmpty){
-                          return 'Please enter a valid email'; //requires user enter a value for email
+                      items: [
+                        DropdownMenuItem(value: 'United Kingdom', child: Text('United Kingdom')),
+                        DropdownMenuItem(value: 'United States', child: Text('United States')),
+                        DropdownMenuItem(value: 'Canada', child: Text('Canada')),
+                        DropdownMenuItem(value: 'Australia', child: Text('Australia')),
+                        DropdownMenuItem(value: 'Germany', child: Text('Germany')),
+                        DropdownMenuItem(value: 'France', child: Text('France')),
+                        DropdownMenuItem(value: 'India', child: Text('India')),
+                        DropdownMenuItem(value: 'China', child: Text('China')),
+                        DropdownMenuItem(value: 'Japan', child: Text('Japan')),
+                        DropdownMenuItem(value: 'Brazil', child: Text('Brazil')),
+                        DropdownMenuItem(value: 'South Africa', child: Text('South Africa')),
+                        DropdownMenuItem(value: 'Mexico', child: Text('Mexico')),
+                        DropdownMenuItem(value: 'Italy', child: Text('Italy')),
+                        DropdownMenuItem(value: 'Spain', child: Text('Spain')),
+                      ],
+                      hint: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text('Location', style: TextStyle(color: Color.fromARGB(255, 168, 168, 168))),
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedLocation = value;
+                        });
+                      },
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please make a selection'; //requires user enter a value for middle name
                         }
                         return null; // ensures the form is not inputed if invalid
                       },
@@ -221,8 +265,12 @@ class _CreatePageState extends State<CreatePage> {
                     TextFormField(
                       controller: _emailController,
                       decoration: InputDecoration(
-                        hintText: "",
-                        labelText: "Email",
+                        prefixIcon: Visibility(
+                          child: Icon(Icons.mail, color: const Color.fromARGB(255, 213, 213, 213)),
+                        ),
+                        hintText: "Email",
+                        hintStyle: TextStyle(color: Color.fromARGB(255, 168, 168, 168)),
+                        labelText: "",
                         floatingLabelBehavior: FloatingLabelBehavior.always, 
                         floatingLabelStyle: TextStyle(fontSize: 20),
                         filled: true,
@@ -243,8 +291,12 @@ class _CreatePageState extends State<CreatePage> {
                       controller: _passwordController,
                       obscureText: true,
                       decoration: InputDecoration(
-                        hintText: "",
-                        labelText: "Password",
+                        prefixIcon: Visibility(
+                          child: Icon(Icons.lock, color: const Color.fromARGB(255, 213, 213, 213)),
+                        ),
+                        hintText: "Password",
+                        hintStyle: TextStyle(color: Color.fromARGB(255, 168, 168, 168)),
+                        labelText: "",
                         floatingLabelBehavior: FloatingLabelBehavior.always, 
                         floatingLabelStyle: TextStyle(fontSize: 20),
                         filled: true,
@@ -267,8 +319,12 @@ class _CreatePageState extends State<CreatePage> {
                       controller: _passwordController,
                       obscureText: true,
                       decoration: InputDecoration(
-                        hintText: "",
-                        labelText: "Confirm Password",
+                        prefixIcon: Visibility(
+                          child: Icon(Icons.verified_user, color: const Color.fromARGB(255, 213, 213, 213)),
+                        ),
+                        hintText: "Confirm Password",
+                        hintStyle: TextStyle(color: Color.fromARGB(255, 168, 168, 168)),
+                        labelText: "",
                         floatingLabelBehavior: FloatingLabelBehavior.always, 
                         floatingLabelStyle: TextStyle(fontSize: 20),
                         filled: true,

@@ -130,7 +130,7 @@ class _SplashScreen extends State<SplashScreen>{
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text("To use all of CodeRs features as intended, we recommend creating an account"),
+                                Text("To use all of Coders features as intended, we recommend creating an account"),
                                 SizedBox(
                                   height:10
                                   ),
@@ -178,8 +178,7 @@ class _SplashScreen extends State<SplashScreen>{
                       );
                     }
                 );
-              },
-                            
+              },             
               child: Text("Continue as Guest",
               style: TextStyle(color: const Color.fromARGB(180, 56, 62, 70)))),
             SizedBox(

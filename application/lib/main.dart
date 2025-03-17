@@ -1,5 +1,7 @@
 import 'package:coder_application/create.dart';
 import 'package:flutter/material.dart';
+import 'page_animation.dart';
+import 'account_page.dart';
 
 
 void main() {
@@ -10,18 +12,22 @@ class Home extends StatelessWidget {
   const Home({super.key});
 
   @override
-  Widget build(BuildContext context) { //redefine material app so that app bar can be used properly
+  Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 77, 175, 255)),
-        useMaterial3: true,
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            foregroundColor: Colors.blue,
-            backgroundColor: Colors.black,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20), side: BorderSide.none)
-            )
-            )
-            ),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 77, 175, 255)),
+      useMaterial3: true,
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          foregroundColor: Colors.blue,
+          backgroundColor: Colors.black,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20), 
+            side: BorderSide.none
+          )
+        )
+      )
+      ),
       home: const HomePage(),
     );
   }
@@ -34,35 +40,172 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>{
+class _HomePageState extends State<HomePage> {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.lightBlue,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("appearing properly"),
-              SizedBox(width: 110,),
-              IconButton(icon: Icon(Icons.account_circle,
-              size: 46,
-              color: Colors.white,),
-              onPressed: null, //change functionality of app bar icon
-              ),
-            ],
-          ),),
-          body: Stack(
-          children: <Widget>[
-            Positioned.fill(
-              child: Image.asset(
-                "assets/images/Background Main_Lighter_Dark Mode_No Scroll.png",
-                fit: BoxFit.cover,
+      body: Stack(
+        children: <Widget>[
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/Background Main_Dark Mode_No Scroll.png"),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ],
-        ),
-      );
+          ),
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child:Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: 140),
+                  Container(
+                    height: 250,
+                    width: 350,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: const Color.fromARGB(255, 77, 175, 255),
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(25),
+                      color: Color.fromARGB(81, 255, 255, 255),
+                    ),
+                  ),
+                  SizedBox(
+                    height:10
+                    ),
+                  Container(
+                    height: 150,
+                    width: 350,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: const Color.fromARGB(255, 77, 175, 255),
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(25),
+                      color: Color.fromARGB(81, 255, 255, 255),
+                    ),
+                  ),
+                  SizedBox(
+                    height:10
+                    ),
+                  Container(
+                    height: 150,
+                    width: 350,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: const Color.fromARGB(255, 77, 175, 255),
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(25),
+                      color: Color.fromARGB(81, 255, 255, 255),
+                    ),
+                  ),
+                  SizedBox(
+                    height:10
+                  ),
+                  Container(
+                    height: 250,
+                    width: 350,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: const Color.fromARGB(255, 77, 175, 255),
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(25),
+                      color: Color.fromARGB(81, 255, 255, 255),
+                    ),
+                  ),
+                  SizedBox(
+                    height:10
+                  ),
+                  Container(
+                    height: 150,
+                    width: 350,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: const Color.fromARGB(255, 77, 175, 255),
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(25),
+                      color: Color.fromARGB(81, 255, 255, 255),
+                    ),
+                  ),
+                  Container(
+                    height: 150,
+                  ),
+                ],
+              ),
+            )
+          ),
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: AppBar(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+                  bottom: Radius.circular(25),
+                ),
+              ),
+              backgroundColor: Color.fromARGB(255, 77, 175, 255),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "My Dashboard",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                    ),
+                  ),
+                  SizedBox(width: 110),
+                  IconButton(
+                    icon: Icon(
+                      Icons.account_circle,
+                      size: 35,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).push(createPageRoute3(Account()));
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 50,
+            left: 60,
+            right: 60,
+            child: Container(
+              height: 50,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 77, 175, 255),
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.home, color: Colors.white),
+                  SizedBox(width: 50),
+                  Icon(Icons.timeline, color: const Color.fromARGB(75, 255, 255, 255)),
+                  SizedBox(width: 50),
+                  Icon(Icons.leaderboard, color: Color.fromARGB(75, 255, 255, 255)),
+                  SizedBox(width: 50),
+                  Icon(Icons.settings, color: Color.fromARGB(75, 255, 255, 255)),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
-    
