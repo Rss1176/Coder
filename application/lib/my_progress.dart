@@ -1,0 +1,183 @@
+import 'package:coder_application/create.dart';
+import 'package:flutter/material.dart';
+import 'page_animation.dart';
+import 'account_page.dart';
+
+
+void main() {
+  runApp(const Progress());
+}
+
+class Progress extends StatelessWidget {
+  const Progress({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: Stack(
+          children: <Widget>[
+            Positioned.fill(
+              child: Container(
+                height: double.infinity,
+                width: double.infinity,
+                color: Color.fromARGB(255, 77, 175, 255),
+              ),
+            ),
+            Progress(),
+          ],
+        ),
+      );
+  }
+}
+
+class ProgressPage extends StatefulWidget {
+  const ProgressPage({super.key});
+
+  @override
+  State<ProgressPage> createState() => _ProgressPageState();
+}
+
+class _ProgressPageState extends State<ProgressPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/Background Main_Dark Mode_No Scroll.png"),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child:Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: 140),
+                  Container(
+                    height: 1500,
+                  ),
+                ],
+              ),
+            )
+          ),
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: AppBar(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+                  bottom: Radius.circular(25),
+                ),
+              ),
+              backgroundColor: Color.fromARGB(255, 77, 175, 255),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Progress",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontFamily: 'LuckiestGuy',
+                    ),
+                  ),
+                  SizedBox(width: 110),
+                  IconButton(
+                    icon: Icon(
+                      Icons.account_circle,
+                      size: 35,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      showMyAccountDialog(context);
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 50,
+            left: 60,
+            right: 60,
+            child: Container(
+              height: 50,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 77, 175, 255),
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FloatingActionButton(onPressed: () {
+                    // Navigator.of(context).push(createPageRoute2(Home()));
+                  },
+                  shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                  ),
+                  elevation: 0.0,
+                  splashColor: Colors.transparent,
+                  highlightElevation: 0.0,
+                  backgroundColor: Colors.transparent,
+                  child: Icon(Icons.home, color: Colors.white)),
+                  SizedBox(
+                    width: 15
+                  ),
+                  FloatingActionButton(onPressed: () {
+                    Navigator.of(context).push(createPageRoute3(Progress()));
+                  },
+                  shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                  ),
+                  elevation: 0.0,
+                  splashColor: Colors.transparent,
+                  highlightElevation: 0.0,
+                  backgroundColor: Colors.transparent,
+                  child: Icon(Icons.timeline, color: const Color.fromARGB(75, 255, 255, 255))),
+                  SizedBox(
+                    width: 15
+                  ),
+                  FloatingActionButton(onPressed: () {
+                    //Navigator.of(context).push(createPageRoute3(Leaderboard()));
+                  },
+                  shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                  ),
+                  elevation: 0.0,
+                  splashColor: Colors.transparent,
+                  highlightElevation: 0.0,
+                  backgroundColor: Colors.transparent,
+                  child: Icon(Icons.leaderboard, color: Color.fromARGB(75, 255, 255, 255))),
+                  SizedBox(
+                    width: 15
+                  ),
+                  FloatingActionButton(onPressed: () {
+                    //Navigator.of(context).push(createPageRoute3(Settings()));
+                  },
+                  shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                  ),
+                  elevation: 0.0,
+                  splashColor: Colors.transparent,
+                  highlightElevation: 0.0,
+                  backgroundColor: Colors.transparent,
+                  child: Icon(Icons.settings, color: Color.fromARGB(75, 255, 255, 255))),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

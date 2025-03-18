@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 Route createPageRoute1(Widget page) {
   // Transition from Lower to Upper
   return PageRouteBuilder(
+    transitionDuration: Duration(milliseconds: 1500),
     pageBuilder: (context, animation, secondaryAnimation) => page,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       // Duration(seconds: 2);
@@ -43,6 +44,7 @@ Route createPageRoute3(Widget page) {
   return PageRouteBuilder(
     transitionDuration: Duration(milliseconds: 1600),
     reverseTransitionDuration: Duration(milliseconds: 1600),
+    barrierColor: Colors.transparent,
     pageBuilder: (context, animation, secondaryAnimation) => page,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       const begin = Offset(0.0, -1.0);

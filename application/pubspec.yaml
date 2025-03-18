@@ -30,4 +30,4 @@ flutter:
 fonts:
   - family: LuckiestGuy
     fonts:
-      - asset: assets/fonts/LuckiestGuy-Regular.ttf
+      - asset: application/assets/fonts/LuckiestGuy.ttf
