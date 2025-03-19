@@ -36,14 +36,14 @@ Future<void> showMyAccountDialog(BuildContext context) async {
             ), */ // This, for some unknown reason breaks the dialogue box
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            padding: const EdgeInsets.symmetric(horizontal: 35.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(height: 65),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       "My Coder Profile",
@@ -67,31 +67,148 @@ Future<void> showMyAccountDialog(BuildContext context) async {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+                Divider(
+                  color: Colors.white,
+                  thickness: 1,
+                ),
+                SizedBox(
+                  height: 20
+                  ),
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      "Name",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                      ),
+
+                    SizedBox(
+                      height: 30
                     ),
-                    Text(
-                      "TestName",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                      ),
+
+                    CircleAvatar(
+                      radius: 80,
+                      backgroundImage: AssetImage("assets/images/profile_image_placeholder.png"),
+                      backgroundColor: const Color.fromARGB(255, 205, 205, 205),
                     ),
-                    SizedBox(height: 10),
-                    Text(
-                      "Email:",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                      ),
+                    SizedBox(
+                      height: 20
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Fname Lname",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white
+                              ),
+                            ),
+
+                            SizedBox(height: 10),
+
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.star, color: Colors.white),
+                                SizedBox(width: 5),
+                                Text(
+                                  "They/Them",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.location_on, color: Colors.white),
+                                SizedBox(width: 5),
+                                Text(
+                                  "City, Country",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Column",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white
+
+                              ),
+                            ),
+
+                            SizedBox(height: 10),
+
+                            Text(
+                              "something", 
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white
+                              ),
+                            ),
+
+                            Text(
+                              "somthing else",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white
+                              ),
+                            ),
+
+                          ],
+                        ),
+                      ],
+                    ),
+
+                    SizedBox(
+                      height: 30
+                    ),
+
+                    Divider(
+                      color: Colors.white,
+                      thickness: 1,
+                    ),
+
+                    SizedBox(
+                      height: 10
+                    ),
+
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Awards",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ],
                 ),

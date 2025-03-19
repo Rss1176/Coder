@@ -151,7 +151,7 @@ class _HomePageState extends State<HomePage> {
               ),
               backgroundColor: Color.fromARGB(255, 77, 175, 255),
               title: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
                     "My Dashboard",
@@ -172,8 +172,8 @@ class _HomePageState extends State<HomePage> {
                       showMyAccountDialog(context);
                     },
                   ),
-            ],
-            ),
+                ],
+              ),
             )
           ),
           Positioned(
@@ -193,25 +193,25 @@ class _HomePageState extends State<HomePage> {
                   IconButton(
                     icon: Icon(Icons.home, color: Colors.white),
                     onPressed: () {
-                      Navigator.of(context).push(createPageRoute3(Home()));
+                      Navigator.of(context).push(createPageRoute2(Home()));
                     },
                   ),
                   IconButton(
                     icon: Icon(Icons.timeline, color: const Color.fromARGB(75, 255, 255, 255)),
                     onPressed: () {
-                      Navigator.of(context).push(createPageRoute3(Progress()));
+                      Navigator.of(context).push(createPageRoute2(Progress()));
                     },
                   ),
                   IconButton(
                     icon: Icon(Icons.leaderboard, color: Color.fromARGB(75, 255, 255, 255)),
                     onPressed: () {
-                      //Navigator.of(context).push(createPageRoute3(Leaderboard()));
+                      //Navigator.of(context).push(createPageRoute2(Leaderboard()));
                     },
                   ),
                   IconButton(
                     icon: Icon(Icons.settings, color: Color.fromARGB(75, 255, 255, 255)),
                     onPressed: () {
-                      //Navigator.of(context).push(createPageRoute3(Settings()));
+                      //Navigator.of(context).push(createPageRoute2(Settings()));
                     },
                   ),
                 ],

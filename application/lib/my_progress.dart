@@ -2,6 +2,7 @@ import 'package:coder_application/create.dart';
 import 'package:flutter/material.dart';
 import 'page_animation.dart';
 import 'account_page.dart';
+import 'main.dart';
 
 
 void main() {
@@ -23,7 +24,7 @@ class Progress extends StatelessWidget {
                 color: Color.fromARGB(255, 77, 175, 255),
               ),
             ),
-            Progress(),
+            ProgressPage(),
           ],
         ),
       );
@@ -80,7 +81,7 @@ class _ProgressPageState extends State<ProgressPage> {
               ),
               backgroundColor: Color.fromARGB(255, 77, 175, 255),
               title: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
                     "Progress",
@@ -117,61 +118,32 @@ class _ProgressPageState extends State<ProgressPage> {
                 borderRadius: BorderRadius.circular(30),
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  FloatingActionButton(onPressed: () {
-                    // Navigator.of(context).push(createPageRoute2(Home()));
-                  },
-                  shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
+                  IconButton(
+                    icon: Icon(Icons.home, color: const Color.fromARGB(75, 255, 255, 255)),
+                    onPressed: () {
+                      Navigator.of(context).push(createPageRoute2(Home()));
+                    },
                   ),
-                  elevation: 0.0,
-                  splashColor: Colors.transparent,
-                  highlightElevation: 0.0,
-                  backgroundColor: Colors.transparent,
-                  child: Icon(Icons.home, color: Colors.white)),
-                  SizedBox(
-                    width: 15
+                  IconButton(
+                    icon: Icon(Icons.timeline, color: Colors.white),
+                    onPressed: () {
+                      Navigator.of(context).push(createPageRoute2(Progress()));
+                    },
                   ),
-                  FloatingActionButton(onPressed: () {
-                    Navigator.of(context).push(createPageRoute3(Progress()));
-                  },
-                  shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
+                  IconButton(
+                    icon: Icon(Icons.leaderboard, color: Color.fromARGB(75, 255, 255, 255)),
+                    onPressed: () {
+                      //Navigator.of(context).push(createPageRoute2(Leaderboard()));
+                    },
                   ),
-                  elevation: 0.0,
-                  splashColor: Colors.transparent,
-                  highlightElevation: 0.0,
-                  backgroundColor: Colors.transparent,
-                  child: Icon(Icons.timeline, color: const Color.fromARGB(75, 255, 255, 255))),
-                  SizedBox(
-                    width: 15
+                  IconButton(
+                    icon: Icon(Icons.settings, color: Color.fromARGB(75, 255, 255, 255)),
+                    onPressed: () {
+                      //Navigator.of(context).push(createPageRoute2(Settings()));
+                    },
                   ),
-                  FloatingActionButton(onPressed: () {
-                    //Navigator.of(context).push(createPageRoute3(Leaderboard()));
-                  },
-                  shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
-                  ),
-                  elevation: 0.0,
-                  splashColor: Colors.transparent,
-                  highlightElevation: 0.0,
-                  backgroundColor: Colors.transparent,
-                  child: Icon(Icons.leaderboard, color: Color.fromARGB(75, 255, 255, 255))),
-                  SizedBox(
-                    width: 15
-                  ),
-                  FloatingActionButton(onPressed: () {
-                    //Navigator.of(context).push(createPageRoute3(Settings()));
-                  },
-                  shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
-                  ),
-                  elevation: 0.0,
-                  splashColor: Colors.transparent,
-                  highlightElevation: 0.0,
-                  backgroundColor: Colors.transparent,
-                  child: Icon(Icons.settings, color: Color.fromARGB(75, 255, 255, 255))),
                 ],
               ),
             ),
