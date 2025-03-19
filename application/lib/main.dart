@@ -2,6 +2,7 @@ import 'package:coder_application/create.dart';
 import 'package:flutter/material.dart';
 import 'page_animation.dart';
 import 'account_page.dart';
+import 'my_progress.dart';
 
 
 void main() {
@@ -58,15 +59,14 @@ class _HomePageState extends State<HomePage> {
           ),
           SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
                 child:Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 140),
+                  SizedBox(height: 135),
                   Container(
                     height: 250,
-                    width: 350,
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: const Color.fromARGB(255, 77, 175, 255),
@@ -81,7 +81,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   Container(
                     height: 150,
-                    width: 350,
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: const Color.fromARGB(255, 77, 175, 255),
@@ -96,7 +95,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   Container(
                     height: 150,
-                    width: 350,
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: const Color.fromARGB(255, 77, 175, 255),
@@ -111,7 +109,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Container(
                     height: 250,
-                    width: 350,
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: const Color.fromARGB(255, 77, 175, 255),
@@ -126,7 +123,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Container(
                     height: 150,
-                    width: 350,
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: const Color.fromARGB(255, 77, 175, 255),
@@ -155,13 +151,14 @@ class _HomePageState extends State<HomePage> {
               ),
               backgroundColor: Color.fromARGB(255, 77, 175, 255),
               title: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
                     "My Dashboard",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 25,
+                      fontFamily: 'LuckiestGuy',
                     ),
                   ),
                   SizedBox(width: 110),
@@ -172,12 +169,12 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.white,
                     ),
                     onPressed: () {
-                      Navigator.of(context).push(createPageRoute3(Account()));
+                      showMyAccountDialog(context);
                     },
                   ),
                 ],
               ),
-            ),
+            )
           ),
           Positioned(
             bottom: 50,
@@ -191,15 +188,32 @@ class _HomePageState extends State<HomePage> {
                 borderRadius: BorderRadius.circular(30),
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Icon(Icons.home, color: Colors.white),
-                  SizedBox(width: 50),
-                  Icon(Icons.timeline, color: const Color.fromARGB(75, 255, 255, 255)),
-                  SizedBox(width: 50),
-                  Icon(Icons.leaderboard, color: Color.fromARGB(75, 255, 255, 255)),
-                  SizedBox(width: 50),
-                  Icon(Icons.settings, color: Color.fromARGB(75, 255, 255, 255)),
+                  IconButton(
+                    icon: Icon(Icons.home, color: Colors.white),
+                    onPressed: () {
+                      Navigator.of(context).push(createPageRoute2(Home()));
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.timeline, color: const Color.fromARGB(75, 255, 255, 255)),
+                    onPressed: () {
+                      Navigator.of(context).push(createPageRoute2(Progress()));
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.leaderboard, color: Color.fromARGB(75, 255, 255, 255)),
+                    onPressed: () {
+                      //Navigator.of(context).push(createPageRoute2(Leaderboard()));
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.settings, color: Color.fromARGB(75, 255, 255, 255)),
+                    onPressed: () {
+                      //Navigator.of(context).push(createPageRoute2(Settings()));
+                    },
+                  ),
                 ],
               ),
             ),
@@ -209,3 +223,4 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+

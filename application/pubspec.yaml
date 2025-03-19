@@ -26,8 +26,9 @@ flutter:
   assets:
   - assets/images/
   - assets/images/Background Main_Dark Mode_No Scroll.png
+  - assets/images/profile_image_placeholder.png
 
 fonts:
   - family: LuckiestGuy
     fonts:
-      - asset: assets/fonts/LuckiestGuy-Regular.ttf
+      - asset: application/assets/fonts/LuckiestGuy.ttf
