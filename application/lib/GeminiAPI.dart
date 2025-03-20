@@ -5,7 +5,7 @@ class GeminiAIService {
   
   Future<Map<String, dynamic>> generateQuestions(String abilityLevel, String codingLanguage) async{
     final String apiKey = 'AIzaSyAZxxFD_mRrNw60wuJfzD4ykUxItEEw9Nw';
-    final String modelName = 'models/gemini-1.5-pro-002'; // chnaged model a couple times in debugging so made its own variable for ease
+    final String modelName = 'gemini-1.5-pro-002'; // chnaged model a couple times in debugging so made its own variable for ease
     final String endpoint = "https://generativelanguage.googleapis.com/v1/models/$modelName:generateContent";
     //future object that creates a dictionary (map) of json response and name
     //the name is a string and the json response is of type dynamic to avoid type errors
@@ -18,7 +18,11 @@ class GeminiAIService {
         headers: {"Content-Type": "application/json"},
         body: jsonEncode({
           "contents": [{"parts":[
-            {"text" : "wrtie a short story"}//used """ for multiline strings and readability
+            {"text" : 
+                      """Generate a multiple choice question about the coding langauge $codingLanguage"
+                      "It should be aimed at someone at a $abilityLevel level"
+                      "There should be 4 answers to the questions."
+                      "the final part of the response should be the correct answer, i.e A,B,C,D with the final part being C"""}//used """ for multiline strings and readability
             ]
             }
           ]
@@ -27,6 +31,7 @@ class GeminiAIService {
       
       if (questionResponse.statusCode == 200) {//enssure http has connected properly with a response
         final data = jsonDecode(questionResponse.body);
+        print("full response data: £data");
         String textResponse = data['candidates'][0]['content']['parts'][0]['text']; //gemini produces json with these headings
         // candidates is the full response (only matters if we decided to do mutiple prompts), content is a single response, part isnt used here, text is the text of the question
         return {"question": textResponse};
@@ -35,12 +40,7 @@ class GeminiAIService {
       }
     }
     catch (e){
-      return {"error": "$e"};
+      return {"error status 200 not met": "$e"};
     }
     }
   }
-
-  // """Generate a multiple choice question about the coding langauge $codingLanguage"
-  //                     "It should be aimed at someone at a $abilityLevel level"
-  //                     "There should be 4 answers to the questions."
-  //                     "the final part of the response should be the correct answer, i.e A,B,C,D with the final part being C"""
