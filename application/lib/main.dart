@@ -1,4 +1,6 @@
-import 'package:coder_application/create.dart';
+import 'dart:convert';
+
+import 'GeminiAPI.dart';
 import 'package:flutter/material.dart';
 import 'page_animation.dart';
 import 'account_page.dart';
@@ -42,6 +44,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final GeminiAIService geminiService = GeminiAIService();
+  Map<String, dynamic> response = {"Response" : "no : response"} ;
+
+  void generateQuestions() async {
+    Map<String, dynamic> questionResponse = await geminiService.generateQuestions("Beginner","Python");
+    setState(() {
+      response = questionResponse;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,6 +101,11 @@ class _HomePageState extends State<HomePage> {
                       borderRadius: BorderRadius.circular(25),
                       color: Color.fromARGB(81, 255, 255, 255),
                     ),
+                    child: Column(children: <Widget>[
+                      ElevatedButton(onPressed: generateQuestions, child: Text("Generate")),
+                      Text(jsonEncode(response))
+                    ],
+                    )
                   ),
                   SizedBox(
                     height:10
