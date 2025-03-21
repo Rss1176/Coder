@@ -29,16 +29,16 @@ class GeminiAIService {
         })
       );
       
+      // logic assumes that no one text string will be longer than a full JSON line
       if (questionResponse.statusCode == 200) {//enssure http has connected properly with a response
         final data = jsonDecode(questionResponse.body);
         String textResponse = data['candidates'][0]['content']['parts'][0]['text']; //gemini produces json with these headings
         List<String> lines = textResponse.split('\n');
         String finishedQuestion = lines[0];
-        List<String> options = lines.sublist(1, 5); // Assuming options are on lines 2-5. Adjust if needed
-        String answer = lines[5];  // Assuming answer is on line 6
+        List<String> options = lines.sublist(1, 5); // gemini produces options are on lines 2-5
+        String answer = lines[5];  // gemini produced answer is on line 6
         String explanation = lines.sublist(6).join(' ');
 
-        // candidates is the full response (only matters if we decided to do mutiple prompts), content is a single response, part isnt used here, text is the text of the question
         return {
           "question": finishedQuestion,
           "options" : options,

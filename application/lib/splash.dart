@@ -163,7 +163,7 @@ class _SplashScreen extends State<SplashScreen>{
                               ),
                               SimpleDialogOption(
                                 onPressed: () {
-                                  Navigator.of(context).push(createPageRoute2(Loading()));
+                                  Navigator.of(context).push(createPageRoute2(Loading(fromGuest: true,)));
                                 },
                                 child: const Text('Continue as Guest'),
                               ),

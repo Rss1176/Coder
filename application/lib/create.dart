@@ -44,6 +44,7 @@ class _CreatePageState extends State<CreatePage> {
   final _lastNameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
   String? _selectedPronoun;
   String? _selectedLocation;
 
@@ -54,10 +55,14 @@ class _CreatePageState extends State<CreatePage> {
       await _firestore.collection('users').doc(user.uid).set({
         'email': user.email,
         'uid': user.uid,
+        'firstName': _firstNameController.text,
+        'lastName': _lastNameController.text,
+        'pronoun': _selectedPronoun,
+        'location': _selectedLocation,
       });
     } catch (e) {
       print("Error creating user document: $e");
-    }
+    };
   }
 
   
@@ -316,7 +321,7 @@ class _CreatePageState extends State<CreatePage> {
                       height: 15.0
                     ),
                     TextFormField(
-                      controller: _passwordController,
+                      controller: _confirmPasswordController,
                       obscureText: true,
                       decoration: InputDecoration(
                         prefixIcon: Visibility(
@@ -335,7 +340,9 @@ class _CreatePageState extends State<CreatePage> {
                       ),
                       validator: (value){
                         if (value == null || value.isEmpty) {
-                          return "please set a password"; //same logic as above
+                          return "please confirm your password"; //same logic as above
+                      } else if (value != _passwordController.text){
+                          return "Passwords do not match"; //ensure that the password matches the confirm password
                       }
                       return null;
                       },
