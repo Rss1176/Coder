@@ -186,9 +186,9 @@ class _LoginPage extends State<LoginPage>{
                       );
                       final userDoc = await _firestore.collection('users').doc(_auth.currentUser!.uid).get();
                       if (!userDoc.exists){
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Loading(fromGuest: false,)));
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Create()));
                       } else {
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Loading(fromGuest: false,)));
                       }
                     } on FirebaseAuthException catch (e) { // catches the error for incorrect sign in
                       String errorMessage = "";

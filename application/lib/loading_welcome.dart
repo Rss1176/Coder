@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'page_animation.dart';
 import 'main.dart';
@@ -38,20 +39,27 @@ class LoadingPage extends StatefulWidget {
 
 class _LoadingPage extends State<LoadingPage> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
-  Future<void> getFirebaseData() async {
-    try {
-      QuerySnapshot data = await _firestore.collection('users').get();
-    } catch (e) {
-      print(e); // Print actual error
-    }
-  }
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  late Future<DocumentSnapshot> data;
 
   @override
   void initState() {
     super.initState();
-    getFirebaseData(); // Fetch data on init
+    data = getFirebaseData(); // Fetch data of user
   }
+
+  Future<DocumentSnapshot> getFirebaseData() async{//could add a "try" later for better error checking
+      String? iD = _auth.currentUser?.uid;
+      if (iD == null){
+        throw Exception("You are not logged in");
+      }
+      DocumentSnapshot userDoc = await _firestore.collection('users').doc(iD).get();
+
+      if (!userDoc.exists){
+        throw Exception("failed to find user document");
+      }
+      return userDoc;
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -92,9 +100,9 @@ class _LoadingPage extends State<LoadingPage> {
                         textAlign: TextAlign.center,
                       ),
                       if (widget.fromGuest == false)
-                        FutureBuilder(
-                          future: _firestore.collection('users').get(),
-                          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                        FutureBuilder<DocumentSnapshot>(
+                          future: data,
+                          builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
                             if (snapshot.connectionState == ConnectionState.waiting) {
                               return CircularProgressIndicator();
                             }
@@ -102,18 +110,12 @@ class _LoadingPage extends State<LoadingPage> {
                               return Text('Error: ${snapshot.error}');
                             }
 
-                            var data = snapshot.data?.docs;
+                            var userData = snapshot.data?.data() as Map<String, dynamic>?;//save all user data in dictionary
+                            var firstName = userData?['firstName'] ?? 'Guest';//get the first name out of the dict/map
 
-                            return Expanded(
-                              child: ListView.builder(
-                                itemCount: data?.length ?? 0,
-                                itemBuilder: (context, index) {
-                                  var user = data?[index];
-                                  return ListTile(
-                                    title: Text(user?['firstName'] ?? 'name not found'),
-                                  );
-                                },
-                              ),
+                            return SizedBox(
+                              child:
+                              Text(firstName),
                             );
                           },
                         ),
