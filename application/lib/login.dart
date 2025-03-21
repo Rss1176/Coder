@@ -186,7 +186,7 @@ class _LoginPage extends State<LoginPage>{
                       );
                       final userDoc = await _firestore.collection('users').doc(_auth.currentUser!.uid).get();
                       if (!userDoc.exists){
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Loading()));
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Loading(fromGuest: false,)));
                       } else {
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
                       }
