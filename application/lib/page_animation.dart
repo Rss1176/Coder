@@ -61,3 +61,25 @@ Route createPageRoute3(Widget page) {
     },
   );
 }
+
+Route createPageRoute4(Widget page) {
+  // Fade Transition - Quick
+  return PageRouteBuilder(
+    transitionDuration: Duration(milliseconds: 100),
+    reverseTransitionDuration: Duration(milliseconds: 100),
+    pageBuilder: (context, animation, secondaryAnimation) => page,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const begin = 0.0;
+      const end = 1.0;
+      const curve = Curves.easeIn;
+
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+      var opacityAnimation = animation.drive(tween);
+
+      return FadeTransition(
+        opacity: opacityAnimation,
+        child: child,
+      );
+    },
+  );
+}
