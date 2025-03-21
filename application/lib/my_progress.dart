@@ -56,7 +56,7 @@ class _ProgressPageState extends State<ProgressPage> {
           ),
           SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
                 child:Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -74,6 +74,7 @@ class _ProgressPageState extends State<ProgressPage> {
             left: 0,
             right: 0,
             child: AppBar(
+              automaticallyImplyLeading: false,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.vertical(
                   bottom: Radius.circular(25),
@@ -91,7 +92,7 @@ class _ProgressPageState extends State<ProgressPage> {
                       fontFamily: 'LuckiestGuy',
                     ),
                   ),
-                  SizedBox(width: 110),
+                  SizedBox(width: 175),
                   IconButton(
                     icon: Icon(
                       Icons.account_circle,
@@ -123,25 +124,25 @@ class _ProgressPageState extends State<ProgressPage> {
                   IconButton(
                     icon: Icon(Icons.home, color: const Color.fromARGB(75, 255, 255, 255)),
                     onPressed: () {
-                      Navigator.of(context).push(createPageRoute2(Home()));
+                      Navigator.of(context).push(createPageRoute4(Home()));
                     },
                   ),
                   IconButton(
                     icon: Icon(Icons.timeline, color: Colors.white),
                     onPressed: () {
-                      Navigator.of(context).push(createPageRoute2(Progress()));
+                      Navigator.of(context).push(createPageRoute4(Progress()));
                     },
                   ),
                   IconButton(
                     icon: Icon(Icons.leaderboard, color: Color.fromARGB(75, 255, 255, 255)),
                     onPressed: () {
-                      //Navigator.of(context).push(createPageRoute2(Leaderboard()));
+                      //Navigator.of(context).push(createPageRoute4(Leaderboard()));
                     },
                   ),
                   IconButton(
                     icon: Icon(Icons.settings, color: Color.fromARGB(75, 255, 255, 255)),
                     onPressed: () {
-                      //Navigator.of(context).push(createPageRoute2(Settings()));
+                      //Navigator.of(context).push(createPageRoute4(Settings()));
                     },
                   ),
                 ],
