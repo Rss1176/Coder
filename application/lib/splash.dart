@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'page_animation.dart';
-import 'loading_welcome.dart';
+import 'continue_as_guest.dart';
 
 void main() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -30,6 +30,7 @@ class Splash extends StatelessWidget {
           ),
         )
       ),
+      // Adding Page Background Image
       home: Scaffold(
         body: Stack(
           children: <Widget>[
@@ -61,128 +62,86 @@ class _SplashScreen extends State<SplashScreen>{
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+
+          // Adding Whitespace
           SizedBox(
-            height:180.0),
+            height:180.0
+          ),
+
+          // Adding 'Welcome to' Image
           Image(
             image: AssetImage("assets/images/image_welcometo.png"),
-            width: 375, 
-            height: 50),
+            width: 375.0, 
+            height: 50.0,
+          ),
+          
+          // Adding 'Coder' Image
           Image(
             image: AssetImage("assets/images/logo_darkmode.png"), 
-            width: 375, 
-            height: 125),
-            SizedBox(height:250.0),
-            ElevatedButton(
-              onPressed: () {
+            width: 375.0, 
+            height: 125.0,
+          ),
+          
+          // Adding Whitespace
+          SizedBox(
+            height:250.0
+          ),
+
+          // Adding 'Sign in' Button
+          ElevatedButton(
+            onPressed: () {
               Navigator.of(context).push(createPageRoute2(Login()));
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 77, 175, 255),
-                minimumSize: Size(350, 50),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-              ),
-              child: Text("Sign in", 
-                style: TextStyle(color: Colors.white)),
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color.fromARGB(255, 77, 175, 255),
+              minimumSize: Size(350, 50),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             ),
-            SizedBox(
-              height:8),
-            ElevatedButton(
-              onPressed: () {
-              Navigator.of(context).push(createPageRoute2(Create()));
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 77, 175, 255),
-                minimumSize: Size(350, 50),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-              ),
-              child: Text("Create an Account", style: TextStyle(color: Colors.white)),
+            child: Text("Sign in", 
+              style: TextStyle(color: Colors.white)
             ),
-            SizedBox(
-              height:25.0),
-            TextButton(
-              onPressed: (){
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return SimpleDialog(
-                        children: [
-                          SizedBox(
-                            height: 20
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                            child: Row(children: [
-                              Text(
-                                "Continue without Account?",
-                                style: TextStyle(
-                                  color: Color.fromARGB(255, 56, 62, 70),
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],)
-                          ),
-                          SizedBox(
-                            height:20
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("To use all of Coders features as intended, we recommend creating an account"),
-                                SizedBox(
-                                  height:10
-                                  ),
-                                Text("But if now isn't the right time, you can continue as a guest"),
-                          SizedBox(
-                            height:32
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                            Navigator.of(context).push(createPageRoute2(Create()));
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color.fromARGB(255, 77, 175, 255),
-                              minimumSize: Size(350, 50),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                            ),
-                            child: Text("Create an Account", style: TextStyle(color: Colors.white)),
-                          ),
-                          SizedBox(
-                            height:25
-                          ),  
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              SimpleDialogOption(
-                                onPressed: () {
-                                  Navigator.of(context).pop('Cancel');
-                                },
-                                child: const Text('Cancel'),
-                              ),
-                              SimpleDialogOption(
-                                onPressed: () {
-                                  Navigator.of(context).push(createPageRoute2(Loading(fromGuest: true,)));
-                                },
-                                child: const Text('Continue as Guest'),
-                              ),
-                          ]),
-                          SizedBox(
-                            height:20
-                          ),
-                             ]
-                            ),
-                          ),
-                        ]
-                      );
-                    }
-                );
-              },             
-              child: Text("Continue as Guest",
-              style: TextStyle(color: const Color.fromARGB(180, 56, 62, 70)))),
-            SizedBox(
-              height:2.0),
+          ),
+
+          // Adding Whitespace
+          SizedBox(
+            height:8.0
+          ),
+
+          // Adding 'Create an Account' Button
+          ElevatedButton(
+            onPressed: () {
+            Navigator.of(context).push(createPageRoute2(Create()));
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color.fromARGB(255, 77, 175, 255),
+              minimumSize: Size(350, 50),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            ),
+            child: Text("Create an Account", style: TextStyle(color: Colors.white)),
+          ),
+
+          // Adding Whitespace
+          SizedBox(
+            height:25.0
+          ),
+
+          // Adding 'Continue as Guest' Button, which opens a pop-up menu
+          TextButton(
+            child: Text("Continue as Guest",
+              style: TextStyle(
+                color: const Color.fromARGB(180, 56, 62, 70)
+              )
+            ),
+            onPressed: (){
+              guestContinueDialog(context);
+            },             
+          ),
+
+          // Adding Whitespace
+          SizedBox(
+            height:20.0
+          ),
+          
         ],
       ),
     );
