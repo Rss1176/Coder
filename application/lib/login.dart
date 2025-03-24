@@ -2,13 +2,8 @@ import 'package:coder_application/create.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'main.dart';
 import 'page_animation.dart';
 import 'loading_welcome.dart';
-
-void main() {
-  runApp(const Login());
-}
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -52,50 +47,70 @@ class _LoginPage extends State<LoginPage>{
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
+
+          // Adding Whitespace
           SizedBox(
-            height:80.0),
-          Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Let's Sign you in.",
-                style: TextStyle(
-                  color: Color.fromARGB(255, 56, 62, 70),
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Container(
-                height: 40,
-                width: 40,
-              child: FloatingActionButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-                side: BorderSide(color: const Color.fromARGB(255, 56, 62, 65), width: 1.0)
-                ),
-                elevation: 0.0,
-                backgroundColor: const Color.fromARGB(11, 255, 255, 255),
-                child: const Icon(Icons.close, color: Color.fromARGB(255, 56, 62, 65)),
-              ),
-              ),
-            ],
+            height:80.0
           ),
-        ),
+
+          // Adding Padding for widgets so they all line up with one another
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+
+                // Adding a Text Title to the top left of the screen
+                Text("Let's Sign you in.",
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 56, 62, 70),
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+                // Adding a close button to the top right of the screen
+                FloatingActionButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  mini: true,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    side: BorderSide(
+                      color: const Color.fromARGB(255, 56, 62, 65), 
+                      width: 1.0
+                    )
+                  ),
+                  elevation: 0.0,
+                  backgroundColor: const Color.fromARGB(11, 255, 255, 255),
+                  child: Icon(
+                    Icons.close, 
+                    color: Color.fromARGB(255, 56, 62, 65)
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // Adding Whitespace
           SizedBox(
-            height:50),
+            height:50
+          ),
+
+          // Adding Padding for widgets so they all line up with one another
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
              child: Column(
               children: [
+
+                // Creating a Form to send login information to Firebase for Verification
                 Form(
-                key: _formKey, 
+                  key: _formKey, 
                   child: Column(
                     children: [
+
+                      // The first text entry field, covering username for firebase verification
                       TextFormField(
                         controller: _emailController,
                         decoration: InputDecoration(
@@ -113,15 +128,21 @@ class _LoginPage extends State<LoginPage>{
                           ),
                         ),
                         validator: (value) {
+                          // tells user that their inputed value is not a valid email
                           if (value == null || value.isEmpty) {
-                            return 'Please enter a valid email';// tells user that their inputed value is not a valid email
+                            return 'Please enter a valid email';
                             }
-                              return null;  // ensures that the form is not valid as the email is wrong
+                            // ensures that the form is not valid as the email is wrong
+                            return null;
                         },
                       ),
+
+                      // Adding Whitespace
                       SizedBox(
                         height: 15.0
-                        ),
+                      ),
+
+                      // The second text entry field, covering password for firebase verification
                       TextFormField(
                         controller: _passwordController,
                         obscureText: true,
@@ -136,96 +157,122 @@ class _LoginPage extends State<LoginPage>{
                           filled: true,
                           fillColor: const Color.fromARGB(11, 225, 225, 225),
                           border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0),
+                            borderRadius: BorderRadius.circular(15.0),
                           ),
                         ),
-                      validator: (value){
-                        if (value == null || value.isEmpty) {
-                          return "please enter password"; //same logic as above but for passwords
-                      }
-                      return null;
-                      },
+                        validator: (value){
+                          if (value == null || value.isEmpty) {
+                            return "please enter password"; //same logic as above but for passwords
+                          }
+                          return null;
+                        },
                       ),
                     ],
                   ),
                 ),
-              SizedBox(
-                height:380.0
-                ),
-              Column(
+
+                // Adding Whitespace
+                SizedBox(
+                  height:380.0
+                  ),
+
+                // Adding Column for bottom widgets related to creating an account and Logging in
+                Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children:[
-                Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                Text("Don't have an account?",
-                  style: TextStyle(color: Color.fromARGB(180, 56, 62, 70))),
-                SizedBox(
-                  width:1.0
-                  ),
-                TextButton(
-                  child: Text("Register", 
-                  style: TextStyle(
-                  color: Color.fromARGB(180, 56, 62, 70),
-                  fontWeight: FontWeight.bold)),
-                  onPressed: (){
-                    Navigator.of(context).push(createPageRoute2(Create()));
-                  },
+
+                    // Adding a Row for the buttons to create an account instead of logging in
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+
+                        // Adding non-clickable text before the button
+                        Text("Don't have an account?",
+                          style: TextStyle(
+                            color: Color.fromARGB(180, 56, 62, 70)
+                          )
+                        ),
+                        
+                        // Adding whitespace
+                        SizedBox(
+                          width:1.0
+                        ),
+
+                        // Adding a button to push to create an account screen
+                        TextButton(
+                          onPressed: (){
+                            Navigator.of(context).push(createPageRoute2(Create()));
+                          },
+                          child: Text("Register", 
+                          style: TextStyle(
+                            color: Color.fromARGB(180, 56, 62, 70),
+                            fontWeight: FontWeight.bold
+                            )
+                          ),
+                        )
+                      ],
+                    ),
+
+                    // Adding Whitespace
+                    SizedBox(
+                      height: 20,
+                    ),
+
+                    // Adding a button to sign in after entering email and password
+                    ElevatedButton(
+                      onPressed: () async {
+                        try{ // Try to sign in
+                          await _auth.signInWithEmailAndPassword(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          );
+                          final userDoc = await _firestore.collection('users').doc(_auth.currentUser!.uid).get();
+                          if (!userDoc.exists){
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Create()));
+                          } else {
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Loading(fromGuest: false,)));
+                          }
+                        } 
+                        on FirebaseAuthException catch (e) { // catches the error for incorrect sign in
+                          String errorMessage = "";
+
+                          if (e.code == 'user-not-found'){
+                            errorMessage = "Incorrect Email.";
+                          } else if (e.code == 'wrong-password'){
+                            errorMessage = "Incorrect Password";
+                          } else if (e.code == 'invalid-email'){
+                            errorMessage = "Invalid Email";
+                          } else if (e.code == 'too-many-requests'){
+                            errorMessage = "too many sign in attempts";
+                          }
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(errorMessage)),
+                        );
+                        print(errorMessage);
+
+                        } catch(e){ // catches all other errors to prevent crashes (this also catches firebase not being initialised - dont ask me why i know)
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("Error: ${e.toString()}")));
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        alignment: Alignment.center,
+                        backgroundColor: const Color.fromARGB(255, 77, 175, 255),
+                        minimumSize: Size(350, 50),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
+                      child: Text("Sign in", 
+                        style: TextStyle(
+                          color: Colors.white)
+                      )
+                    ),
+                  ]
                 )
-                ]
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                  onPressed: () async {
-                    try{ // Try to sign in
-                      await _auth.signInWithEmailAndPassword(
-                        email: _emailController.text,
-                        password: _passwordController.text,
-                      );
-                      final userDoc = await _firestore.collection('users').doc(_auth.currentUser!.uid).get();
-                      if (!userDoc.exists){
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Create()));
-                      } else {
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Loading(fromGuest: false,)));
-                      }
-                    } on FirebaseAuthException catch (e) { // catches the error for incorrect sign in
-                      String errorMessage = "";
-
-                      if (e.code == 'user-not-found'){
-                        errorMessage = "Incorrect Email.";
-                      } else if (e.code == 'wrong-password'){
-                        errorMessage = "Incorrect Password";
-                      } else if (e.code == 'invalid-email'){
-                        errorMessage = "Invalid Email";
-                      } else if (e.code == 'too-many-requests'){
-                        errorMessage = "too many sign in attempts";
-                      }
-
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(errorMessage)),
-                    );
-                    print(errorMessage);
-
-                    } catch(e){ // catches all other errors to prevent crashes (this also catches firebase not being initialised - dont ask me why i know)
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text("Error: ${e.toString()}")));
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    alignment: Alignment.center,
-                    backgroundColor: const Color.fromARGB(255, 77, 175, 255),
-                    minimumSize: Size(350, 50),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
-                  child: Text("Sign in", style: TextStyle(color: Colors.white))),
               ]
-            )
-          ]
-        ),
-    )
-    ]
-    )
+            ),
+          )
+        ]
+      )
     );
   }
 }
