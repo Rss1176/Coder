@@ -73,28 +73,34 @@ class _CreatePageState extends State<CreatePage> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,        
         children: <Widget>[
+
+          // Adding Whitespace
           SizedBox(
-            height:80.0),
+            height:80.0
+          ),
+
+
           Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "Let's Get Started.",
+
+              // Adding 'Let's Get Started' Title Text
+              Text("Let's Get Started.",
                 style: TextStyle(
                   color: Color.fromARGB(255, 56, 62, 70),
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Container(
-                height: 40,
-                width: 40,
-              child: FloatingActionButton(
+
+              // Adding 'Close' Button
+              FloatingActionButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
+                mini:true,
                 shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
                 side: BorderSide(color: const Color.fromARGB(255, 56, 62, 65), width: 1.0)
@@ -102,14 +108,17 @@ class _CreatePageState extends State<CreatePage> {
                 elevation: 0.0,
                 backgroundColor: const Color.fromARGB(11, 255, 255, 255),
                 child: const Icon(Icons.close, color: Color.fromARGB(255, 56, 62, 65)),
-              ),
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
-        ),
+
+          // Adding Whitespace
           SizedBox(
             height: 50
           ),
+
+          // Adding Padding for the Description of 'Create an Account'
           Padding(padding: const EdgeInsets.symmetric(horizontal: 25.0),
           child: Column(
             children:[
@@ -117,9 +126,15 @@ class _CreatePageState extends State<CreatePage> {
                 key: _formKey,
                 child: Column(
                   children: [
+
+                    // Adding First Name and Pronouns Form Fields in the same row to tidy up space
                     Row(
                       children: [
+
+                        // Using expanded to fill avaliable space 
                         Expanded(  
+
+                          // Adding First Name Form Field
                           child: TextFormField(
                             controller: _firstNameController,
                             decoration: InputDecoration(
@@ -144,8 +159,16 @@ class _CreatePageState extends State<CreatePage> {
                             },
                           ),
                         ),
-                        SizedBox(width: 15.0),
+
+                        // Adding Whitespace
+                        SizedBox(
+                          width: 15.0
+                          ),
+
+                        // Using expanded to fill avaliable space 
                         Expanded(
+
+                          // Adding Dropdown Button for Pronouns
                           child: DropdownButtonFormField<String>(
                             value: _selectedPronoun,
                             decoration: InputDecoration(
@@ -159,7 +182,7 @@ class _CreatePageState extends State<CreatePage> {
                                 borderRadius: BorderRadius.circular(15.0),
                               ),
                             ),
-                            items: [
+                            items: [ // Dropdown menu items
                               DropdownMenuItem(value: 'He/Him', child: Text('He/Him')),
                               DropdownMenuItem(value: 'She/Her', child: Text('She/Her')),
                               DropdownMenuItem(value: 'They/Them', child: Text('They/Them')),
@@ -185,9 +208,13 @@ class _CreatePageState extends State<CreatePage> {
                         ),
                       ],
                     ),
+
+                    // Adding Whitespace
                     SizedBox(
                       height: 15.0
                     ),
+
+                    // Adding Last Name Form Field
                     TextFormField(
                       controller: _lastNameController,
                       decoration: InputDecoration(
@@ -211,9 +238,13 @@ class _CreatePageState extends State<CreatePage> {
                         return null; // ensures the form is not inputed if invalid
                       },
                     ),
+
+                    // Adding Whitespace
                     SizedBox(
                       height: 15.0
                     ),
+
+                    // Adding Location Dropdown Button
                     DropdownButtonFormField<String>(
                       value: _selectedLocation,
                       decoration: InputDecoration(
@@ -264,9 +295,13 @@ class _CreatePageState extends State<CreatePage> {
                         return null; // ensures the form is not inputed if invalid
                       },
                     ),
+
+                    // Adding Whitespace
                     SizedBox(
                       height: 80.0
                     ),
+
+                    // Adding Email Form Field
                     TextFormField(
                       controller: _emailController,
                       decoration: InputDecoration(
@@ -291,7 +326,13 @@ class _CreatePageState extends State<CreatePage> {
                         return null; // ensures the form is not inputed if invalid
                       },
                     ),
-                    SizedBox(height: 15.0),
+
+                    // Adding Whitespace
+                    SizedBox(
+                      height: 15.0
+                    ),
+
+                    // Adding Password Form Field
                     TextFormField(
                       controller: _passwordController,
                       obscureText: true,
@@ -317,9 +358,13 @@ class _CreatePageState extends State<CreatePage> {
                       return null;
                       },
                     ),
+
+                    // Adding Whitespace
                     SizedBox(
                       height: 15.0
                     ),
+
+                    // Adding Confirm Password Form Field
                     TextFormField(
                       controller: _confirmPasswordController,
                       obscureText: true,
@@ -347,53 +392,78 @@ class _CreatePageState extends State<CreatePage> {
                       return null;
                       },
                     ),
-                    SizedBox(height: 30.0)
+
+                    // Adding Whitespace
+                    SizedBox(
+                      height: 30.0
+                    ),
+
                   ],
                 ),
               ),
+
+              // Adding 'Already have an account?' Text and 'Login' Button
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                Text("Already have an account?",
-                  style: TextStyle(color: Color.fromARGB(180, 56, 62, 70))),
-                SizedBox(
-                  width:1.0
+
+                  // Adding leading text before Text button to Login
+                  Text("Already have an account?",
+                    style: TextStyle(color: Color.fromARGB(180, 56, 62, 70))
                   ),
-                TextButton(
-                  child: Text("Login", 
-                  style: TextStyle(
-                  color: Color.fromARGB(180, 56, 62, 70),
-                  fontWeight: FontWeight.bold)),
-                  onPressed: (){
-                    Navigator.of(context).push(createPageRoute2(Login()));
-                  },
-                )
-                ]
-                ),
-              SizedBox(height: 20),
-              ElevatedButton(onPressed: () async {
-                try {
-                    UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
-                    email: _emailController.text,
-                    password: _passwordController.text,
-                  );
 
-                  await _createUserDocument(userCredential.user!);
+                  // Adding Whitespace
+                  SizedBox(
+                    width:1.0
+                  ),
 
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login()));
-                } catch (e) {
-                  print (e)
-                  ; 
-                }
-              }, 
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 77, 175, 255),
-                minimumSize: Size(350, 50),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
-              child: Text("Create Account", style: TextStyle(color: Colors.white))),
+                  // Adding 'Login' Button, which redirects to Login Page
+                  TextButton(
+                    child: Text("Login", 
+                      style: TextStyle(
+                        color: Color.fromARGB(180, 56, 62, 70),
+                        fontWeight: FontWeight.bold)),
+                    onPressed: (){
+                      Navigator.of(context).push(createPageRoute2(Login()));
+                    },
+                  ),
+                ],
+              ),
+
+              // Adding Whitespace
               SizedBox(
-                height: 0
+                height: 20
+              ),
+
+              // Adding 'Create Account' Button, which forwards the form to Firebase Service
+              ElevatedButton(
+                onPressed: () async {
+                  try {
+                      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+                      email: _emailController.text,
+                      password: _passwordController.text,
+                    );
+
+                    await _createUserDocument(userCredential.user!);
+
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login()));
+                  } catch (e) {
+                    print (e)
+                    ; 
+                  }
+                }, 
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 77, 175, 255),
+                  minimumSize: Size(350, 50),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
+                child: Text("Create Account", style: TextStyle(color: Colors.white)),
+              ),
+
+              // Adding Whitespace, Currently set to 0.0, however likely to change based on Firebase Service
+              SizedBox(
+                height: 0.0
                 ),
+
               ]
             )
           )
