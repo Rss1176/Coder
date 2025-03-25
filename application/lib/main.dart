@@ -1,6 +1,6 @@
-import 'dart:convert';
-
-import 'GeminiAPI.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:coder_application/questions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'page_animation.dart';
 import 'account_page.dart';
@@ -44,15 +44,28 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final GeminiAIService geminiService = GeminiAIService(); // get an instantiation of the AI call class so the method can be called off it
-  Map<String, dynamic> response = {"Response" : "no : response"} ; // set an base value map that can be changed by function
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance; // variables for getting user details, used in dialog box
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  late Future<DocumentSnapshot> data;
 
-  void generateQuestions() async { //set state of function ready to be called
-    Map<String, dynamic> questionResponse = await geminiService.generateQuestions("Beginner","Python");
-    setState(() {
-      response = questionResponse;
-    });
+  // same function block as used in all other firebase calls, fetches the user data, ensure the ID matches and gets the userdocument
+  @override
+  void initState() {
+    super.initState();
+    data = getFirebaseData(); // Fetch data of user
   }
+    Future<DocumentSnapshot> getFirebaseData() async{
+      String? iD = _auth.currentUser?.uid;
+      if (iD == null){
+        throw Exception("You are not logged in");
+      }
+      DocumentSnapshot userDoc = await _firestore.collection('users').doc(iD).get();
+
+      if (!userDoc.exists){
+        throw Exception("failed to find user document");
+      }
+      return userDoc;
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -113,10 +126,11 @@ class _HomePageState extends State<HomePage> {
                       ),
                       child: Column(children: <Widget>[
                         ElevatedButton(
-                          onPressed: generateQuestions, 
+                          onPressed: (){ 
+                             Navigator.push(context, MaterialPageRoute(builder: (context) => const Questions()));
+                          },
                           child: Text("Generate")
                         ),
-                        Text(jsonEncode(response))
                         ],
                       )
                     ),
@@ -216,8 +230,9 @@ class _HomePageState extends State<HomePage> {
                       size: 35,
                       color: Colors.white,
                     ),
-                    onPressed: () {
-                      showMyAccountDialog(context);
+                    onPressed: () async {
+                      DocumentSnapshot userDoc = await data; // awaits the function call at the top of the class for the firebase data
+                      showMyAccountDialog(context, userDoc); // passes the firebase data into the dialog box constructor
                     },
                   ),
                 ],
