@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'page_animation.dart';
 import 'account_page.dart';
 import 'my_progress.dart';
+import 'settings.dart';
 
 
 void main() {
@@ -272,7 +273,7 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
 
-                  // Button for Leader Boards Page
+                  // Button for Leaderboards Page
                   IconButton(
                     icon: Icon(Icons.leaderboard, color: Color.fromARGB(75, 255, 255, 255)),
                     onPressed: () {
@@ -284,7 +285,7 @@ class _HomePageState extends State<HomePage> {
                   IconButton(
                     icon: Icon(Icons.settings, color: Color.fromARGB(75, 255, 255, 255)),
                     onPressed: () {
-                      //Navigator.of(context).push(createPageRoute2(Settings()));
+                      Navigator.of(context).push(createPageRoute2(SettingsPage()));
                     },
                   ),
                 ],

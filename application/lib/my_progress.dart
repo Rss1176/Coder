@@ -5,11 +5,6 @@ import 'main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-
-void main() {
-  runApp(const Progress());
-}
-
 class Progress extends StatelessWidget {
   const Progress({super.key});
 
