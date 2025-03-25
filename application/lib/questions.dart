@@ -106,8 +106,53 @@ class _QuestionsPage extends State<QuestionsPage>{
             height:65.0
           ),
 
+          // button to select the programing language of the question
+          DropdownButtonFormField<String>(
+                value: pLanguage,
+                decoration: InputDecoration(
+                  prefixIcon: Visibility(
+                    child: Icon(Icons.place, color: Color.fromARGB(255, 213, 213, 213)),
+                  ),
+                  
+                  hintText: "Select Programing Language",
+                  hintStyle: TextStyle(color: Colors.black),
+                  labelText: "",
+                  floatingLabelBehavior: FloatingLabelBehavior.always, 
+                  floatingLabelStyle: TextStyle(fontSize: 20, color: Colors.black),
+                  filled: true,
+                  fillColor: const Color.fromARGB(11, 225, 225, 225),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                ),
+                items: [
+                  DropdownMenuItem(value: 'Python', child: Text('Python',
+                    style: TextStyle(color: Colors.black))),
+                  DropdownMenuItem(value: 'C#', child: Text('C#',
+                    style: TextStyle(color: Colors.black))),
+                  DropdownMenuItem(value: 'Java', child: Text('Java',
+                    style: TextStyle(color: Colors.black))),
+                ],
+                hint: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text('Location', style: TextStyle(color: Color.fromARGB(255, 168, 168, 168))),
+                ),
+                onChanged: (value) {
+                  setButtonToActive(value);
+                }         
+              ),
+
+          // sized box
+          SizedBox(
+            height:25.0
+          ),
+
           Container(
             decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/questions_background_1.png"),
+                fit: BoxFit.cover
+                ),
               border: Border.all(
                 color: const Color.fromARGB(255, 77, 175, 255),
                 width: 2,
@@ -120,39 +165,6 @@ class _QuestionsPage extends State<QuestionsPage>{
           child: Column(
             children: [
                         
-              // button to select the programing language of the question
-              DropdownButtonFormField<String>(
-                value: pLanguage,
-                decoration: InputDecoration(
-                  prefixIcon: Visibility(
-                    child: Icon(Icons.place, color: Color.fromARGB(255, 213, 213, 213)),
-                  ),
-                  
-                  hintText: "Select Programing Language",
-                  hintStyle: TextStyle(color: Color.fromARGB(255, 168, 168, 168)),
-                  labelText: "",
-                  floatingLabelBehavior: FloatingLabelBehavior.always, 
-                  floatingLabelStyle: TextStyle(fontSize: 20),
-                  filled: true,
-                  fillColor: const Color.fromARGB(11, 225, 225, 225),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                ),
-                items: [
-                  DropdownMenuItem(value: 'Python', child: Text('Python')),
-                  DropdownMenuItem(value: 'C*', child: Text('C*')),
-                  DropdownMenuItem(value: 'Java', child: Text('Java')),
-                ],
-                hint: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Location', style: TextStyle(color: Color.fromARGB(255, 168, 168, 168))),
-                ),
-                onChanged: (value) {
-                  setButtonToActive(value);
-                }         
-              ),
-
               // adding white sppace
               SizedBox(
                 height:30.0
@@ -165,6 +177,7 @@ class _QuestionsPage extends State<QuestionsPage>{
 
             // Question String
             Text(response["question"], style: TextStyle(
+              color: Colors.white,
               fontSize: 20,
               fontWeight: FontWeight.bold
               ),
@@ -195,9 +208,10 @@ class _QuestionsPage extends State<QuestionsPage>{
                 ),        
                 Flexible(
                   child: Text(response["optionA"], style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,),
-                  softWrap: true, // ensures text can feed to next line
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,),
+                    softWrap: true, // ensures text can feed to next line
                 ),
                 ),
               ] 
@@ -228,9 +242,10 @@ class _QuestionsPage extends State<QuestionsPage>{
                 ),        
                 Flexible(
                   child: Text(response["optionB"], style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,),
-                  softWrap: true, // ensures text can feed to next line
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,),
+                    softWrap: true, // ensures text can feed to next line
                   ),
                 )
               ]
@@ -261,9 +276,10 @@ class _QuestionsPage extends State<QuestionsPage>{
                 ),        
                 Flexible(
                   child: Text(response["optionC"], style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,),
-                  softWrap: true, // ensures text can feed to next line
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,),
+                    softWrap: true, // ensures text can feed to next line
                   ),
                 )
               ] 
@@ -294,9 +310,10 @@ class _QuestionsPage extends State<QuestionsPage>{
                 ),
                 Flexible(
                   child: Text(response["optionD"], style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,),
-                  softWrap: true, // ensures text can feed to next line
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,),
+                    softWrap: true, // ensures text can feed to next line
                 ),
               ),
               ],
@@ -308,6 +325,7 @@ class _QuestionsPage extends State<QuestionsPage>{
           ),
 
             Text(response["explination"], style: TextStyle(
+              color: Colors.white,
               fontSize: 18,
               fontWeight: FontWeight.bold
               )
@@ -323,14 +341,31 @@ class _QuestionsPage extends State<QuestionsPage>{
           } : null, // logic for making the elevated button rely on the boolean
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color.fromARGB(255, 77, 175, 255),
-            minimumSize: Size(350, 50),
+            minimumSize: Size(50, 80),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           ),
-          child: Text("Get Next Question", style: TextStyle(color: Colors.white))), 
+          child: Row(
+            children:[
+
+              Text("Next Question ", 
+                style: TextStyle(
+                  color: Colors.white)
+              ),
+
+              SizedBox(
+                width: 5.0
+              ),
+
+              Icon(Icons.arrow_forward_ios, 
+                color: Colors.white,
+              ),
+            ],
+          ),
+          )
           ],
           )
           else
-          Text("Please select a language")
+          Text("Please select a language", style: TextStyle(color: Colors.white))
             ]
            )
            )

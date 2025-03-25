@@ -115,7 +115,7 @@ class _LoadingPage extends State<LoadingPage> {
 
                             return SizedBox(
                               child:
-                              Text(firstName),
+                              Text(firstName, style: TextStyle(fontSize: 18),),
                             );
                           },
                         ),
