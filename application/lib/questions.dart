@@ -61,7 +61,7 @@ class _QuestionsPage extends State<QuestionsPage>{
   Map<String, dynamic> response = {"Response" : "no : response"} ; // set an base value map that can be changed by function
 
   String? pLanguage = "Python";
-  String? aptitude = "expert";
+  String? aptitude = "beginner";
   bool languageSelected = false;
 
   @override 
@@ -92,57 +92,71 @@ class _QuestionsPage extends State<QuestionsPage>{
 
   @override
   Widget build(BuildContext context){
-    return Center
-    (
-      child: Padding
-      (padding: EdgeInsets.all(16),
-        child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-
-            // adding white sppace
-            SizedBox(
-              height:20.0
-            ),
-
-
-          // button to select the programing language of the question
-          DropdownButtonFormField<String>(
-                      value: pLanguage,
-                      decoration: InputDecoration(
-                        prefixIcon: Visibility(
-                          child: Icon(Icons.place, color: Color.fromARGB(255, 213, 213, 213)),
-                        ),
-                        
-                        hintText: "Select Programing Language",
-                        hintStyle: TextStyle(color: Color.fromARGB(255, 168, 168, 168)),
-                        labelText: "",
-                        floatingLabelBehavior: FloatingLabelBehavior.always, 
-                        floatingLabelStyle: TextStyle(fontSize: 20),
-                        filled: true,
-                        fillColor: const Color.fromARGB(11, 225, 225, 225),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                      ),
-                      items: [
-                        DropdownMenuItem(value: 'Python', child: Text('Python')),
-                        DropdownMenuItem(value: 'C*', child: Text('C*')),
-                        DropdownMenuItem(value: 'Java', child: Text('Java')),
-                      ],
-                      hint: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text('Location', style: TextStyle(color: Color.fromARGB(255, 168, 168, 168))),
-                      ),
-                      onChanged: (value) {
-                        setButtonToActive(value);
-                      }         
-          ),
+    return Center(
+          // scroll view for page 
+          child: SingleChildScrollView(
+            child: Padding(padding: const EdgeInsets.all(15.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children:<Widget>[
 
           // adding white sppace
-            SizedBox(
-              height:30.0
+          SizedBox(
+            height:65.0
+          ),
+
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: const Color.fromARGB(255, 77, 175, 255),
+                width: 2,
+              ),
+              borderRadius: BorderRadius.circular(25),
+              color: Color.fromARGB(81, 255, 255, 255),
             ),
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+          child: Column(
+            children: [
+                        
+              // button to select the programing language of the question
+              DropdownButtonFormField<String>(
+                value: pLanguage,
+                decoration: InputDecoration(
+                  prefixIcon: Visibility(
+                    child: Icon(Icons.place, color: Color.fromARGB(255, 213, 213, 213)),
+                  ),
+                  
+                  hintText: "Select Programing Language",
+                  hintStyle: TextStyle(color: Color.fromARGB(255, 168, 168, 168)),
+                  labelText: "",
+                  floatingLabelBehavior: FloatingLabelBehavior.always, 
+                  floatingLabelStyle: TextStyle(fontSize: 20),
+                  filled: true,
+                  fillColor: const Color.fromARGB(11, 225, 225, 225),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                ),
+                items: [
+                  DropdownMenuItem(value: 'Python', child: Text('Python')),
+                  DropdownMenuItem(value: 'C*', child: Text('C*')),
+                  DropdownMenuItem(value: 'Java', child: Text('Java')),
+                ],
+                hint: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text('Location', style: TextStyle(color: Color.fromARGB(255, 168, 168, 168))),
+                ),
+                onChanged: (value) {
+                  setButtonToActive(value);
+                }         
+              ),
+
+              // adding white sppace
+              SizedBox(
+                height:30.0
+              ),
 
           // add a firebase call to get the aptitude of a user later
           if (response["question"] != null && response["question"]!.isNotEmpty)
@@ -168,12 +182,12 @@ class _QuestionsPage extends State<QuestionsPage>{
                                              padding: EdgeInsets.all(0),
                                              backgroundColor: Colors.blue, 
                                              elevation: 4), 
-                                             child: Container(width: 60,
-                                             height: 60,
+                                             child: Container(width: 32,
+                                             height: 32,
                                              alignment: Alignment.center,
                                              child: Container(
-                                              width: 40,
-                                              height: 40,
+                                              width: 25,
+                                              height: 25,
                                               decoration: const BoxDecoration(color:Colors.white,
                                               shape: BoxShape.circle),
                                              )
@@ -201,12 +215,12 @@ class _QuestionsPage extends State<QuestionsPage>{
                                              padding: EdgeInsets.all(0),
                                              backgroundColor: Colors.blue, 
                                              elevation: 4), 
-                                             child: Container(width: 60,
-                                             height: 60,
+                                             child: Container(width: 32,
+                                             height: 32,
                                              alignment: Alignment.center,
                                              child: Container(
-                                              width: 40,
-                                              height: 40,
+                                              width: 25,
+                                              height: 25,
                                               decoration: const BoxDecoration(color:Colors.white,
                                               shape: BoxShape.circle),
                                              )
@@ -234,12 +248,12 @@ class _QuestionsPage extends State<QuestionsPage>{
                                              padding: EdgeInsets.all(0),
                                              backgroundColor: Colors.blue, 
                                              elevation: 4), 
-                                             child: Container(width: 60,
-                                             height: 60,
+                                             child: Container(width: 32,
+                                             height: 32,
                                              alignment: Alignment.center,
                                              child: Container(
-                                              width: 40,
-                                              height: 40,
+                                              width: 25,
+                                              height: 25,
                                               decoration: const BoxDecoration(color:Colors.white,
                                               shape: BoxShape.circle),
                                              )
@@ -267,12 +281,12 @@ class _QuestionsPage extends State<QuestionsPage>{
                                              padding: EdgeInsets.all(0),
                                              backgroundColor: Colors.blue, 
                                              elevation: 4), 
-                                             child: Container(width: 60,
-                                             height: 60,
+                                             child: Container(width: 32,
+                                             height: 32,
                                              alignment: Alignment.center,
                                              child: Container(
-                                              width: 40,
-                                              height: 40,
+                                              width: 25,
+                                              height: 25,
                                               decoration: const BoxDecoration(color:Colors.blue,
                                               shape: BoxShape.circle),
                                              )
@@ -317,9 +331,14 @@ class _QuestionsPage extends State<QuestionsPage>{
           )
           else
           Text("Please select a language")
+            ]
+           )
+           )
+          )
         ]
       ),
     )
+    ),
     );
   } 
 }

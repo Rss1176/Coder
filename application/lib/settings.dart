@@ -105,7 +105,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
 
                   SizedBox(
-                    height: 550.0
+                    height: 650.0
                   ),
                 ],
               ),
