@@ -4,6 +4,7 @@ import 'account_page.dart';
 import 'main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'settings.dart';
 
 class Progress extends StatelessWidget {
   const Progress({super.key});
@@ -565,7 +566,7 @@ class _ProgressPageState extends State<ProgressPage> {
                   IconButton(
                     icon: Icon(Icons.settings, color: Color.fromARGB(75, 255, 255, 255)),
                     onPressed: () {
-                      //Navigator.of(context).push(createPageRoute2(Settings()));
+                      Navigator.of(context).push(createPageRoute2(AppSettings()));
                     },
                   ),
                 ],

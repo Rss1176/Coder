@@ -285,7 +285,7 @@ class _HomePageState extends State<HomePage> {
                   IconButton(
                     icon: Icon(Icons.settings, color: Color.fromARGB(75, 255, 255, 255)),
                     onPressed: () {
-                      Navigator.of(context).push(createPageRoute2(SettingsPage()));
+                      Navigator.of(context).push(createPageRoute2(AppSettings()));
                     },
                   ),
                 ],
