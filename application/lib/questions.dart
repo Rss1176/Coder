@@ -16,9 +16,36 @@ class Questions extends StatelessWidget {
               ),
             ),
             QuestionsPage(),
-          ],
-        ),
-      );
+            Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: AppBar( // AppBar variables set
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+                  bottom: Radius.circular(25),
+                ),
+              ),
+              backgroundColor: Color.fromARGB(255, 77, 175, 255),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    "Question Page",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontFamily: 'LuckiestGuy',
+                    ),
+                  ),
+                  SizedBox(width: 110),
+                ]
+             )
+            )
+          )
+        ]
+      ),
+    );
   }
 }
 
@@ -34,7 +61,7 @@ class _QuestionsPage extends State<QuestionsPage>{
   Map<String, dynamic> response = {"Response" : "no : response"} ; // set an base value map that can be changed by function
 
   String? pLanguage = "Python";
-  String? aptitude = "beginner";
+  String? aptitude = "expert";
   bool languageSelected = false;
 
   @override 
@@ -67,10 +94,18 @@ class _QuestionsPage extends State<QuestionsPage>{
   Widget build(BuildContext context){
     return Center
     (
-      child: Column
-      (
+      child: Padding
+      (padding: EdgeInsets.all(16),
+        child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+
+            // adding white sppace
+            SizedBox(
+              height:20.0
+            ),
+
+
           // button to select the programing language of the question
           DropdownButtonFormField<String>(
                       value: pLanguage,
@@ -103,26 +138,188 @@ class _QuestionsPage extends State<QuestionsPage>{
                         setButtonToActive(value);
                       }         
           ),
-          // add a firebase call to get the aptitude of a user later
 
-          ElevatedButton(onPressed: languageSelected ? (){
+          // adding white sppace
+            SizedBox(
+              height:30.0
+            ),
+
+          // add a firebase call to get the aptitude of a user later
+          if (response["question"] != null && response["question"]!.isNotEmpty)
+
+          Column(children: <Widget>[
+
+            // Question String
+            Text(response["question"], style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold
+              ),
+            ),
+
+            // adding white space
+            SizedBox(
+              height:50.0
+            ),
+
+            // First answer button
+            Row(children:<Widget>[
+              ElevatedButton(onPressed: null,  
+              style: ElevatedButton.styleFrom(shape: CircleBorder(),
+                                             padding: EdgeInsets.all(0),
+                                             backgroundColor: Colors.blue, 
+                                             elevation: 4), 
+                                             child: Container(width: 60,
+                                             height: 60,
+                                             alignment: Alignment.center,
+                                             child: Container(
+                                              width: 40,
+                                              height: 40,
+                                              decoration: const BoxDecoration(color:Colors.white,
+                                              shape: BoxShape.circle),
+                                             )
+                                            ),
+                ),        
+                Flexible(
+                  child: Text(response["optionA"], style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,),
+                  softWrap: true, // ensures text can feed to next line
+                ),
+                ),
+              ] 
+            ),
+
+            // adding white space
+            SizedBox(
+              height:20.0
+            ),
+
+            //second answer button
+            Row(children:<Widget>[
+              ElevatedButton(onPressed: null,  
+              style: ElevatedButton.styleFrom(shape: CircleBorder(),
+                                             padding: EdgeInsets.all(0),
+                                             backgroundColor: Colors.blue, 
+                                             elevation: 4), 
+                                             child: Container(width: 60,
+                                             height: 60,
+                                             alignment: Alignment.center,
+                                             child: Container(
+                                              width: 40,
+                                              height: 40,
+                                              decoration: const BoxDecoration(color:Colors.white,
+                                              shape: BoxShape.circle),
+                                             )
+                                            ),
+                ),        
+                Flexible(
+                  child: Text(response["optionB"], style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,),
+                  softWrap: true, // ensures text can feed to next line
+                  ),
+                )
+              ]
+            ),
+            
+            // adding white space
+            SizedBox(
+              height:20.0
+            ),
+
+            //Third answer button
+            Row(children:<Widget>[
+              ElevatedButton(onPressed: null,  
+              style: ElevatedButton.styleFrom(shape: CircleBorder(),
+                                             padding: EdgeInsets.all(0),
+                                             backgroundColor: Colors.blue, 
+                                             elevation: 4), 
+                                             child: Container(width: 60,
+                                             height: 60,
+                                             alignment: Alignment.center,
+                                             child: Container(
+                                              width: 40,
+                                              height: 40,
+                                              decoration: const BoxDecoration(color:Colors.white,
+                                              shape: BoxShape.circle),
+                                             )
+                                            ),
+                ),        
+                Flexible(
+                  child: Text(response["optionC"], style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,),
+                  softWrap: true, // ensures text can feed to next line
+                  ),
+                )
+              ] 
+            ),
+
+            // adding white space
+            SizedBox(
+              height:20.0
+            ),
+
+            //Forth answer button
+            Row(children:<Widget>[
+              ElevatedButton(onPressed: null,  
+              style: ElevatedButton.styleFrom(shape: CircleBorder(),
+                                             padding: EdgeInsets.all(0),
+                                             backgroundColor: Colors.blue, 
+                                             elevation: 4), 
+                                             child: Container(width: 60,
+                                             height: 60,
+                                             alignment: Alignment.center,
+                                             child: Container(
+                                              width: 40,
+                                              height: 40,
+                                              decoration: const BoxDecoration(color:Colors.blue,
+                                              shape: BoxShape.circle),
+                                             )
+                                            ),
+                ),
+                Flexible(
+                  child: Text(response["optionD"], style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,),
+                  softWrap: true, // ensures text can feed to next line
+                ),
+              ),
+              ],
+            ),
+
+            // add white space
+          SizedBox(
+            height:100.0
+          ),
+
+            Text(response["explination"], style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold
+              )
+            ),
+
+            // adding white space
+            SizedBox(
+              height:40.0
+            ),
+
+            ElevatedButton(onPressed: languageSelected ? (){
             generateQuestions();
           } : null, // logic for making the elevated button rely on the boolean
-           child: Text("Get Next Question")),
-          if (response["question"] != null && response["question"]!.isNotEmpty)
-          Column(children: <Widget>[
-            Text(response["question"]),
-            Text(response["optionA"]),
-            Text(response["optionB"]),
-            Text(response["optionC"]),
-            Text(response["optionD"]),
-            Text(response["explination"]), 
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color.fromARGB(255, 77, 175, 255),
+            minimumSize: Size(350, 50),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          ),
+          child: Text("Get Next Question", style: TextStyle(color: Colors.white))), 
           ],
           )
           else
           Text("Please select a language")
         ]
       ),
+    )
     );
   } 
 }
