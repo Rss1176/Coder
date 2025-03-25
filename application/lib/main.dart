@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coder_application/questions.dart';
+import 'package:coder_application/splash.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'page_animation.dart';
@@ -285,7 +286,7 @@ class _HomePageState extends State<HomePage> {
                   IconButton(
                     icon: Icon(Icons.settings, color: Color.fromARGB(75, 255, 255, 255)),
                     onPressed: () {
-                      Navigator.of(context).push(createPageRoute2(SettingsPage()));
+                      Navigator.of(context).push(createPageRoute2(AppSettings()));
                     },
                   ),
                 ],
