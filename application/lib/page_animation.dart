@@ -4,6 +4,7 @@ Route createPageRoute1(Widget page) {
   // Transition from Lower to Upper
   return PageRouteBuilder(
     transitionDuration: Duration(milliseconds: 1500),
+    reverseTransitionDuration: Duration(milliseconds: 1500),
     pageBuilder: (context, animation, secondaryAnimation) => page,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       // Duration(seconds: 2);
@@ -21,8 +22,8 @@ Route createPageRoute1(Widget page) {
 Route createPageRoute2(Widget page) {
   // Fade Transition
   return PageRouteBuilder(
-    transitionDuration: Duration(milliseconds: 500),
-    reverseTransitionDuration: Duration(milliseconds: 500),
+    transitionDuration: Duration(milliseconds: 200),
+    reverseTransitionDuration: Duration(milliseconds: 200),
     pageBuilder: (context, animation, secondaryAnimation) => page,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       const begin = 0.0;
