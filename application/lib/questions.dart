@@ -63,6 +63,14 @@ class _QuestionsPage extends State<QuestionsPage>{
   String? pLanguage = "Python";
   String? aptitude = "beginner";
   bool languageSelected = false;
+  Color _buttonColor1 = Colors.white;
+  Color _buttonColor2 = Colors.white;
+  Color _buttonColor3 = Colors.white;
+  Color _buttonColor4 = Colors.white;
+  String? _selectedAnswer = "";
+  bool _questionChecked = false;
+  String _buttonText = "Submit";
+  String _resultText = "";
 
   @override 
   void initState(){
@@ -74,12 +82,31 @@ class _QuestionsPage extends State<QuestionsPage>{
   try{Map<String, dynamic> questionResponse = await geminiService.generateQuestions(aptitude,pLanguage);
     setState(() {
       response = questionResponse;
+      // reset all vars that change to answer the question back to their basic values
+      _selectedAnswer = "";
+      _questionChecked = false;
+      _buttonText = "Submit";
+      _buttonColor1 = _buttonColor2 = _buttonColor3 = _buttonColor4 = Colors.white;
     });}
     catch (e){
       setState(() {
         response = {"Response": "Failed to generate Questions: $e"};
       });
     }
+  }
+
+  void checkAnswer(){
+    // ensure that nothing happens if an answer has not yet been chosen
+    if (_selectedAnswer == null || _selectedAnswer!.isEmpty || _selectedAnswer == "") return;
+    String apiAnswer = response["answer"];
+
+    String correctAnswer = apiAnswer;
+    setState((){
+      _questionChecked = true;
+      _buttonText = "Next Question";
+    });
+
+    _resultText = _selectedAnswer == correctAnswer ? "Correct!" : "Incorrect, the answer is $apiAnswer";
   }
 
   void setButtonToActive(String? value){
@@ -190,10 +217,16 @@ class _QuestionsPage extends State<QuestionsPage>{
 
             // First answer button
             Row(children:<Widget>[
-              ElevatedButton(onPressed: null,  
+              ElevatedButton(onPressed: (){setState(() {
+                _buttonColor1 = Colors.blue;
+                _buttonColor2 = Colors.white;
+                _buttonColor3 = Colors.white;
+                _buttonColor4 = Colors.white;
+                _selectedAnswer = "A";
+              });},
               style: ElevatedButton.styleFrom(shape: CircleBorder(),
                                              padding: EdgeInsets.all(0),
-                                             backgroundColor: Colors.blue, 
+                                             backgroundColor: _buttonColor1, 
                                              elevation: 4), 
                                              child: Container(width: 32,
                                              height: 32,
@@ -201,10 +234,11 @@ class _QuestionsPage extends State<QuestionsPage>{
                                              child: Container(
                                               width: 25,
                                               height: 25,
-                                              decoration: const BoxDecoration(color:Colors.white,
+                                              decoration: BoxDecoration(color: _buttonColor1,
                                               shape: BoxShape.circle),
                                              )
                                             ),
+  
                 ),        
                 Flexible(
                   child: Text(response["optionA"], style: TextStyle(
@@ -224,10 +258,16 @@ class _QuestionsPage extends State<QuestionsPage>{
 
             //second answer button
             Row(children:<Widget>[
-              ElevatedButton(onPressed: null,  
+              ElevatedButton(onPressed: (){setState(() {
+                _buttonColor2 = Colors.blue;
+                _buttonColor1 = Colors.white;
+                _buttonColor3 = Colors.white;
+                _buttonColor4 = Colors.white;
+                _selectedAnswer = "B";
+              });},  
               style: ElevatedButton.styleFrom(shape: CircleBorder(),
                                              padding: EdgeInsets.all(0),
-                                             backgroundColor: Colors.blue, 
+                                             backgroundColor: _buttonColor2, 
                                              elevation: 4), 
                                              child: Container(width: 32,
                                              height: 32,
@@ -235,7 +275,7 @@ class _QuestionsPage extends State<QuestionsPage>{
                                              child: Container(
                                               width: 25,
                                               height: 25,
-                                              decoration: const BoxDecoration(color:Colors.white,
+                                              decoration: BoxDecoration(color: _buttonColor2,
                                               shape: BoxShape.circle),
                                              )
                                             ),
@@ -258,10 +298,16 @@ class _QuestionsPage extends State<QuestionsPage>{
 
             //Third answer button
             Row(children:<Widget>[
-              ElevatedButton(onPressed: null,  
+              ElevatedButton(onPressed: (){setState(() {
+                _buttonColor3 = Colors.blue;
+                _buttonColor1 = Colors.white;
+                _buttonColor2 = Colors.white;
+                _buttonColor4 = Colors.white;
+                _selectedAnswer = "C";
+              });},  
               style: ElevatedButton.styleFrom(shape: CircleBorder(),
                                              padding: EdgeInsets.all(0),
-                                             backgroundColor: Colors.blue, 
+                                             backgroundColor: _buttonColor3, 
                                              elevation: 4), 
                                              child: Container(width: 32,
                                              height: 32,
@@ -269,7 +315,7 @@ class _QuestionsPage extends State<QuestionsPage>{
                                              child: Container(
                                               width: 25,
                                               height: 25,
-                                              decoration: const BoxDecoration(color:Colors.white,
+                                              decoration: BoxDecoration(color: _buttonColor3,
                                               shape: BoxShape.circle),
                                              )
                                             ),
@@ -292,10 +338,16 @@ class _QuestionsPage extends State<QuestionsPage>{
 
             //Forth answer button
             Row(children:<Widget>[
-              ElevatedButton(onPressed: null,  
+              ElevatedButton(onPressed: (){setState(() {
+                _buttonColor4 = Colors.blue;
+                _buttonColor1 = Colors.white;
+                _buttonColor2 = Colors.white;
+                _buttonColor3 = Colors.white;
+                _selectedAnswer = "D";
+              });},  
               style: ElevatedButton.styleFrom(shape: CircleBorder(),
                                              padding: EdgeInsets.all(0),
-                                             backgroundColor: Colors.blue, 
+                                             backgroundColor: _buttonColor4, 
                                              elevation: 4), 
                                              child: Container(width: 32,
                                              height: 32,
@@ -303,7 +355,7 @@ class _QuestionsPage extends State<QuestionsPage>{
                                              child: Container(
                                               width: 25,
                                               height: 25,
-                                              decoration: const BoxDecoration(color:Colors.blue,
+                                              decoration: BoxDecoration(color: _buttonColor4,
                                               shape: BoxShape.circle),
                                              )
                                             ),
@@ -321,14 +373,30 @@ class _QuestionsPage extends State<QuestionsPage>{
 
             // add white space
           SizedBox(
-            height:100.0
+            height:30.0
           ),
 
+          if (_questionChecked)
+          Text(_resultText, style: TextStyle(
+            color: _resultText == "Correct!" ? Colors.green : Colors.red, // make the text green if correct red if wrong
+            fontSize: 22,
+            fontWeight:  FontWeight.bold,
+          ),),
+
+          SizedBox(
+            height: 30.0,
+            ),
+
+            if(_questionChecked)
             Text(response["explination"], style: TextStyle(
               color: Colors.white,
               fontSize: 18,
               fontWeight: FontWeight.bold
               )
+            )
+            else
+            SizedBox(
+              height: 30,
             ),
 
             // adding white space
@@ -337,7 +405,11 @@ class _QuestionsPage extends State<QuestionsPage>{
             ),
 
             ElevatedButton(onPressed: languageSelected ? (){
-            generateQuestions();
+              if (!_questionChecked){
+                checkAnswer();
+              } else {
+                generateQuestions();
+              }
           } : null, // logic for making the elevated button rely on the boolean
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color.fromARGB(255, 77, 175, 255),
@@ -347,7 +419,7 @@ class _QuestionsPage extends State<QuestionsPage>{
           child: Row(
             children:[
 
-              Text("Next Question ", 
+              Text(_buttonText, 
                 style: TextStyle(
                   color: Colors.white)
               ),
