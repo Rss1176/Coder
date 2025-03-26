@@ -37,8 +37,8 @@ class GeminiAIService {
         String textResponse = data['candidates'][0]['content']['parts'][0]['text']; // Reads JSON string data, these headings are produced by API, saves into one long string
         List<String> lines = textResponse.split('\n'); // splits the strings into individual lines such that variables can be assigned to them
         String finishedQuestion = lines[0]; //first line is the question
-        List<String> options = lines.sublist(1, 5); // possible responses takes up the next 4 lines
-        String answer = lines[5];  // gemini produced answer is on line 6
+        List<String> options = lines.sublist(1, 5);  // possible responses takes up the next 4 lines
+        String answer = lines[6];  // gemini produced answer is on line 6
         String explination = lines.sublist(7,10).join(''); //everyline after 6 is the explination, combines all the lines after 6 into a list before joining them together as a string with a whitespace seperator
 
         //seperate the list of strings into individual variables for easy use later
