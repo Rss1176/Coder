@@ -36,7 +36,7 @@ class Splash extends StatelessWidget {
           children: <Widget>[
             Positioned.fill(
               child: Image.asset(
-                "assets/images/Background Main_Dark Mode_No Scroll.png",
+                "assets/images/background_simple.png",
                 fit: BoxFit.cover,
               ),
             ),
@@ -93,12 +93,15 @@ class _SplashScreen extends State<SplashScreen>{
               Navigator.of(context).push(createPageRoute2(Login()));
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color.fromARGB(255, 77, 175, 255),
+              backgroundColor: const Color.fromARGB(255, 0, 85, 155),
               minimumSize: Size(350, 50),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             ),
             child: Text("Sign in", 
-              style: TextStyle(color: Colors.white)
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16
+              ),
             ),
           ),
 
@@ -113,11 +116,16 @@ class _SplashScreen extends State<SplashScreen>{
             Navigator.of(context).push(createPageRoute2(Create()));
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color.fromARGB(255, 77, 175, 255),
+              backgroundColor: const Color.fromARGB(255, 0, 85, 155),
               minimumSize: Size(350, 50),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             ),
-            child: Text("Create an Account", style: TextStyle(color: Colors.white)),
+            child: Text("Create an Account", 
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16
+              ),
+            ),
           ),
 
           // Adding Whitespace
@@ -129,8 +137,9 @@ class _SplashScreen extends State<SplashScreen>{
           TextButton(
             child: Text("Continue as Guest",
               style: TextStyle(
-                color: const Color.fromARGB(180, 56, 62, 70)
-              )
+                color: const Color.fromARGB(255, 208, 208, 208),
+                fontSize: 16,
+              ),
             ),
             onPressed: (){
               guestContinueDialog(context);

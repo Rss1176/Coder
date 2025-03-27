@@ -70,7 +70,7 @@ class _SettingsPageState extends State<SettingsPage> {
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/Background_Main_Dark.png"),
+                  image: AssetImage("assets/images/background_simple.png"),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -99,7 +99,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         color: Color.fromARGB(81, 255, 255, 255),
                       ),
                     ),
-
+                  
 
                   // FOR JOHN: You should be able to add whatever you want here
 
@@ -122,7 +122,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   bottom: Radius.circular(25),
                 ),
               ),
-              backgroundColor: Color.fromARGB(255, 77, 175, 255),
+              backgroundColor: Color.fromARGB(255, 0, 85, 155),
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -160,14 +160,14 @@ class _SettingsPageState extends State<SettingsPage> {
             left: 60,
             right: 60,
             child: Container(
-              height: 50,
+              height: 60,
               width: double.infinity,
               decoration: BoxDecoration(
                 border: Border.all(
                   color: const Color.fromARGB(255, 255, 255, 255),
                   width: 2,
                 ),
-                color: Color.fromARGB(255, 77, 175, 255),
+                color: Color.fromARGB(255, 0, 85, 155),
                 borderRadius: BorderRadius.circular(30),
               ),
               child: Row(

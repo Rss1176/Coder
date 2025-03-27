@@ -17,7 +17,7 @@ class Loading extends StatelessWidget {
         children: <Widget>[
           Positioned.fill(
             child: Image.asset(
-              "assets/images/Background Main_Lighter_Dark Mode_No Scroll.png",
+              "assets/images/background_simple_fortext.png",
               fit: BoxFit.cover,
             ),
           ),
@@ -78,10 +78,10 @@ class _LoadingPage extends State<LoadingPage> {
                   height: 350,
                   width: 350,
                   child: CircularProgressIndicator(
-                    semanticsLabel: "Welcome Back!",
+                    semanticsLabel: "A Welcome Message with the Users Name!",
                     valueColor: AlwaysStoppedAnimation<Color>(
-                        Color.fromARGB(255, 77, 175, 255)),
-                    backgroundColor: const Color.fromARGB(25, 0, 0, 0),
+                        Color.fromARGB(255, 0, 85, 155)),
+                    backgroundColor: const Color.fromARGB(12, 238, 238, 238),
                     strokeWidth: 6.0,
                   ),
                 ),
@@ -92,10 +92,10 @@ class _LoadingPage extends State<LoadingPage> {
                       Text(
                         "Welcome Back",
                         style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 32,
                           fontFamily: 'LuckiestGuy',
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                          color: Color.fromARGB(255, 208, 208, 208),
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -116,7 +116,7 @@ class _LoadingPage extends State<LoadingPage> {
                             return SizedBox(
                               child:
                               Text(firstName+'!', 
-                                style: TextStyle(fontSize: 30),),
+                                style: TextStyle(color: Color.fromARGB(255, 208, 208, 208), fontSize: 30),),
                             );
                           },
                         ),
@@ -132,7 +132,7 @@ class _LoadingPage extends State<LoadingPage> {
               Navigator.of(context).push(createPageRoute1(Home()));
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color.fromARGB(255, 77, 175, 255),
+              backgroundColor: const Color.fromARGB(255, 0, 85, 155),
               minimumSize: Size(250, 50),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             ),
@@ -141,7 +141,7 @@ class _LoadingPage extends State<LoadingPage> {
           SizedBox(height: 20.0),
           TextButton(
             child: Text("Return to Sign In",
-                style: TextStyle(color: Color.fromARGB(180, 56, 62, 70))),
+                style: TextStyle(color: Color.fromARGB(255, 208, 208, 208))),
             onPressed: () {
               Navigator.of(context).push(createPageRoute2(Splash()));
             },

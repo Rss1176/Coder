@@ -114,7 +114,7 @@ class _ProgressPageState extends State<ProgressPage> {
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/Background_Main_Dark.png"),
+                  image: AssetImage("assets/images/background_simple.png"),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -128,19 +128,21 @@ class _ProgressPageState extends State<ProgressPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
 
+                  // Adding Whitespace
                   SizedBox(
                     height: 135.0
                   ),
 
+                  // Python Widget
                   Container(
                     height: 100,
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: const Color.fromARGB(255, 77, 175, 255),
-                        width: 2,
+                        color:Colors.white,
+                        width: 1,
                       ),
                       borderRadius: BorderRadius.circular(25),
-                      color: Color.fromARGB(81, 255, 255, 255),
+                      color: Color.fromARGB(120, 105, 190, 255),
                     ),
                     child:Padding(
                       padding: const EdgeInsets.all(15.0),
@@ -152,12 +154,26 @@ class _ProgressPageState extends State<ProgressPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween, 
                               children: [
 
-                                Image(
+                                Container(
+                                  height: 60,
+                                  width: 60,
+                                  decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.white,
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Color.fromARGB(125, 198, 230, 255),
+                                  ),
+                                  child:Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                  child: Image(
                                   image: AssetImage("assets/images/python-logo.png"),
-                                  width: 50.0,
-                                  height: 50.0,
+                                  width: 40.0,
+                                  height: 40.0,
                                 ),
-
+                                  ),
+                                ),
                                 Column(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
@@ -282,7 +298,7 @@ class _ProgressPageState extends State<ProgressPage> {
                                     );
                                   },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color.fromARGB(255, 77, 175, 255),
+                                  backgroundColor: const Color.fromARGB(255, 0, 85, 155),
                                   minimumSize: Size(50, 100),
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                                 ),
@@ -313,19 +329,21 @@ class _ProgressPageState extends State<ProgressPage> {
                     ),
                   ),
 
+                  // Adding Whitespace
                   SizedBox(
                     height: 10.0
                   ),
 
+                  // Java Widget
                   Container(
                     height: 100,
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: const Color.fromARGB(255, 77, 175, 255),
-                        width: 2,
+                        color: Colors.white,
+                        width: 1,
                       ),
                       borderRadius: BorderRadius.circular(25),
-                      color: Color.fromARGB(81, 255, 255, 255),
+                      color: Color.fromARGB(120, 105, 190, 255),
                     ),
                     child:Padding(
                       padding: const EdgeInsets.all(15.0),
@@ -336,11 +354,25 @@ class _ProgressPageState extends State<ProgressPage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween, 
                               children: [
-
-                                Image(
+                                Container(
+                                  height: 60,
+                                  width: 60,
+                                  decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.white,
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Color.fromARGB(125, 198, 230, 255),
+                                  ),
+                                  child:Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                  child: Image(
                                   image: AssetImage("assets/images/java-logo.png"),
-                                  width: 50,
-                                  height: 50,
+                                  width: 40.0,
+                                  height: 40.0,
+                                ),
+                                  ),
                                 ),
 
                                 Column(
@@ -388,7 +420,7 @@ class _ProgressPageState extends State<ProgressPage> {
                                     );
                                   },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color.fromARGB(255, 77, 175, 255),
+                                  backgroundColor: const Color.fromARGB(255, 0, 85, 155),
                                   minimumSize: Size(50, 100),
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                                 ),
@@ -419,19 +451,21 @@ class _ProgressPageState extends State<ProgressPage> {
                     ),
                   ),
 
+                  // Adding Whitespace
                   SizedBox(
                     height: 10.0
                   ),
 
+                  // C# Widget
                   Container(
                     height: 100,
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: const Color.fromARGB(255, 77, 175, 255),
-                        width: 2,
+                        color: Colors.white,
+                        width: 1,
                       ),
                       borderRadius: BorderRadius.circular(25),
-                      color: Color.fromARGB(81, 255, 255, 255),
+                      color: Color.fromARGB(120, 105, 190, 255),
                     ),
                     child:Padding(
                       padding: const EdgeInsets.all(15.0),
@@ -443,10 +477,25 @@ class _ProgressPageState extends State<ProgressPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween, 
                               children: [
 
-                                Image(
+                                Container(
+                                  height: 60,
+                                  width: 60,
+                                  decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.white,
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Color.fromARGB(125, 198, 230, 255),
+                                  ),
+                                  child:Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                  child: Image(
                                   image: AssetImage("assets/images/csharp-logo.png"),
-                                  width: 50.0,
-                                  height: 50.0,
+                                  width: 40.0,
+                                  height: 40.0,
+                                ),
+                                  ),
                                 ),
 
                                 Column(
@@ -480,7 +529,7 @@ class _ProgressPageState extends State<ProgressPage> {
                                     Navigator.push(context, MaterialPageRoute(builder: (context) => const Questions()));
                                   },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color.fromARGB(255, 77, 175, 255),
+                                  backgroundColor: const Color.fromARGB(255, 0, 85, 155),
                                   minimumSize: Size(50, 100),
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                                 ),
@@ -519,11 +568,11 @@ class _ProgressPageState extends State<ProgressPage> {
                     height: 100,
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: const Color.fromARGB(255, 77, 175, 255),
-                        width: 2,
+                        color: Colors.white,
+                        width: 1,
                       ),
                       borderRadius: BorderRadius.circular(25),
-                      color: Color.fromARGB(81, 255, 255, 255),
+                      color: Color.fromARGB(120, 105, 190, 255),
                     ),
                     child:Padding(
                       padding: const EdgeInsets.all(15.0),
@@ -536,7 +585,7 @@ class _ProgressPageState extends State<ProgressPage> {
                               children: [
 
                                 Image(
-                                  image: AssetImage("assets/images/questions.png"),
+                                  image: AssetImage("assets/images/questions_light.png"),
                                   width: 50.0,
                                   height: 50.0,
                                 ),
@@ -547,7 +596,7 @@ class _ProgressPageState extends State<ProgressPage> {
                                     Text(
                                       "Question Portal",
                                       style: TextStyle(
-                                        color: Colors.black,
+                                        color: Colors.white,
                                         fontSize: 18,
                                         fontFamily: 'LuckiestGuy',
                                         decorationThickness: 0.8,
@@ -557,7 +606,7 @@ class _ProgressPageState extends State<ProgressPage> {
                                     Text(
                                       "Let's Practice!",
                                       style: TextStyle(
-                                        color: Colors.black,
+                                        color: Colors.white,
                                         fontSize: 20,
                                         fontFamily: 'LuckiestGuy',
                                       ),
@@ -584,7 +633,7 @@ class _ProgressPageState extends State<ProgressPage> {
                                     );
                                   },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color.fromARGB(255, 77, 175, 255),
+                                  backgroundColor: const Color.fromARGB(255, 0, 85, 155),
                                   minimumSize: Size(50, 100),
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                                 ),
@@ -616,7 +665,7 @@ class _ProgressPageState extends State<ProgressPage> {
                   ),
 
                   SizedBox(
-                    height: 150.0
+                    height: 250.0
                   ),
                 ],
               ),
@@ -633,7 +682,7 @@ class _ProgressPageState extends State<ProgressPage> {
                   bottom: Radius.circular(25),
                 ),
               ),
-              backgroundColor: Color.fromARGB(255, 77, 175, 255),
+              backgroundColor: Color.fromARGB(255, 0, 85, 155),
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -671,14 +720,14 @@ class _ProgressPageState extends State<ProgressPage> {
             left: 60,
             right: 60,
             child: Container(
-              height: 50,
+              height: 60,
               width: double.infinity,
               decoration: BoxDecoration(
                 border: Border.all(
                   color: const Color.fromARGB(255, 255, 255, 255),
                   width: 2,
                 ),
-                color: Color.fromARGB(255, 77, 175, 255),
+                color: Color.fromARGB(255, 0, 85, 155),
                 borderRadius: BorderRadius.circular(30),
               ),
               child: Row(

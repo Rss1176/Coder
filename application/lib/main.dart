@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/Background_Main_Dark.png"),
+                  image: AssetImage("assets/images/background_simple.png"),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -108,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                           width: 1,
                         ),
                         borderRadius: BorderRadius.circular(25),
-                        color: Color.fromARGB(172, 69, 174, 255),
+                        color: Color.fromARGB(120, 105, 190, 255),
                       ),
                     ),
 
@@ -126,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                         width: 1,
                       ),
                       borderRadius: BorderRadius.circular(25),
-                      color: Color.fromARGB(172, 69, 174, 255),
+                      color: Color.fromARGB(120, 105, 190, 255),
                     ),
                     child:Padding(
                       padding: const EdgeInsets.all(15.0),
@@ -168,7 +168,7 @@ class _HomePageState extends State<HomePage> {
                                     Navigator.of(context).push(createPageRoute2(Questions()));
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color.fromARGB(255, 77, 175, 255),
+                                    backgroundColor: const Color.fromARGB(255, 0, 85, 155),
                                     minimumSize: Size(40, 75),
                                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                                   ),
@@ -212,7 +212,7 @@ class _HomePageState extends State<HomePage> {
                           width: 1,
                         ),
                         borderRadius: BorderRadius.circular(25),
-                        color: Color.fromARGB(172, 69, 174, 255),
+                        color: Color.fromARGB(120, 105, 190, 255),
                       ),
                     ),
 
@@ -230,7 +230,7 @@ class _HomePageState extends State<HomePage> {
                           width: 1,
                         ),
                         borderRadius: BorderRadius.circular(25),
-                        color: Color.fromARGB(172, 69, 174, 255),
+                        color: Color.fromARGB(120, 105, 190, 255),
                       ),
                     ),
 
@@ -248,7 +248,7 @@ class _HomePageState extends State<HomePage> {
                           width: 1,
                         ),
                         borderRadius: BorderRadius.circular(25),
-                        color: Color.fromARGB(172, 69, 174, 255),
+                        color: Color.fromARGB(120, 105, 190, 255),
                       ),
                     ),
 
@@ -309,7 +309,7 @@ class _HomePageState extends State<HomePage> {
             left: 60,
             right: 60,
             child: Container(
-              height: 50,
+              height: 60,
               width: double.infinity,
               decoration: BoxDecoration(
                 border: Border.all(

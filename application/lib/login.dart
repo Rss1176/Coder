@@ -15,7 +15,7 @@ class Login extends StatelessWidget {
           children: <Widget>[
             Positioned.fill(
               child: Image.asset(
-                "assets/images/Background Main_Lighter_Dark Mode_No Scroll.png",
+                "assets/images/background_simple_fortext.png",
                 fit: BoxFit.cover,
               ),
             ),
@@ -63,7 +63,7 @@ class _LoginPage extends State<LoginPage>{
                 // Adding a Text Title to the top left of the screen
                 Text("Let's Sign you in.",
                   style: TextStyle(
-                    color: Color.fromARGB(255, 56, 62, 70),
+                    color: Color.fromARGB(255, 208, 208, 208),
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
                   ),
@@ -78,7 +78,7 @@ class _LoginPage extends State<LoginPage>{
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                     side: BorderSide(
-                      color: const Color.fromARGB(255, 56, 62, 65), 
+                      color: const Color.fromARGB(255, 208, 208, 208), 
                       width: 1.0
                     )
                   ),
@@ -86,7 +86,7 @@ class _LoginPage extends State<LoginPage>{
                   backgroundColor: const Color.fromARGB(11, 255, 255, 255),
                   child: Icon(
                     Icons.close, 
-                    color: Color.fromARGB(255, 56, 62, 65)
+                    color: Color.fromARGB(255, 208, 208, 208)
                   ),
                 ),
               ],
@@ -112,12 +112,13 @@ class _LoginPage extends State<LoginPage>{
 
                       // The first text entry field, covering username for firebase verification
                       TextFormField(
+                        style:TextStyle(color: Color.fromARGB(255, 208, 208, 208)),
                         controller: _emailController,
                         decoration: InputDecoration(
                           prefixIcon: Visibility(
-                            child: Icon(Icons.mail, color: const Color.fromARGB(255, 213, 213, 213))),
+                            child: Icon(Icons.mail, color: const Color.fromARGB(255, 208, 208, 208))),
                           hintText: "Email",
-                            hintStyle: TextStyle(color: Color.fromARGB(255, 168, 168, 168)),
+                            hintStyle: TextStyle(color: Color.fromARGB(255, 208, 208, 208)),
                           labelText: "",
                           floatingLabelBehavior: FloatingLabelBehavior.always, 
                           floatingLabelStyle: TextStyle(fontSize: 20),
@@ -144,11 +145,12 @@ class _LoginPage extends State<LoginPage>{
 
                       // The second text entry field, covering password for firebase verification
                       TextFormField(
+                        style:TextStyle(color: Color.fromARGB(255, 208, 208, 208)),
                         controller: _passwordController,
                         obscureText: true,
                         decoration: InputDecoration(
                           prefixIcon: Visibility(
-                            child: Icon(Icons.lock, color: const Color.fromARGB(255, 213, 213, 213))),
+                            child: Icon(Icons.lock, color: const Color.fromARGB(255, 208, 208, 208))),
                           hintText: "Password",
                             hintStyle: TextStyle(color: Color.fromARGB(255, 168, 168, 168)),
                           labelText: "",
@@ -189,7 +191,7 @@ class _LoginPage extends State<LoginPage>{
                         // Adding non-clickable text before the button
                         Text("Don't have an account?",
                           style: TextStyle(
-                            color: Color.fromARGB(180, 56, 62, 70)
+                            color: Color.fromARGB(255, 208, 208, 208),
                           )
                         ),
                         
@@ -205,8 +207,8 @@ class _LoginPage extends State<LoginPage>{
                           },
                           child: Text("Register", 
                           style: TextStyle(
-                            color: Color.fromARGB(180, 56, 62, 70),
-                            fontWeight: FontWeight.bold
+                            color: Color.fromARGB(255, 208, 208, 208),
+                            fontWeight: FontWeight.bold,
                             )
                           ),
                         )
@@ -258,12 +260,13 @@ class _LoginPage extends State<LoginPage>{
                       },
                       style: ElevatedButton.styleFrom(
                         alignment: Alignment.center,
-                        backgroundColor: const Color.fromARGB(255, 77, 175, 255),
+                        backgroundColor: const Color.fromARGB(255, 0, 85, 155),
                         minimumSize: Size(350, 50),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
                       child: Text("Sign in", 
                         style: TextStyle(
-                          color: Colors.white)
+                          color: Colors.white,
+                        ),
                       )
                     ),
                   ]
