@@ -5,6 +5,7 @@ import 'main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'settings.dart';
+import 'questions.dart';
 
 class Progress extends StatelessWidget {
   const Progress({super.key});
@@ -69,7 +70,7 @@ class _ProgressPageState extends State<ProgressPage> {
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/Background Main_Dark Mode_No Scroll.png"),
+                  image: AssetImage("assets/images/Background_Main_Dark.png"),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -432,6 +433,96 @@ class _ProgressPageState extends State<ProgressPage> {
 
                                 ElevatedButton(
                                   onPressed: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => const Questions()));
+                                  },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color.fromARGB(255, 77, 175, 255),
+                                  minimumSize: Size(50, 100),
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                                ),
+                                child: Row(
+                                  children:[
+
+                                    Text("View", 
+                                      style: TextStyle(
+                                        color: Colors.white)
+                                    ),
+
+                                    SizedBox(
+                                      width: 5.0
+                                    ),
+
+                                    Icon(Icons.arrow_forward_ios, 
+                                      color: Colors.white,
+                                    ),
+                                  ],
+                                ),
+                                ),
+                              
+                            ],
+                          ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 175.0
+                  ),
+
+                  Container(
+                    height: 100,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: const Color.fromARGB(255, 77, 175, 255),
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(25),
+                      color: Color.fromARGB(81, 255, 255, 255),
+                    ),
+                    child:Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Column(
+                        children: [
+
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween, 
+                              children: [
+
+                                Image(
+                                  image: AssetImage("assets/images/questions.png"),
+                                  width: 50.0,
+                                  height: 50.0,
+                                ),
+
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      "Question Portal",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                        fontFamily: 'LuckiestGuy',
+                                        decorationThickness: 0.8,
+                                      ),
+                                    ),
+                                    
+                                    Text(
+                                      "Let's Practice!",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontFamily: 'LuckiestGuy',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                                ElevatedButton(
+                                  onPressed: () {
                                     showDialog(
                                       context: context,
                                       useSafeArea: false,
@@ -481,7 +572,7 @@ class _ProgressPageState extends State<ProgressPage> {
                   ),
 
                   SizedBox(
-                    height: 450.0
+                    height: 150.0
                   ),
                 ],
               ),
@@ -539,6 +630,10 @@ class _ProgressPageState extends State<ProgressPage> {
               height: 50,
               width: double.infinity,
               decoration: BoxDecoration(
+                border: Border.all(
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                  width: 2,
+                ),
                 color: Color.fromARGB(255, 77, 175, 255),
                 borderRadius: BorderRadius.circular(30),
               ),
