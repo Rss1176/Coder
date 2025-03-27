@@ -18,23 +18,6 @@ Future<void> showMyAccountDialog(BuildContext context, DocumentSnapshot userData
           decoration: BoxDecoration(
             color: const Color.fromARGB(255, 77, 175, 255),
             borderRadius: BorderRadius.circular(15),
-            /* border: Border(
-              top: BorderSide(
-                width: 0,
-              ),
-              left: BorderSide(
-                color: Colors.white,
-                width: 6,
-              ),
-              right: BorderSide(
-                color: Colors.white,
-                width: 6,
-              ),
-              bottom: BorderSide(
-                color: Colors.white,
-                width: 6,
-              ),
-            ), */ // This, for some unknown reason breaks the dialogue box
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),

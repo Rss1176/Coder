@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/Background Main_Dark Mode_No Scroll.png"),
+                  image: AssetImage("assets/images/Background_Main_Dark.png"),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -104,11 +104,11 @@ class _HomePageState extends State<HomePage> {
                       height: 250,
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: const Color.fromARGB(255, 77, 175, 255),
-                          width: 2,
+                          color: Colors.white,
+                          width: 1,
                         ),
                         borderRadius: BorderRadius.circular(25),
-                        color: Color.fromARGB(81, 255, 255, 255),
+                        color: Color.fromARGB(172, 69, 174, 255),
                       ),
                     ),
 
@@ -122,11 +122,11 @@ class _HomePageState extends State<HomePage> {
                     height: 150,
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: const Color.fromARGB(255, 77, 175, 255),
-                        width: 2,
+                        color: Colors.white,
+                        width: 1,
                       ),
                       borderRadius: BorderRadius.circular(25),
-                      color: Color.fromARGB(81, 255, 255, 255),
+                      color: Color.fromARGB(172, 69, 174, 255),
                     ),
                     child:Padding(
                       padding: const EdgeInsets.all(15.0),
@@ -141,10 +141,11 @@ class _HomePageState extends State<HomePage> {
                                 Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
+
                                     Text(
                                       "Question Portal",
                                       style: TextStyle(
-                                        color: Colors.black,
+                                        color: Colors.white,
                                         fontSize: 18,
                                         fontFamily: 'LuckiestGuy',
                                         decorationThickness: 0.8,
@@ -154,8 +155,8 @@ class _HomePageState extends State<HomePage> {
                                     Text(
                                       "Let's Practice!",
                                       style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20,
+                                        color: Colors.white,
+                                        fontSize: 24,
                                         fontFamily: 'LuckiestGuy',
                                       ),
                                     ),
@@ -168,7 +169,7 @@ class _HomePageState extends State<HomePage> {
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: const Color.fromARGB(255, 77, 175, 255),
-                                    minimumSize: Size(50, 100),
+                                    minimumSize: Size(40, 75),
                                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                                   ),
                                   child: Row(
@@ -207,11 +208,11 @@ class _HomePageState extends State<HomePage> {
                       height: 150,
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: const Color.fromARGB(255, 77, 175, 255),
-                          width: 2,
+                          color: Colors.white,
+                          width: 1,
                         ),
                         borderRadius: BorderRadius.circular(25),
-                        color: Color.fromARGB(81, 255, 255, 255),
+                        color: Color.fromARGB(172, 69, 174, 255),
                       ),
                     ),
 
@@ -225,11 +226,11 @@ class _HomePageState extends State<HomePage> {
                       height: 250,
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: const Color.fromARGB(255, 77, 175, 255),
-                          width: 2,
+                          color: Colors.white,
+                          width: 1,
                         ),
                         borderRadius: BorderRadius.circular(25),
-                        color: Color.fromARGB(81, 255, 255, 255),
+                        color: Color.fromARGB(172, 69, 174, 255),
                       ),
                     ),
 
@@ -243,11 +244,11 @@ class _HomePageState extends State<HomePage> {
                       height: 150,
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: const Color.fromARGB(255, 77, 175, 255),
-                          width: 2,
+                          color: Colors.white,
+                          width: 1,
                         ),
                         borderRadius: BorderRadius.circular(25),
-                        color: Color.fromARGB(81, 255, 255, 255),
+                        color: Color.fromARGB(172, 69, 174, 255),
                       ),
                     ),
 
@@ -271,7 +272,7 @@ class _HomePageState extends State<HomePage> {
                   bottom: Radius.circular(25),
                 ),
               ),
-              backgroundColor: Color.fromARGB(255, 77, 175, 255),
+              backgroundColor: Color.fromARGB(255, 0, 85, 155),
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -311,7 +312,11 @@ class _HomePageState extends State<HomePage> {
               height: 50,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 77, 175, 255),
+                border: Border.all(
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                  width: 2,
+                ),
+                color: Color.fromARGB(255, 0, 85, 155),
                 borderRadius: BorderRadius.circular(30),
               ),
               child: Row(

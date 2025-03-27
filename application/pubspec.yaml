@@ -26,12 +26,12 @@ flutter:
   assets:
   - assets/images/
   - assets/images/Background Main_Dark Mode_No Scroll.png
+  - assets/images/Background_Main_Dark.png
   - assets/images/profile_image_placeholder.png
   - assets/images/python-logo.png
   - assets/images/java-logo.png
   - assets/images/csharp-logo.png
   - assets/images/questions.png
-  - assets/images/Background Main_Dark.png
 
 fonts:
   - family: LuckiestGuy

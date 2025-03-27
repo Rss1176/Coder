@@ -70,7 +70,7 @@ class _ProgressPageState extends State<ProgressPage> {
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/Background Main_Dark Mode_No Scroll.png"),
+                  image: AssetImage("assets/images/Background_Main_Dark.png"),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -630,6 +630,10 @@ class _ProgressPageState extends State<ProgressPage> {
               height: 50,
               width: double.infinity,
               decoration: BoxDecoration(
+                border: Border.all(
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                  width: 2,
+                ),
                 color: Color.fromARGB(255, 77, 175, 255),
                 borderRadius: BorderRadius.circular(30),
               ),
