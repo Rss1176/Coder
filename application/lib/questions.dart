@@ -62,6 +62,7 @@ class _QuestionsPage extends State<QuestionsPage>{
   final FirebaseFirestore _firestore = FirebaseFirestore.instance; // variables for getting user details, used in dialog box
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late Future<DocumentSnapshot> data;
+  bool _isLoading = false;
 
   // same function block as used in all other firebase calls, fetches the user data, ensure the ID matches and gets the userdocument
   @override
@@ -100,6 +101,9 @@ class _QuestionsPage extends State<QuestionsPage>{
   String _resultText = "";
 
   void generateQuestions() async { //set inital state of function so the page can be built, will be recalled every time the drop down box is pressed
+  setState(() {
+      _isLoading = true;
+  });
   try{Map<String, dynamic> questionResponse = await geminiService.generateQuestions(aptitude,pLanguage);
     setState(() {
       response = questionResponse;
@@ -107,11 +111,15 @@ class _QuestionsPage extends State<QuestionsPage>{
       _selectedAnswer = "";
       _questionChecked = false;
       _buttonText = "Submit";
-      _buttonColor1 = _buttonColor2 = _buttonColor3 = _buttonColor4 = Colors.white;
+      _buttonColor1 = _buttonColor2 = _buttonColor3 = _buttonColor4 = Colors.white; // set loading indicator waiting API call
     });}
     catch (e){
       setState(() {
         response = {"Response": "Failed to generate Questions: $e"};
+      });
+    } finally {
+      setState(() {
+        _isLoading = false; // hide loading indicator after API call
       });
     }
   }
@@ -135,6 +143,10 @@ class _QuestionsPage extends State<QuestionsPage>{
     pLanguage = value;
     languageSelected = value != null; // only allows the generate question button be pressed if a language has been chosed in the drop down
     });
+
+    if (languageSelected){
+      generateQuestions();
+    }
 
     data.then((userDoc){
       updateAptitude(pLanguage, userDoc); // update language and aptitiude each time the language is changed
@@ -265,8 +277,23 @@ class _QuestionsPage extends State<QuestionsPage>{
                 height:30.0
               ),
 
+          // Display loading indicator when generating questions
+          if (_isLoading)
+            Column(
+              children:[
+                SizedBox(
+                  height: 250,
+                  width: 300,
+                ),
+                CircularProgressIndicator(),
+                SizedBox(
+                  height: 250,
+                  width: 350,
+                ),
+              ],
+            )
           // add a firebase call to get the aptitude of a user later
-          if (response["question"] != null && response["question"]!.isNotEmpty)
+          else if (response["question"] != null && response["question"]!.isNotEmpty)
 
           Column(children: <Widget>[
 
@@ -456,7 +483,7 @@ class _QuestionsPage extends State<QuestionsPage>{
             ),
 
             if(_questionChecked)
-            Text(response["explination"], style: TextStyle(
+            Text(response["explanation"], style: TextStyle(
               color: Colors.white,
               fontSize: 18,
               fontWeight: FontWeight.bold
@@ -515,7 +542,7 @@ class _QuestionsPage extends State<QuestionsPage>{
               ),
 
               // adding hint text
-              Text("Please select a language", 
+              Text("Please Select a Language", 
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,
