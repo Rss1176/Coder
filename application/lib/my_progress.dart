@@ -46,9 +46,15 @@ class _ProgressPageState extends State<ProgressPage> {
   @override
   void initState() {
     super.initState();
-    data = getFirebaseData(); // Fetch data of user
+    getFirebaseDataAndUpdateRank();// Fetch data of user
   }
-    Future<DocumentSnapshot> getFirebaseData() async{
+
+  // set language ranks based on integer values
+  String? pythonDescription = "Basic";
+  String? csharpDescription = "Basic";
+  String? javaDescription = "Basic";
+
+    void getFirebaseDataAndUpdateRank() async{
       String? iD = _auth.currentUser?.uid;
       if (iD == null){
         throw Exception("You are not logged in");
@@ -58,8 +64,46 @@ class _ProgressPageState extends State<ProgressPage> {
       if (!userDoc.exists){
         throw Exception("failed to find user document");
       }
-      return userDoc;
+      setState(() {
+        updateRanks(userDoc);
+      });
     }
+
+  // function to update users rank based on questions answered - pass in document snapshot of user
+  void updateRanks(DocumentSnapshot userDoc) async{
+    // update the users python rank
+    if (userDoc["pythonLevel"] > 5 && userDoc["pythonLevel"] <= 10){
+      pythonDescription = "Intermediate";
+    }
+    else if (userDoc["pythonLevel"] > 10){
+      pythonDescription = "Expert";
+    }
+    else{
+      pythonDescription = "Beginner";
+    }
+
+    // update the users C# rank
+    if (userDoc["c#Level"] > 5 && userDoc["c#Level"] <= 10){
+      csharpDescription = "Intermediate";
+    }
+    else if (userDoc["c#Level"] > 10){
+      csharpDescription = "Expert";
+    }
+    else{
+      csharpDescription = "Beginner";
+    }
+
+    //update the users java rank
+    if (userDoc["javaLevel"] > 5 && userDoc["javaLevel"] <= 10){
+      javaDescription = "Intermediate";
+    }
+    else if (userDoc["javaLevel"] > 10){
+      javaDescription = "Expert";
+    }
+    else{
+      javaDescription = "Beginner";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +174,7 @@ class _ProgressPageState extends State<ProgressPage> {
                                     ),
                                     
                                     Text(
-                                      "Basic",
+                                      "$pythonDescription",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 25,
@@ -315,7 +359,7 @@ class _ProgressPageState extends State<ProgressPage> {
                                     ),
                                     
                                     Text(
-                                      "Intermediate",
+                                      "$javaDescription",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 25,
@@ -421,7 +465,7 @@ class _ProgressPageState extends State<ProgressPage> {
                                     ),
                                     
                                     Text(
-                                      "Advanced",
+                                      "$csharpDescription",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 25,

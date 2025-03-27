@@ -59,6 +59,9 @@ class _CreatePageState extends State<CreatePage> {
         'lastName': _lastNameController.text,
         'pronoun': _selectedPronoun,
         'location': _selectedLocation,
+        'pythonLevel': 0,
+        'c#Level': 0,
+        'javaLevel': 0
       });
     } catch (e) {
       print("Error creating user document: $e");
