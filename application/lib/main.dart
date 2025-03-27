@@ -119,7 +119,7 @@ class _HomePageState extends State<HomePage> {
 
                     // adding template container for questions button
                     Container(
-                    height: 150,
+                    height: 120,
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: Colors.white,
@@ -167,10 +167,17 @@ class _HomePageState extends State<HomePage> {
                                   onPressed: () {
                                     Navigator.of(context).push(createPageRoute2(Questions()));
                                   },
+                                  
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: const Color.fromARGB(255, 0, 85, 155),
                                     minimumSize: Size(40, 75),
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      side: BorderSide(
+                                        color: Colors.white,
+                                        width: 1,
+                                      ),
+                                    ),
                                   ),
                                   child: Row(
                                     children:[
@@ -314,7 +321,7 @@ class _HomePageState extends State<HomePage> {
               decoration: BoxDecoration(
                 border: Border.all(
                   color: const Color.fromARGB(255, 255, 255, 255),
-                  width: 2,
+                  width: 1,
                 ),
                 color: Color.fromARGB(255, 0, 85, 155),
                 borderRadius: BorderRadius.circular(30),

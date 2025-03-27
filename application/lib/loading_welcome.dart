@@ -17,7 +17,7 @@ class Loading extends StatelessWidget {
         children: <Widget>[
           Positioned.fill(
             child: Image.asset(
-              "assets/images/background_simple_fortext.png",
+              "assets/images/background_simple.png",
               fit: BoxFit.cover,
             ),
           ),
@@ -70,7 +70,7 @@ class _LoadingPage extends State<LoadingPage> {
         children: <Widget>[
           SizedBox(height: 180),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: Stack(
               alignment: Alignment.center,
               children: [
@@ -82,7 +82,7 @@ class _LoadingPage extends State<LoadingPage> {
                     valueColor: AlwaysStoppedAnimation<Color>(
                         Color.fromARGB(255, 0, 85, 155)),
                     backgroundColor: const Color.fromARGB(12, 238, 238, 238),
-                    strokeWidth: 6.0,
+                    strokeWidth: 8.0,
                   ),
                 ),
                 Center(

@@ -100,7 +100,6 @@ class _SplashScreen extends State<SplashScreen>{
             child: Text("Sign in", 
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 16
               ),
             ),
           ),
@@ -123,7 +122,6 @@ class _SplashScreen extends State<SplashScreen>{
             child: Text("Create an Account", 
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 16
               ),
             ),
           ),
@@ -138,7 +136,6 @@ class _SplashScreen extends State<SplashScreen>{
             child: Text("Continue as Guest",
               style: TextStyle(
                 color: const Color.fromARGB(255, 208, 208, 208),
-                fontSize: 16,
               ),
             ),
             onPressed: (){
