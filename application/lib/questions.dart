@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'GeminiAPI.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Questions extends StatelessWidget {
   const Questions({super.key});
@@ -57,6 +59,31 @@ class QuestionsPage extends StatefulWidget{
 }
 
 class _QuestionsPage extends State<QuestionsPage>{
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance; // variables for getting user details, used in dialog box
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  late Future<DocumentSnapshot> data;
+
+  // same function block as used in all other firebase calls, fetches the user data, ensure the ID matches and gets the userdocument
+  @override
+  void initState() {
+    super.initState();
+    data = getFirebaseData();
+  }
+
+      Future<DocumentSnapshot> getFirebaseData() async{
+      String? iD = _auth.currentUser?.uid;
+      if (iD == null){
+        throw Exception("You are not logged in");
+      }
+      DocumentSnapshot userDoc = await _firestore.collection('users').doc(iD).get();
+
+      if (!userDoc.exists){
+        throw Exception("failed to find user document");
+      }
+      return userDoc;
+    }
+
+
   final GeminiAIService geminiService = GeminiAIService(); // get an instantiation of the AI call class so the method can be called off it
   Map<String, dynamic> response = {"Response" : "no : response"} ; // set an base value map that can be changed by function
 
@@ -71,12 +98,6 @@ class _QuestionsPage extends State<QuestionsPage>{
   bool _questionChecked = false;
   String _buttonText = "Submit";
   String _resultText = "";
-
-  @override 
-  void initState(){
-   super.initState();
-   generateQuestions();
-  }
 
   void generateQuestions() async { //set inital state of function so the page can be built, will be recalled every time the drop down box is pressed
   try{Map<String, dynamic> questionResponse = await geminiService.generateQuestions(aptitude,pLanguage);
@@ -111,10 +132,57 @@ class _QuestionsPage extends State<QuestionsPage>{
 
   void setButtonToActive(String? value){
   setState(() {
-    languageSelected = value != null;
-    pLanguage = value; // only allows the generate question button be pressed if a language has been chosed in the drop down
+    pLanguage = value;
+    languageSelected = value != null; // only allows the generate question button be pressed if a language has been chosed in the drop down
     });
+
+    data.then((userDoc){
+      updateAptitude(pLanguage, userDoc); // update language and aptitiude each time the language is changed
+    });
+
     generateQuestions(); // rerun the generate questions call with the new language selected to istantiate with the correct language
+  }
+
+  void updateAptitude(String? pLanguage, DocumentSnapshot userDoc){
+    setState((){
+    // function that checks the users level with a language and sets it to a valid difficulty
+    if (pLanguage == "Java"){
+      int checker = userDoc["javaLevel"];
+      if (checker > 5 &&  checker <= 10){
+        aptitude = 'intermediate';
+      }
+      else if (checker > 10){
+        aptitude = 'expert';
+      }
+      else{
+        aptitude = 'beginner';
+      }
+    }
+    else if (pLanguage == 'C#') {
+      int checker = userDoc["c#Level"];
+      if (checker > 5 &&  checker <= 10){
+        aptitude = 'intermediate';
+      }
+      else if (checker > 10){
+        aptitude = 'expert';
+      }
+      else{
+        aptitude = 'beginner';
+      }
+    }
+    else {
+      int checker = userDoc["pythonLevel"];
+      if (checker > 5 &&  checker <= 10){
+        aptitude = 'intermediate';
+      }
+      else if (checker > 10){
+        aptitude = 'expert';
+      }
+      else{
+        aptitude = 'beginner';
+      }
+    }
+  });
   }
 
   @override
@@ -437,7 +505,31 @@ class _QuestionsPage extends State<QuestionsPage>{
           ],
           )
           else
-          Text("Please select a language", style: TextStyle(color: Colors.white))
+          Column(
+            children: <Widget> [
+
+              // adding white space
+              SizedBox(
+                height: 300,
+                width: 500,
+              ),
+
+              // adding hint text
+              Text("Please select a language", 
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold
+              ),
+              ),
+
+              // adding white space
+              SizedBox(
+                height: 300,
+              )
+            ],
+          )
+
             ]
            )
            )

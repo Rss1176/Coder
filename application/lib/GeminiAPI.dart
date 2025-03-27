@@ -22,7 +22,7 @@ class GeminiAIService {
                       """Generate a multiple choice question about the coding langauge $codingLanguage"
                       "It should be aimed at someone at a $abilityLevel level"
                       "There should be 4 answers to the questions. each seperated by a \n character"
-                      "the next part of the response should be the correct answer, i.e A,B,C,D with the final part being C,
+                      "the next part of the response should be the correct answer, i.e C if that is the correct answer,
                       the final part of the response should be a short explination ~20 words
                       """} //used """ for multiline strings and readability
             ]
