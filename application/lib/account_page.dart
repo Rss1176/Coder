@@ -16,7 +16,7 @@ Future<void> showMyAccountDialog(BuildContext context, DocumentSnapshot userData
           width: MediaQuery.of(context).size.width,
           height: 600,
           decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 77, 175, 255),
+            color: const Color.fromARGB(255, 0, 85, 155),
             borderRadius: BorderRadius.circular(15),
           ),
           child: Padding(

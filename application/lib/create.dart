@@ -19,7 +19,7 @@ class Create extends StatelessWidget {
           children: <Widget>[
             Positioned.fill(
               child: Image.asset(
-                "assets/images/Background Main_Lighter_Dark Mode_No Scroll.png",
+                "assets/images/background_simple_fortext.png",
                 fit: BoxFit.cover,
               ),
             ),
@@ -92,7 +92,7 @@ class _CreatePageState extends State<CreatePage> {
               // Adding 'Let's Get Started' Title Text
               Text("Let's Get Started.",
                 style: TextStyle(
-                  color: Color.fromARGB(255, 56, 62, 70),
+                  color: Color.fromARGB(255, 208, 208, 208),
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                 ),
@@ -106,11 +106,12 @@ class _CreatePageState extends State<CreatePage> {
                 mini:true,
                 shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
-                side: BorderSide(color: const Color.fromARGB(255, 56, 62, 65), width: 1.0)
+                side: BorderSide(color: const Color.fromARGB(255, 208, 208, 208), 
+                width: 1.0)
                 ),
                 elevation: 0.0,
                 backgroundColor: const Color.fromARGB(11, 255, 255, 255),
-                child: const Icon(Icons.close, color: Color.fromARGB(255, 56, 62, 65)),
+                child: const Icon(Icons.close, color: Color.fromARGB(255, 208, 208, 208)),
                 ),
               ],
             ),
@@ -139,12 +140,13 @@ class _CreatePageState extends State<CreatePage> {
 
                           // Adding First Name Form Field
                           child: TextFormField(
+                            style:TextStyle(color: Color.fromARGB(255, 208, 208, 208), fontSize:16),
                             controller: _firstNameController,
                             decoration: InputDecoration(
                               prefixIcon: Visibility(
-                                child: Icon(Icons.account_box, color: const Color.fromARGB(255, 213, 213, 213))),
+                                child: Icon(Icons.account_box, color: const Color.fromARGB(255, 208, 208, 208))),
                               hintText: "First Name",
-                              hintStyle: TextStyle(color: Color.fromARGB(255, 168, 168, 168)),
+                              hintStyle: TextStyle(color: Color.fromARGB(255, 208, 208, 208)),
                               labelText: "",
                               floatingLabelBehavior: FloatingLabelBehavior.always, 
                               floatingLabelStyle: TextStyle(fontSize: 20),
@@ -173,6 +175,8 @@ class _CreatePageState extends State<CreatePage> {
 
                           // Adding Dropdown Button for Pronouns
                           child: DropdownButtonFormField<String>(
+                            dropdownColor: Colors.grey[850],
+                            style:TextStyle(color: Color.fromARGB(255, 208, 208, 208), fontSize:16),
                             value: _selectedPronoun,
                             decoration: InputDecoration(
                               hintText: "",
@@ -219,12 +223,13 @@ class _CreatePageState extends State<CreatePage> {
 
                     // Adding Last Name Form Field
                     TextFormField(
+                      style:TextStyle(color: Color.fromARGB(255, 208, 208, 208), fontSize:16),
                       controller: _lastNameController,
                       decoration: InputDecoration(
                         prefixIcon: Visibility(
-                          child: Icon(Icons.account_box, color: const Color.fromARGB(255, 213, 213, 213))),
+                          child: Icon(Icons.account_box, color: const Color.fromARGB(255, 208, 208, 208))),
                         hintText: "Last Name",
-                        hintStyle: TextStyle(color: Color.fromARGB(255, 168, 168, 168)),
+                        hintStyle: TextStyle(color: Color.fromARGB(255, 208, 208, 208)),
                         labelText: "",
                         floatingLabelBehavior: FloatingLabelBehavior.always, 
                         floatingLabelStyle: TextStyle(fontSize: 20),
@@ -249,14 +254,16 @@ class _CreatePageState extends State<CreatePage> {
 
                     // Adding Location Dropdown Button
                     DropdownButtonFormField<String>(
+                      dropdownColor: Colors.grey[850],
+                      style:TextStyle(color: Color.fromARGB(255, 208, 208, 208), fontSize:16),
                       value: _selectedLocation,
                       decoration: InputDecoration(
                         prefixIcon: Visibility(
-                          child: Icon(Icons.place, color: Color.fromARGB(255, 213, 213, 213)),
+                          child: Icon(Icons.place, color: Color.fromARGB(255, 208, 208, 208)),
                         ),
                         
                         hintText: "Location",
-                        hintStyle: TextStyle(color: Color.fromARGB(255, 168, 168, 168)),
+                        hintStyle: TextStyle(color: Color.fromARGB(255, 208, 208, 208)),
                         labelText: "",
                         floatingLabelBehavior: FloatingLabelBehavior.always, 
                         floatingLabelStyle: TextStyle(fontSize: 20),
@@ -306,13 +313,14 @@ class _CreatePageState extends State<CreatePage> {
 
                     // Adding Email Form Field
                     TextFormField(
+                      style:TextStyle(color: Color.fromARGB(255, 208, 208, 208), fontSize:16),
                       controller: _emailController,
                       decoration: InputDecoration(
                         prefixIcon: Visibility(
-                          child: Icon(Icons.mail, color: const Color.fromARGB(255, 213, 213, 213)),
+                          child: Icon(Icons.mail, color: const Color.fromARGB(255, 208, 208, 208)),
                         ),
                         hintText: "Email",
-                        hintStyle: TextStyle(color: Color.fromARGB(255, 168, 168, 168)),
+                        hintStyle: TextStyle(color: Color.fromARGB(255, 208, 208, 208)),
                         labelText: "",
                         floatingLabelBehavior: FloatingLabelBehavior.always, 
                         floatingLabelStyle: TextStyle(fontSize: 20),
@@ -337,14 +345,15 @@ class _CreatePageState extends State<CreatePage> {
 
                     // Adding Password Form Field
                     TextFormField(
+                      style:TextStyle(color: Color.fromARGB(255, 208, 208, 208), fontSize:16),
                       controller: _passwordController,
                       obscureText: true,
                       decoration: InputDecoration(
                         prefixIcon: Visibility(
-                          child: Icon(Icons.lock, color: const Color.fromARGB(255, 213, 213, 213)),
+                          child: Icon(Icons.lock, color: const Color.fromARGB(255, 208, 208, 208)),
                         ),
                         hintText: "Password",
-                        hintStyle: TextStyle(color: Color.fromARGB(255, 168, 168, 168)),
+                        hintStyle: TextStyle(color: Color.fromARGB(255, 208, 208, 208)),
                         labelText: "",
                         floatingLabelBehavior: FloatingLabelBehavior.always, 
                         floatingLabelStyle: TextStyle(fontSize: 20),
@@ -369,19 +378,20 @@ class _CreatePageState extends State<CreatePage> {
 
                     // Adding Confirm Password Form Field
                     TextFormField(
+                      style:TextStyle(color: Color.fromARGB(255, 208, 208, 208), fontSize:16),
                       controller: _confirmPasswordController,
                       obscureText: true,
                       decoration: InputDecoration(
                         prefixIcon: Visibility(
-                          child: Icon(Icons.verified_user, color: const Color.fromARGB(255, 213, 213, 213)),
+                          child: Icon(Icons.verified_user, color: const Color.fromARGB(255, 208, 208, 208)),
                         ),
                         hintText: "Confirm Password",
-                        hintStyle: TextStyle(color: Color.fromARGB(255, 168, 168, 168)),
+                        hintStyle: TextStyle(color: Color.fromARGB(255, 208, 208, 208)),
                         labelText: "",
                         floatingLabelBehavior: FloatingLabelBehavior.always, 
                         floatingLabelStyle: TextStyle(fontSize: 20),
                         filled: true,
-                        fillColor: const Color.fromARGB(45, 255, 255, 255),
+                        fillColor: const Color.fromARGB(11, 225, 225, 225),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15.0),
                         )
@@ -412,7 +422,7 @@ class _CreatePageState extends State<CreatePage> {
 
                   // Adding leading text before Text button to Login
                   Text("Already have an account?",
-                    style: TextStyle(color: Color.fromARGB(180, 56, 62, 70))
+                    style: TextStyle(color: Color.fromARGB(255, 208, 208, 208))
                   ),
 
                   // Adding Whitespace
@@ -424,8 +434,10 @@ class _CreatePageState extends State<CreatePage> {
                   TextButton(
                     child: Text("Login", 
                       style: TextStyle(
-                        color: Color.fromARGB(180, 56, 62, 70),
-                        fontWeight: FontWeight.bold)),
+                        color: Color.fromARGB(255, 208, 208, 208),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     onPressed: (){
                       Navigator.of(context).push(createPageRoute2(Login()));
                     },
@@ -456,10 +468,11 @@ class _CreatePageState extends State<CreatePage> {
                   }
                 }, 
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 77, 175, 255),
+                  backgroundColor: const Color.fromARGB(255, 0, 85, 155),
                   minimumSize: Size(350, 50),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
-                child: Text("Create Account", style: TextStyle(color: Colors.white)),
+                child: Text("Create Account", style: TextStyle(color: Colors.white),
+                ),
               ),
 
               // Adding Whitespace, Currently set to 0.0, however likely to change based on Firebase Service

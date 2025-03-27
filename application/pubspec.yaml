@@ -32,6 +32,7 @@ flutter:
   - assets/images/java-logo.png
   - assets/images/csharp-logo.png
   - assets/images/questions.png
+  - assets/images/background_simple.png
 
 fonts:
   - family: LuckiestGuy
