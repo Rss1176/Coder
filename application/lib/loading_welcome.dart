@@ -90,7 +90,7 @@ class _LoadingPage extends State<LoadingPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Welcome Back!",
+                        "Welcome Back",
                         style: TextStyle(
                           fontSize: 30,
                           fontFamily: 'LuckiestGuy',
@@ -115,7 +115,8 @@ class _LoadingPage extends State<LoadingPage> {
 
                             return SizedBox(
                               child:
-                              Text(firstName, style: TextStyle(fontSize: 18),),
+                              Text(firstName+'!', 
+                                style: TextStyle(fontSize: 30),),
                             );
                           },
                         ),
@@ -142,7 +143,7 @@ class _LoadingPage extends State<LoadingPage> {
             child: Text("Return to Sign In",
                 style: TextStyle(color: Color.fromARGB(180, 56, 62, 70))),
             onPressed: () {
-              Navigator.of(context).push(createPageRoute1(Splash()));
+              Navigator.of(context).push(createPageRoute2(Splash()));
             },
           )
         ],

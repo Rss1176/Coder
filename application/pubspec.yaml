@@ -30,6 +30,8 @@ flutter:
   - assets/images/python-logo.png
   - assets/images/java-logo.png
   - assets/images/csharp-logo.png
+  - assets/images/questions.png
+  - assets/images/Background Main_Dark.png
 
 fonts:
   - family: LuckiestGuy

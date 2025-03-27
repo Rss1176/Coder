@@ -96,7 +96,10 @@ class _HomePageState extends State<HomePage> {
                   children: [
 
                     // adding template container for daily question pop-up
-                    SizedBox(height: 135),
+                    SizedBox(
+                      height: 135
+                    ),
+
                     Container(
                       height: 250,
                       decoration: BoxDecoration(
@@ -114,27 +117,85 @@ class _HomePageState extends State<HomePage> {
                       height:10
                     ),
 
-                    // adding template container for ----
+                    // adding template container for questions button
                     Container(
-                      height: 150,
-                      decoration: BoxDecoration(
-                        border: Border.all(
+                    height: 150,
+                    decoration: BoxDecoration(
+                      border: Border.all(
                         color: const Color.fromARGB(255, 77, 175, 255),
                         width: 2,
-                        ),
-                        borderRadius: BorderRadius.circular(25),
-                        color: Color.fromARGB(81, 255, 255, 255),
                       ),
-                      child: Column(children: <Widget>[
-                        ElevatedButton(
-                          onPressed: (){ 
-                             Navigator.push(context, MaterialPageRoute(builder: (context) => const Questions()));
-                          },
-                          child: Text("Generate")
-                        ),
-                        ],
-                      )
+                      borderRadius: BorderRadius.circular(25),
+                      color: Color.fromARGB(81, 255, 255, 255),
                     ),
+                    child:Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Column(
+                        children: [
+
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween, 
+                              children: [
+
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      "Question Portal",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                        fontFamily: 'LuckiestGuy',
+                                        decorationThickness: 0.8,
+                                      ),
+                                    ),
+                                    
+                                    Text(
+                                      "Let's Practice!",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontFamily: 'LuckiestGuy',
+                                      ),
+                                    ),
+                                  ],
+                                ), 
+
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(createPageRoute2(Questions()));
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color.fromARGB(255, 77, 175, 255),
+                                    minimumSize: Size(50, 100),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                                  ),
+                                  child: Row(
+                                    children:[
+
+                                      Text("Generate", 
+                                        style: TextStyle(
+                                          color: Colors.white)
+                                      ),
+
+                                      SizedBox(
+                                        width: 5.0
+                                      ),
+
+                                      Icon(Icons.arrow_forward_ios, 
+                                        color: Colors.white,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
 
                     // adding white space
                     SizedBox(
