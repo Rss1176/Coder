@@ -82,185 +82,354 @@ class _HomePageState extends State<HomePage> {
           ),
 
           // set scrolling widget with padding 
+          
           SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                child:Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
+              child:Column(
+                children:[
 
-                    // adding template container for daily question pop-up
-                    SizedBox(
-                      height: 135
-                    ),
+                  SizedBox(
+                    height: 135,
+                    width: 100,
+                  ),
 
-                    Container(
-                      height: 250,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.white,
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(25),
-                        color: Color.fromARGB(120, 105, 190, 255),
-                      ),
-                    ),
-
-                    // adding white space
-                    SizedBox(
-                      height:10
-                    ),
-
-                    // adding template container for questions button
-                    Container(
-                    height: 120,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.white,
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(25),
-                      color: Color.fromARGB(120, 105, 190, 255),
-                    ),
-                    child:Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Column(
-                        children: [
-
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween, 
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      
+                      Expanded(
+                        child:Container(
+                          height: 250,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.white,
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(25),
+                            color: Color.fromARGB(120, 105, 190, 255),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
                               children: [
 
-                                Column(
-                                  mainAxisSize: MainAxisSize.min,
+                                Image(image: AssetImage("assets/images/daily_quiz.png"),
+                                  width: 200.0, 
+                                  height: 80.0,
+                                ),
+
+                              ],
+                            )
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+
+                      // FIRST COLUMN
+                      Expanded(
+                        child:Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+
+                            SizedBox(
+                              height: 10,
+                            ),
+
+                            Container(
+                              height: 375,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(25),
+                                color: Color.fromARGB(120, 105, 190, 255),
+                              ),
+                              child:Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child:Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
 
-                                    Text(
-                                      "Question Portal",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontFamily: 'LuckiestGuy',
-                                        decorationThickness: 0.8,
-                                      ),
+                                    Image(image: AssetImage("assets/images/leaderboards_txt.png"),
+                                      width: 180.0, 
+                                      height: 50.0,
                                     ),
                                     
                                     Text(
                                       "Let's Practice!",
                                       style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 24,
+                                        fontSize: 18,
                                         fontFamily: 'LuckiestGuy',
                                       ),
                                     ),
-                                  ],
-                                ), 
 
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.of(context).push(createPageRoute2(Questions()));
-                                  },
-                                  
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color.fromARGB(255, 0, 85, 155),
-                                    minimumSize: Size(40, 75),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15),
-                                      side: BorderSide(
-                                        color: Colors.white,
-                                        width: 1,
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.of(context).push(createPageRoute2(Questions()));
+                                      },
+                                      
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: const Color.fromARGB(255, 0, 85, 155),
+                                        minimumSize: Size(20, 50),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(22),
+                                          side: BorderSide(
+                                            color: Colors.white,
+                                            width: 1,
+                                          ),
+                                        ),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children:[
+
+                                          Text("View", 
+                                            style: TextStyle(
+                                              color: Colors.white)
+                                          ),
+
+                                          SizedBox(
+                                            width: 5.0
+                                          ),
+
+                                          Icon(Icons.arrow_forward_ios, 
+                                            color: Colors.white,
+                                          ),
+
+                                        ],
                                       ),
                                     ),
-                                  ),
-                                  child: Row(
-                                    children:[
-
-                                      Text("Generate", 
-                                        style: TextStyle(
-                                          color: Colors.white)
-                                      ),
-
-                                      SizedBox(
-                                        width: 5.0
-                                      ),
-
-                                      Icon(Icons.arrow_forward_ios, 
-                                        color: Colors.white,
-                                      ),
-                                    ],
-                                  ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ],
+
+                            // adding white space
+                            SizedBox(
+                              height:10
+                            ),
+
+                            Container(
+                              height: 150,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(25),
+                                color: Color.fromARGB(120, 105, 190, 255),
+                              ),
+                            ),
+
+                            // adding white space
+                            SizedBox(
+                              height:10
+                            ),
+
+                            // adding template container for ----
+                            Container(
+                              height: 250,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(25),
+                                color: Color.fromARGB(120, 105, 190, 255),
+                              ),
+                            ),
+
+                            // adding white space
+                            SizedBox(
+                              height:10
+                            ),
+                            
+                            // adding template container for ----
+                            Container(
+                              height: 150,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(25),
+                                color: Color.fromARGB(120, 105, 190, 255),
+                              ),
+                            ),
+
+                            // Container to seperate from Nav Bar
+                            Container(
+                              height: 150,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
+
+                      SizedBox(
+                        width: 10
+                        ),
+
+
+                      // SECOND COLUMN
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            // adding white space
+                            SizedBox(
+                              height:10,
+                            ),
+
+                            Container(
+                              height: 225,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(25),
+                                color: Color.fromARGB(120, 105, 190, 255),
+                              ),
+                              child:Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+                                child:Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+
+                                    Image(image: AssetImage("assets/images/questions.png"),
+                                      width: 150.0, 
+                                      height: 40.0,
+                                    ),
+                                    
+                                    Text(
+                                      "Let's Practice!",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontFamily: 'LuckiestGuy',
+                                      ),
+                                    ),
+
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.of(context).push(createPageRoute2(Questions()));
+                                      },
+                                      
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: const Color.fromARGB(255, 0, 85, 155),
+                                        minimumSize: Size(20, 50),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(22),
+                                          side: BorderSide(
+                                            color: Colors.white,
+                                            width: 1,
+                                          ),
+                                        ),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children:[
+
+                                          Text("Generate", 
+                                            style: TextStyle(
+                                              color: Colors.white)
+                                          ),
+
+                                          SizedBox(
+                                            width: 5.0
+                                          ),
+
+                                          Icon(Icons.arrow_forward_ios, 
+                                            color: Colors.white,
+                                          ),
+
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+
+                            SizedBox(
+                              height: 10.0
+                            ),
+
+                            // adding template container for ----
+                            Container(
+                              height: 150,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(25),
+                                color: Color.fromARGB(120, 105, 190, 255),
+                              ),
+                            ),
+
+                            // adding white space
+                            SizedBox(
+                              height:10
+                            ),
+
+                            // adding template container for ----
+                            Container(
+                              height: 250,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(25),
+                                color: Color.fromARGB(120, 105, 190, 255),
+                              ),
+                            ),
+
+                            // adding white space
+                            SizedBox(
+                              height:10
+                            ),
+                            
+                            // adding template container for ----
+                            Container(
+                              height: 150,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(25),
+                                color: Color.fromARGB(120, 105, 190, 255),
+                              ),
+                            ),
+
+                            // Container to seperate from Nav Bar
+                            Container(
+                              height: 150,
+                            ),
+                          ],
+                        ),
+                      ),
+
+                    ],
                   ),
-
-                    // adding white space
-                    SizedBox(
-                      height:10
-                    ),
-
-                    // adding template container for ----
-                    Container(
-                      height: 150,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.white,
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(25),
-                        color: Color.fromARGB(120, 105, 190, 255),
-                      ),
-                    ),
-
-                    // adding white space
-                    SizedBox(
-                      height:10
-                    ),
-
-                    // adding template container for ----
-                    Container(
-                      height: 250,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.white,
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(25),
-                        color: Color.fromARGB(120, 105, 190, 255),
-                      ),
-                    ),
-
-                    // adding white space
-                    SizedBox(
-                      height:10
-                    ),
-                    
-                    // adding template container for ----
-                    Container(
-                      height: 150,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.white,
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(25),
-                        color: Color.fromARGB(120, 105, 190, 255),
-                      ),
-                    ),
-
-                    // Container to seperate from Nav Bar
-                    Container(
-                      height: 150,
-                    ),
                 ],
               ),
-            )
+            ),
           ),
 
           // App Bar
