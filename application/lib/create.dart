@@ -5,10 +5,6 @@ import 'login.dart';
 import 'page_animation.dart';
 
 
-void main() {
-  runApp(const Create());
-}
-
 class Create extends StatelessWidget {
   const Create({super.key});
 
