@@ -89,7 +89,7 @@ class _QuestionsPage extends State<QuestionsPage>{
   Map<String, dynamic> response = {"Response" : "no : response"} ; // set an base value map that can be changed by function
 
   String? pLanguage = "Python";
-  String? aptitude = "beginner";
+  String? aptitude;
   bool languageSelected = false;
   Color _buttonColor1 = Colors.white;
   Color _buttonColor2 = Colors.white;
@@ -128,15 +128,20 @@ class _QuestionsPage extends State<QuestionsPage>{
     // ensure that nothing happens if an answer has not yet been chosen
     if (_selectedAnswer == null || _selectedAnswer!.isEmpty || _selectedAnswer == "") return;
     String apiAnswer = response["answer"];
+    bool isCorrect = _selectedAnswer == apiAnswer;
 
-    String correctAnswer = apiAnswer;
     setState((){
       _questionChecked = true;
       _buttonText = "Next Question";
     });
 
-    _resultText = _selectedAnswer == correctAnswer ? "Correct!" : "Incorrect, the answer is $apiAnswer";
+    _resultText = isCorrect ? "Correct!" : "Incorrect, the answer is $apiAnswer";
+
+    if (isCorrect){
+      updateUserScore(pLanguage);
+    }
   }
+
 
   void setButtonToActive(String? value){
   setState(() {
@@ -196,6 +201,35 @@ class _QuestionsPage extends State<QuestionsPage>{
     }
   });
   }
+
+  Future<void> updateUserScore(String? progLanguage) async {
+    try{
+      String? userId = _auth.currentUser?.uid;
+      if (userId == null) {
+        throw Exception("User not found");
+      }
+
+      DocumentReference userRef = _firestore.collection('users').doc(userId);
+      DocumentSnapshot userDoc = await userRef.get();
+      if (userDoc.exists) {
+        if (progLanguage == "Python"){
+          int currentScore = userDoc["pythonLevel"];
+          await userRef.update({"pythonLevel": currentScore + 1});
+        }
+          if (progLanguage == "C#"){
+          int currentScore = userDoc["c#Level"];
+          await userRef.update({"c#Level": currentScore + 1});
+        }
+          if (progLanguage == "Java"){
+          int currentScore = userDoc["javaLevel"];
+          await userRef.update({"javaLevel": currentScore + 1});
+        }
+      }
+    } catch(e){
+      throw Exception("error $e");
+    }
+  }
+
 
   @override
   Widget build(BuildContext context){
