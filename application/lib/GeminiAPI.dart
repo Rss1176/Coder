@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class GeminiAIService {
-  // used gemini itself to guide this class, the first version of this class i persoanlly built but I used Gen Ai to help diagnose issues with the parsing into the correct format
+  // used gemini itself to guide this class, the first version of this class I persoanlly built but I used Gen Ai to help diagnose issues with the parsing into the correct format
  
   Future<Map<String, dynamic>> generateQuestions(String? abilityLevel, String? codingLanguage) async{
     final String apiKey = 'AIzaSyDfywIO2QbAMrFgst3Bj1abS6jm0SrYVyY'; // API key - connects to google cloud account

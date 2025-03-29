@@ -7,10 +7,7 @@ import 'account_page.dart';
 import 'my_progress.dart';
 import 'settings.dart';
 
-
-void main() {
-  runApp(const Home());
-}
+// app should be run from the splash screen not main
 
 class Home extends StatelessWidget {
   const Home({super.key});
