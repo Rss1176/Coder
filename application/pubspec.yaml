@@ -33,6 +33,7 @@ flutter:
   - assets/images/csharp-logo.png
   - assets/images/questions.png
   - assets/images/background_simple.png
+  - assets/images/daily_quiz.png
 
 fonts:
   - family: LuckiestGuy

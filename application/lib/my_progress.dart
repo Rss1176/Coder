@@ -725,7 +725,7 @@ class _ProgressPageState extends State<ProgressPage> {
               decoration: BoxDecoration(
                 border: Border.all(
                   color: const Color.fromARGB(255, 255, 255, 255),
-                  width: 2,
+                  width: 1,
                 ),
                 color: Color.fromARGB(255, 0, 85, 155),
                 borderRadius: BorderRadius.circular(30),

@@ -1,3 +1,4 @@
+import 'package:coder_application/splash.dart';
 import 'package:flutter/material.dart';
 import 'page_animation.dart';
 import 'account_page.dart';
@@ -60,6 +61,10 @@ class _SettingsPageState extends State<SettingsPage> {
     return userDoc;
   }
 
+  Future<void> _signOut() async {
+    await FirebaseAuth.instance.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,6 +104,12 @@ class _SettingsPageState extends State<SettingsPage> {
                         color: Color.fromARGB(81, 255, 255, 255),
                       ),
                     ),
+                  ElevatedButton(onPressed: () async {
+                    await _signOut();
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Splash()));},
+                    child: Text("Sign Out"),
+                  ),
+
                   
 
                   // FOR JOHN: You should be able to add whatever you want here
@@ -106,7 +117,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
                   SizedBox(
                     height: 650.0
-                  ),
+                  )
                 ],
               ),
             ),
@@ -165,7 +176,7 @@ class _SettingsPageState extends State<SettingsPage> {
               decoration: BoxDecoration(
                 border: Border.all(
                   color: const Color.fromARGB(255, 255, 255, 255),
-                  width: 2,
+                  width: 1,
                 ),
                 color: Color.fromARGB(255, 0, 85, 155),
                 borderRadius: BorderRadius.circular(30),
