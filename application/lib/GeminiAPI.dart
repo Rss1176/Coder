@@ -18,7 +18,7 @@ class GeminiAIService {
           "parts": [
             {
               "text": 
-                'Generate a multiple-choice question about $codingLanguage. No single part of the response should be longer than 20 words\n'
+                'Generate a multiple-choice question about $codingLanguage. No single part of the response should be longer than 20 words, try to avoid asking print questions\n'
                 'It should be aimed at someone at a $abilityLevel level.\n'
                 'Return the response in JSON format following this structure:\n'
                 '{\n'

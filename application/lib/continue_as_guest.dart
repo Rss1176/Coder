@@ -5,7 +5,7 @@ import 'page_animation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-Future<void> guestContinueDialog(BuildContext context) async {
+Future<void> guestContinueDialog(BuildContext context, bool fromMain) async {
   final auth = FirebaseAuth.instance;
   return showDialog(
     context: context,
@@ -87,8 +87,14 @@ Future<void> guestContinueDialog(BuildContext context) async {
                     // Second Dialog Option, Continue as Guest
                     SimpleDialogOption(
                       onPressed: () async {
-                        await auth.signInAnonymously;
-                        Navigator.of(context).push(createPageRoute2(Loading(fromGuest: true,)));
+                        if (fromMain) {
+                          Navigator.of(context).pop('Cancel');
+                        }
+                        else{
+                          await auth.signInAnonymously();
+                          Navigator.of(context).push(createPageRoute2(Loading(fromGuest: true,)));
+                        }
+                        
                       },
                       child: const Text('Continue as Guest'),
                     ),

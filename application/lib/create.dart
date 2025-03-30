@@ -57,7 +57,8 @@ class _CreatePageState extends State<CreatePage> {
         'location': _selectedLocation,
         'pythonLevel': 0,
         'c#Level': 0,
-        'javaLevel': 0
+        'javaLevel': 0,
+        'isAnonymous': false // this is true for guest users, not sure how it will be used yet but better to have it and not need it than need it and not have it
       });
     } catch (e) {
       print("Error creating user document: $e");

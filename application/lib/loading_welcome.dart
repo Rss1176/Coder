@@ -53,10 +53,27 @@ class _LoadingPage extends State<LoadingPage> {
       if (iD == null){
         throw Exception("You are not logged in");
       }
-      DocumentSnapshot userDoc = await _firestore.collection('users').doc(iD).get();
+        DocumentReference userDocRef = _firestore.collection('users').doc(iD);
+      DocumentSnapshot userDoc = await userDocRef.get();
 
       if (!userDoc.exists){
+        if (_auth.currentUser?.isAnonymous == true) {
+          // If the user is anonymous, create a new document
+          await userDocRef.set({
+            'firstName': 'Guest',
+            'lastName': '',
+            'location': 'United Kingdom', // as a default value is required to match the dropdwon for this field use UK as that is where the app is based
+            'pronoun': 'They/Them',
+            'isAnonymous': true,
+            'pythonLevel': 0,
+            'c#Level': 0,
+            'javaLevel': 0,
+          });
+          userDoc = await userDocRef.get();
+        } else {
+         // If the user is not anonymous, throw an error
         throw Exception("failed to find user document");
+      }
       }
       return userDoc;
     }
