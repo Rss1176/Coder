@@ -139,7 +139,7 @@ class _SplashScreen extends State<SplashScreen>{
               ),
             ),
             onPressed: (){
-              guestContinueDialog(context);
+              guestContinueDialog(context, false);
             },             
           ),
 

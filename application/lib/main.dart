@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:coder_application/continue_as_guest.dart';
 import 'package:coder_application/questions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -468,7 +469,12 @@ class _HomePageState extends State<HomePage> {
                     ),
                     onPressed: () async {
                       DocumentSnapshot userDoc = await data; // awaits the function call at the top of the class for the firebase data
-                      showMyAccountDialog(context, userDoc); // passes the firebase data into the dialog box constructor
+                      if (userDoc["isAnonymous"] == false){
+                        showMyAccountDialog(context, userDoc);// passes the firebase data into the dialog box constructor
+                      }
+                      else {
+                        guestContinueDialog(context, true); // shows the sign in feature to access the account features
+                      }
                     },
                   ),
                 ],
