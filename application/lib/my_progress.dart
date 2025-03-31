@@ -122,7 +122,7 @@ class _ProgressPageState extends State<ProgressPage> {
           ),
           SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 5.0),
               child:Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -684,20 +684,16 @@ class _ProgressPageState extends State<ProgressPage> {
               ),
               backgroundColor: Color.fromARGB(255, 0, 85, 155),
               title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
 
                   Text(
-                    "Progress",
+                    "My Progress",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 25,
                       fontFamily: 'LuckiestGuy',
                     ),
-                  ),
-
-                  SizedBox(
-                    width: 175
                   ),
 
                   IconButton(

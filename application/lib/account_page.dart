@@ -20,7 +20,7 @@ Future<void> showMyAccountDialog(BuildContext context, DocumentSnapshot userData
             borderRadius: BorderRadius.circular(15),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -35,10 +35,7 @@ Future<void> showMyAccountDialog(BuildContext context, DocumentSnapshot userData
                         color: Colors.white,
                         fontSize: 25,
                       ),
-                    ),
-                    SizedBox(
-                      width: 80,
-                    ),
+                    ),                 
                     IconButton(
                       icon: Icon(
                         Icons.close,
