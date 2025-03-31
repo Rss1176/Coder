@@ -181,7 +181,7 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                           prefixIcon: Visibility(
                             child: Icon(Icons.lock, color: const Color.fromARGB(255, 208, 208, 208))),
                           hintText: "Password",
-                            hintStyle: TextStyle(color: Color.fromARGB(255, 168, 168, 168)),
+                            hintStyle: TextStyle(color: Color.fromARGB(255, 208, 208, 208)),
                           labelText: "",
                           floatingLabelBehavior: FloatingLabelBehavior.always, 
                           floatingLabelStyle: TextStyle(fontSize: 20),
