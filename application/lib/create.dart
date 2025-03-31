@@ -485,3 +485,25 @@ class _CreatePageState extends State<CreatePage> {
     );
   }
 }
+
+
+// String getFirebaseAuthErrorMessage(String errorCode) {
+//   switch (errorCode) {
+//     case "invalid-email":
+//       return "The email address is not valid.";
+//     case "user-disabled":
+//       return "This user account has been disabled.";
+//     case "user-not-found":
+//       return "No user found for this email. Please check your email or sign up.";
+//     case "wrong-password":
+//       return "Incorrect password. Please try again.";
+//     case "email-already-in-use":
+//       return "An account already exists for this email.";
+//     case "operation-not-allowed":
+//       return "Signing in with email/password is not enabled.";
+//     case "weak-password":
+//       return "Your password is too weak. Please use a stronger password.";
+//     default:
+//       return "An unknown error occurred. Please try again.";
+//   }
+// }
