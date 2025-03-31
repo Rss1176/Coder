@@ -49,7 +49,7 @@ class _LoginPage extends State<LoginPage>{
       content: Text(errorMessage),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       actions:[
-        TextButton(onPressed: () => Navigator.pop(context), 
+        TextButton(onPressed: () => Navigator.pop(errorBox), 
         child: Text("OK", style: TextStyle(color: Colors.red))),
       ]
     ));
