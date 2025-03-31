@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'GeminiAPI.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'main.dart';
+import 'page_animation.dart';
 
 class Questions extends StatelessWidget {
   const Questions({super.key});
@@ -13,7 +15,7 @@ class Questions extends StatelessWidget {
           children: <Widget>[
             Positioned.fill(
               child: Image.asset(
-                "assets/images/Background Main_Dark Mode_No Scroll.png",
+                "assets/images/background_simple.png",
                 fit: BoxFit.cover,
               ),
             ),
@@ -23,14 +25,15 @@ class Questions extends StatelessWidget {
             left: 0,
             right: 0,
             child: AppBar( // AppBar variables set
+              automaticallyImplyLeading: false,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.vertical(
                   bottom: Radius.circular(25),
                 ),
               ),
-              backgroundColor: Color.fromARGB(255, 77, 175, 255),
+              backgroundColor: Color.fromARGB(255, 0, 85, 155),
               title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     "Question Page",
@@ -40,9 +43,38 @@ class Questions extends StatelessWidget {
                       fontFamily: 'LuckiestGuy',
                     ),
                   ),
-                  SizedBox(width: 110),
-                ]
-             )
+
+                    IconButton(
+                      icon: Icon(Icons.close, color: Colors.white),
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text("Return Home?"),
+                              content: Text("All progress has been saved! \n\n"
+                                  "Pressing 'Yes' will return you to the Dashboard"),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text("No"),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(createPageRoute2(Home()));
+                                  },
+                                  child: Text("Yes"),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ],
+                ),
             )
           )
         ]
@@ -249,34 +281,36 @@ class _QuestionsPage extends State<QuestionsPage>{
 
           // button to select the programing language of the question
           DropdownButtonFormField<String>(
+                dropdownColor: Colors.grey[850],
                 value: pLanguage,
                 decoration: InputDecoration(
                   prefixIcon: Visibility(
-                    child: Icon(Icons.place, color: Color.fromARGB(255, 213, 213, 213)),
+                    child: Icon(Icons.terminal, color: Color.fromARGB(255, 208, 208, 208)),
                   ),
                   
                   hintText: "Select Programing Language",
-                  hintStyle: TextStyle(color: Colors.black),
+                  hintStyle: TextStyle(color: Color.fromARGB(255, 208, 208, 208)),
                   labelText: "",
                   floatingLabelBehavior: FloatingLabelBehavior.always, 
-                  floatingLabelStyle: TextStyle(fontSize: 20, color: Colors.black),
+                  floatingLabelStyle: TextStyle(fontSize: 20, color: Color.fromARGB(255, 208, 208, 208)),
                   filled: true,
                   fillColor: const Color.fromARGB(11, 225, 225, 225),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15.0),
+                    
                   ),
                 ),
                 items: [
                   DropdownMenuItem(value: 'Python', child: Text('Python',
-                    style: TextStyle(color: Colors.black))),
+                    style: TextStyle(color: Color.fromARGB(255, 208, 208, 208)))),
                   DropdownMenuItem(value: 'C#', child: Text('C#',
-                    style: TextStyle(color: Colors.black))),
+                    style: TextStyle(color: Color.fromARGB(255, 208, 208, 208)))),
                   DropdownMenuItem(value: 'Java', child: Text('Java',
-                    style: TextStyle(color: Colors.black))),
+                    style: TextStyle(color: Color.fromARGB(255, 208, 208, 208)))),
                 ],
                 hint: Align(
                   alignment: Alignment.centerLeft,
-                  child: Text('Location', style: TextStyle(color: Color.fromARGB(255, 168, 168, 168))),
+                  child: Text('Location', style: TextStyle(color: Color.fromARGB(255, 208, 208, 208))),
                 ),
                 onChanged: (value) {
                   setButtonToActive(value);
@@ -290,16 +324,12 @@ class _QuestionsPage extends State<QuestionsPage>{
 
           Container(
             decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/images/questions_background_1.png"),
-                fit: BoxFit.cover
-                ),
               border: Border.all(
-                color: const Color.fromARGB(255, 77, 175, 255),
-                width: 2,
+                color: Colors.white,
+                width: 1,
               ),
               borderRadius: BorderRadius.circular(25),
-              color: Color.fromARGB(81, 255, 255, 255),
+              color: Color.fromARGB(120, 105, 190, 255),
             ),
           child: Padding(
             padding: const EdgeInsets.all(15.0),
@@ -319,7 +349,13 @@ class _QuestionsPage extends State<QuestionsPage>{
                   height: 250,
                   width: 300,
                 ),
-                CircularProgressIndicator(),
+                CircularProgressIndicator(
+                    semanticsLabel: "A small circular loading indicator",
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                        Colors.white),
+                    backgroundColor: const Color.fromARGB(121, 238, 238, 238),
+                    strokeWidth: 6.0,
+                ),
                 SizedBox(
                   height: 250,
                   width: 350,
@@ -507,7 +543,7 @@ class _QuestionsPage extends State<QuestionsPage>{
 
           if (_questionChecked)
           Text(_resultText, style: TextStyle(
-            color: _resultText == "Correct!" ? Colors.green : Colors.red, // make the text green if correct red if wrong
+            color: _resultText == "Correct!" ? const Color.fromARGB(255, 158, 255, 161) : const Color.fromARGB(255, 255, 117, 107), // make the text green if correct red if wrong
             fontSize: 22,
             fontWeight:  FontWeight.bold,
           ),),
@@ -533,19 +569,25 @@ class _QuestionsPage extends State<QuestionsPage>{
               height:40.0
             ),
 
-            ElevatedButton(onPressed: languageSelected ? (){
+            ElevatedButton(
+              
+              onPressed: languageSelected ? (){
               if (!_questionChecked){
                 checkAnswer();
               } else {
                 generateQuestions();
               }
           } : null, // logic for making the elevated button rely on the boolean
+          
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color.fromARGB(255, 77, 175, 255),
-            minimumSize: Size(50, 80),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            backgroundColor: const Color.fromARGB(255, 0, 85, 155),
+            minimumSize: Size(30, 60),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15),
+            side: BorderSide(color: Colors.white, width: 1),
+            ),
           ),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children:[
 
               Text(_buttonText, 
@@ -554,7 +596,7 @@ class _QuestionsPage extends State<QuestionsPage>{
               ),
 
               SizedBox(
-                width: 5.0
+                width: 10.0
               ),
 
               Icon(Icons.arrow_forward_ios, 
@@ -571,7 +613,7 @@ class _QuestionsPage extends State<QuestionsPage>{
 
               // adding white space
               SizedBox(
-                height: 300,
+                height: 200,
                 width: 500,
               ),
 
@@ -586,7 +628,7 @@ class _QuestionsPage extends State<QuestionsPage>{
 
               // adding white space
               SizedBox(
-                height: 300,
+                height: 200,
               )
             ],
           )

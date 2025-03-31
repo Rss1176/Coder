@@ -83,7 +83,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 5.0),
               child:Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -135,7 +135,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               backgroundColor: Color.fromARGB(255, 0, 85, 155),
               title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
 
                   Text(
@@ -145,10 +145,6 @@ class _SettingsPageState extends State<SettingsPage> {
                       fontSize: 25,
                       fontFamily: 'LuckiestGuy',
                     ),
-                  ),
-
-                  SizedBox(
-                    width: 175
                   ),
 
                   IconButton(

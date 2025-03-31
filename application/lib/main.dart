@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
           
           SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 5.0),
               child:Column(
                 children:[
 
@@ -448,7 +448,7 @@ class _HomePageState extends State<HomePage> {
               ),
               backgroundColor: Color.fromARGB(255, 0, 85, 155),
               title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     "My Dashboard",
@@ -458,7 +458,6 @@ class _HomePageState extends State<HomePage> {
                       fontFamily: 'LuckiestGuy',
                     ),
                   ),
-                  SizedBox(width: 110),
 
                   // Button for showing account detials
                   IconButton( 
