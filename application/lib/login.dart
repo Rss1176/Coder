@@ -40,6 +40,35 @@ class _LoginPage extends State<LoginPage>{
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  void _showErrorDialog(BuildContext context, String errorMessage){
+    // dialog box shown on an unsucessfuly sign in
+    showDialog(context: context, 
+    builder: (errorBox) => AlertDialog(
+      title: Text("Error", style: TextStyle(color: Colors.red,
+                                            fontWeight: FontWeight.bold)),
+      content: Text(errorMessage),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      actions:[
+        TextButton(onPressed: () => Navigator.pop(context), 
+        child: Text("OK", style: TextStyle(color: Colors.red))),
+      ]
+    ));
+  }
+
+String getFirebaseAuthErrorMessage(String errorCode) {
+  // sets more user friendly strings from firebase failure data, taken from documentation
+  switch (errorCode) {
+    case "invalid-email":
+      return "The email address is not valid.";
+    case "user-disabled":
+      return "This user account has been disabled."; 
+    case "invalid-credential":  // for CodeR invalid credentails will not distinguish between password or email for security
+      return "Incorrect email or password. Please try again.";
+    default:
+      return "An unknown error occurred. Please try again.";
+  }
+}
+
   @override
   Widget build(BuildContext context){
     return Center(
@@ -236,26 +265,9 @@ class _LoginPage extends State<LoginPage>{
                           }
                         } 
                         on FirebaseAuthException catch (e) { // catches the error for incorrect sign in
-                          String errorMessage = "";
-
-                          if (e.code == 'user-not-found'){
-                            errorMessage = "Incorrect Email.";
-                          } else if (e.code == 'wrong-password'){
-                            errorMessage = "Incorrect Password";
-                          } else if (e.code == 'invalid-email'){
-                            errorMessage = "Invalid Email";
-                          } else if (e.code == 'too-many-requests'){
-                            errorMessage = "too many sign in attempts";
-                          }
-
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(errorMessage)),
-                        );
-                        print(errorMessage);
-
-                        } catch(e){ // catches all other errors to prevent crashes (this also catches firebase not being initialised - dont ask me why i know)
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("Error: ${e.toString()}")));
+                        print("Firebase Auth Error Code: ${e.code}");
+                        String errorMessage = getFirebaseAuthErrorMessage(e.code); // calls the function to set user friendly error message
+                        _showErrorDialog(context, errorMessage); // displays user friendly error message
                         }
                       },
                       style: ElevatedButton.styleFrom(
