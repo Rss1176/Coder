@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'settings.dart';
 import 'questions.dart';
+import 'show_Rank_Dialog.dart';
 
 class Progress extends StatelessWidget {
   const Progress({super.key});
@@ -53,6 +54,9 @@ class _ProgressPageState extends State<ProgressPage> {
   String? pythonDescription = "Basic";
   String? csharpDescription = "Basic";
   String? javaDescription = "Basic";
+  num pythonXP = 0;
+  num csharpXP = 0;
+  num javaXP = 0;
 
     void getFirebaseDataAndUpdateRank() async{
       String? iD = _auth.currentUser?.uid;
@@ -74,34 +78,43 @@ class _ProgressPageState extends State<ProgressPage> {
     // update the users python rank
     if (userDoc["pythonLevel"] > 5 && userDoc["pythonLevel"] <= 10){
       pythonDescription = "Intermediate";
+      pythonXP = 11 - userDoc["pythonLevel"]; // questions need to reach for rank
     }
     else if (userDoc["pythonLevel"] > 10){
       pythonDescription = "Expert";
+      pythonXP = 0; // questions no longer needed as already an expert
     }
     else{
       pythonDescription = "Beginner";
+      pythonXP = 6 - userDoc["pythonLevel"]; // questions needed to reach for next rank
     }
 
     // update the users C# rank
     if (userDoc["c#Level"] > 5 && userDoc["c#Level"] <= 10){
       csharpDescription = "Intermediate";
+      csharpXP = 11 - userDoc["c#Level"];  // questions needed to reach for next rank
     }
     else if (userDoc["c#Level"] > 10){
       csharpDescription = "Expert";
+      csharpXP = 0; // questions no longer needed as already an expert
     }
     else{
       csharpDescription = "Beginner";
+      csharpXP = 6 - userDoc["c#Level"]; 
     }
 
     //update the users java rank
     if (userDoc["javaLevel"] > 5 && userDoc["javaLevel"] <= 10){
       javaDescription = "Intermediate";
+      javaXP = 11 - userDoc["javaLevel"]; // questions no longer needed as already an expert
     }
     else if (userDoc["javaLevel"] > 10){
-      javaDescription = "Expert";
+      javaDescription = "Expert"; // questions needed to reach for next rank
+      javaXP = 0;
     }
     else{
       javaDescription = "Beginner";
+      javaXP = 6 - userDoc["javaLevel"]; // questions no longer needed as already an expert
     }
   }
 
@@ -202,100 +215,7 @@ class _ProgressPageState extends State<ProgressPage> {
 
                                 ElevatedButton(
                                   onPressed: () {
-                                    showDialog(
-                                      context: context,
-                                      useSafeArea: false,
-                                      builder: (context) {
-                                        return SimpleDialog(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(15),
-                                          ),
-                                          children: [
-
-                                            Padding(
-                                              padding: const EdgeInsets.all(15),
-                                              child:Column(
-                                                children: [
-
-                                                  Image(
-                                                    image: AssetImage("assets/images/python-logo.png"),
-                                                    width: 50.0,
-                                                    height: 50.0,
-                                                  ),
-
-                                                  SizedBox(
-                                                    height: 10
-                                                  ),
-
-                                                  Row(
-                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                    children: [
-
-                                                      Text("Python Profficiency",
-                                                        style: TextStyle(
-                                                          color: Color.fromARGB(255, 56, 62, 70),
-                                                          fontSize: 20,
-                                                          fontWeight: FontWeight.bold,
-                                                        ),
-                                                      ),
-
-                                                      FloatingActionButton(
-                                                        onPressed: () {
-                                                          Navigator.pop(context);
-                                                        },
-                                                        mini: true,
-                                                        shape: RoundedRectangleBorder(
-                                                          borderRadius: BorderRadius.circular(15),
-                                                          side: BorderSide(
-                                                            color: const Color.fromARGB(255, 56, 62, 65), 
-                                                            width: 1.0
-                                                          )
-                                                        ),
-                                                        elevation: 0.0,
-                                                        backgroundColor: const Color.fromARGB(11, 255, 255, 255),
-                                                        child: Icon(
-                                                          Icons.close, 
-                                                          color: Color.fromARGB(255, 56, 62, 65)
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-
-                                                  SizedBox(
-                                                    height: 20
-                                                  ),
-
-                                                  Text("Here you can find an overview of your current Python progress!",
-                                                    style: TextStyle(
-                                                      color: Color.fromARGB(255, 56, 62, 70),
-                                                      fontSize: 15,
-                                                    ),
-                                                  ),
-
-                                                  SizedBox(
-                                                    height: 100
-                                                  ),
-
-                                                  Text(
-                                                    "Keep coding to improve your proficiency!",
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                      fontSize: 15,
-                                                      color: Color.fromARGB(255, 56, 62, 70),
-                                                    ),
-                                                  ),
-
-                                                ],
-                                              )
-                                            ),
-
-                                            SizedBox(
-                                              height: 20
-                                            ),
-                                          ]
-                                        );
-                                      },
-                                    );
+                                    showRankDialog(context, "Python", pythonXP,pythonDescription);
                                   },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color.fromARGB(255, 0, 85, 155),
@@ -403,21 +323,7 @@ class _ProgressPageState extends State<ProgressPage> {
 
                                 ElevatedButton(
                                   onPressed: () {
-                                    showDialog(
-                                      context: context,
-                                      useSafeArea: false,
-                                      builder: (context) {
-                                        return Dialog(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(15),
-                                          ),
-                                          child: Container(
-                                            height: 400.0,
-                                            width: 150.0,
-                                          ),
-                                        );
-                                      },
-                                    );
+                                    showRankDialog(context, "Java", javaXP, javaDescription);
                                   },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color.fromARGB(255, 0, 85, 155),
@@ -526,7 +432,7 @@ class _ProgressPageState extends State<ProgressPage> {
 
                                 ElevatedButton(
                                   onPressed: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => const Questions()));
+                                    showRankDialog(context, "CSharp", csharpXP, csharpDescription);
                                   },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color.fromARGB(255, 0, 85, 155),
@@ -616,21 +522,7 @@ class _ProgressPageState extends State<ProgressPage> {
 
                                 ElevatedButton(
                                   onPressed: () {
-                                    showDialog(
-                                      context: context,
-                                      useSafeArea: false,
-                                      builder: (context) {
-                                        return Dialog(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(15),
-                                          ),
-                                          child: Container(
-                                            height: 400.0,
-                                            width: 150.0,
-                                          ),
-                                        );
-                                      },
-                                    );
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => const Questions()));
                                   },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color.fromARGB(255, 0, 85, 155),

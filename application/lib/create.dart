@@ -44,6 +44,7 @@ class _CreatePageState extends State<CreatePage> {
   bool formFull = false;
   String? _selectedPronoun;
   String? _selectedLocation;
+  String? sharedEmail; // global variable for passing email to login screen
 
   // Function to create user document in Firestore
   Future<void> _createUserDocument(User user) async {
@@ -512,7 +513,7 @@ String getFirebaseAuthErrorMessage(String errorCode) {
 
                     await _createUserDocument(userCredential.user!);
 
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login()));
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login(email: _emailController.text)));
                   } on FirebaseAuthException catch (e) {         
                     String errorMessage = getFirebaseAuthErrorMessage(e.code);
                     _showErrorDialog(context, errorMessage);
