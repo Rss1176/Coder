@@ -6,7 +6,9 @@ import 'page_animation.dart';
 import 'loading_welcome.dart';
 
 class Login extends StatelessWidget {
-  const Login({super.key});
+  final String? email;
+
+  const Login({super.key, this.email});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class Login extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            LoginPage(),
+            LoginPage(email: email), // take in optional parameter from constructor
           ],
         ),
       );
@@ -27,7 +29,8 @@ class Login extends StatelessWidget {
 }
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  final String? email; // optional constructor param
+  const LoginPage({super.key, this.email});
 
   @override
   State<LoginPage> createState() => _LoginPage();
@@ -40,6 +43,16 @@ class _LoginPage extends State<LoginPage>{
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+
+    // Prefill the email field if an email is provided
+    if (widget.email != null) {
+      _emailController.text = widget.email!;
+    }
+  }
+
   void _showErrorDialog(BuildContext context, String errorMessage){
     // dialog box shown on an unsucessfuly sign in
     showDialog(context: context, 
@@ -51,6 +64,23 @@ class _LoginPage extends State<LoginPage>{
       actions:[
         TextButton(onPressed: () => Navigator.pop(errorBox), 
         child: Text("OK", style: TextStyle(color: Colors.red))),
+      ]
+    ));
+  }
+
+    void _showCreateDialog(BuildContext context){
+    // dialog box shown on an unsucessfuly sign in
+    showDialog(context: context, 
+    builder: (errorBox) => AlertDialog(
+      title: Text("Create Account", style: TextStyle(color: Colors.black,
+                                            fontWeight: FontWeight.bold)),
+      content: Text("No account found for this email. You can create one, try again, or continue as a Guest."),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      actions:[
+        TextButton(onPressed: () => Navigator.pop(errorBox), 
+        child: Text("Cancel", style: TextStyle(color: Colors.black))),
+        TextButton(onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Create())), 
+        child: Text("Create Account", style: TextStyle(color: Colors.blue))),
       ]
     ));
   }
@@ -259,7 +289,7 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                           );
                           final userDoc = await _firestore.collection('users').doc(_auth.currentUser!.uid).get();
                           if (!userDoc.exists){
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Create()));
+                            _showCreateDialog(context);
                           } else {
                             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Loading(fromGuest: false,)));
                           }

@@ -3,7 +3,6 @@ import 'loading_welcome.dart';
 import 'create.dart';
 import 'page_animation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 Future<void> guestContinueDialog(BuildContext context, bool fromMain) async {
   final auth = FirebaseAuth.instance;
