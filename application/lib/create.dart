@@ -41,6 +41,7 @@ class _CreatePageState extends State<CreatePage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+  bool formFull = false;
   String? _selectedPronoun;
   String? _selectedLocation;
 
@@ -63,6 +64,52 @@ class _CreatePageState extends State<CreatePage> {
     } catch (e) {
       print("Error creating user document: $e");
     };
+  }
+
+  void _showErrorDialog(BuildContext context, String errorMessage){
+  // dialog box shown on an unsucessfuly sign in
+  showDialog(context: context, 
+  builder: (errorBox) => AlertDialog(
+    title: Text("Error", style: TextStyle(color: Colors.red,
+                                          fontWeight: FontWeight.bold)),
+    content: Text(errorMessage),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+    actions:[
+      TextButton(onPressed: () => Navigator.pop(errorBox), 
+      child: Text("OK", style: TextStyle(color: Colors.red))),
+    ]
+  ));
+}
+String getFirebaseAuthErrorMessage(String errorCode) {
+  switch (errorCode) {
+    case "invalid-email":
+      return "The email address is not valid.";
+    case "user-disabled":
+      return "This user account has been disabled.";
+    case "invalid-credential":  // for CodeR invalid credentails will not distinguish between password or email for security
+      return "Incorrect email or password. Please try again.";
+    case "email-already-in-use":
+      return "An account already exists for this email.";
+    case "operation-not-allowed":
+      return "Signing in with email/password is not enabled.";
+    case "weak-password":
+      return "Your password is too weak. Your password must be at least 6 characters";
+    default:
+      return "An unknown error occurred. Please try again.";
+  }
+}
+
+  void setButtonActive(){
+    setState(()
+    {
+      formFull = _firstNameController.text.isNotEmpty &&
+               _lastNameController.text.isNotEmpty &&
+               _emailController.text.isNotEmpty &&
+               _passwordController.text.isNotEmpty &&
+               _confirmPasswordController.text.isNotEmpty &&
+               _selectedPronoun != null &&
+               _selectedLocation != null;
+    });
   }
 
   
@@ -137,6 +184,7 @@ class _CreatePageState extends State<CreatePage> {
 
                           // Adding First Name Form Field
                           child: TextFormField(
+                            onChanged: (value) => setButtonActive(),
                             style:TextStyle(color: Color.fromARGB(255, 208, 208, 208), fontSize:16),
                             controller: _firstNameController,
                             decoration: InputDecoration(
@@ -201,6 +249,7 @@ class _CreatePageState extends State<CreatePage> {
                               setState(() {
                                 _selectedPronoun = value;
                               });
+                              setButtonActive();
                             },
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -220,6 +269,7 @@ class _CreatePageState extends State<CreatePage> {
 
                     // Adding Last Name Form Field
                     TextFormField(
+                      onChanged: (value) => setButtonActive(),
                       style:TextStyle(color: Color.fromARGB(255, 208, 208, 208), fontSize:16),
                       controller: _lastNameController,
                       decoration: InputDecoration(
@@ -294,6 +344,7 @@ class _CreatePageState extends State<CreatePage> {
                         setState(() {
                           _selectedLocation = value;
                         });
+                        setButtonActive();
                       },
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -310,6 +361,7 @@ class _CreatePageState extends State<CreatePage> {
 
                     // Adding Email Form Field
                     TextFormField(
+                      onChanged: (value) => setButtonActive(),
                       style:TextStyle(color: Color.fromARGB(255, 208, 208, 208), fontSize:16),
                       controller: _emailController,
                       decoration: InputDecoration(
@@ -342,6 +394,7 @@ class _CreatePageState extends State<CreatePage> {
 
                     // Adding Password Form Field
                     TextFormField(
+                      onChanged: (value) => setButtonActive(),
                       style:TextStyle(color: Color.fromARGB(255, 208, 208, 208), fontSize:16),
                       controller: _passwordController,
                       obscureText: true,
@@ -375,6 +428,7 @@ class _CreatePageState extends State<CreatePage> {
 
                     // Adding Confirm Password Form Field
                     TextFormField(
+                      onChanged: (value) => setButtonActive(),
                       style:TextStyle(color: Color.fromARGB(255, 208, 208, 208), fontSize:16),
                       controller: _confirmPasswordController,
                       obscureText: true,
@@ -449,7 +503,7 @@ class _CreatePageState extends State<CreatePage> {
 
               // Adding 'Create Account' Button, which forwards the form to Firebase Service
               ElevatedButton(
-                onPressed: () async {
+                onPressed: formFull ? () async {
                   try {
                       UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
                       email: _emailController.text,
@@ -459,11 +513,11 @@ class _CreatePageState extends State<CreatePage> {
                     await _createUserDocument(userCredential.user!);
 
                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login()));
-                  } catch (e) {
-                    print (e)
-                    ; 
+                  } on FirebaseAuthException catch (e) {         
+                    String errorMessage = getFirebaseAuthErrorMessage(e.code);
+                    _showErrorDialog(context, errorMessage);
                   }
-                }, 
+                } : null, 
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 0, 85, 155),
                   minimumSize: Size(350, 50),
@@ -485,25 +539,3 @@ class _CreatePageState extends State<CreatePage> {
     );
   }
 }
-
-
-// String getFirebaseAuthErrorMessage(String errorCode) {
-//   switch (errorCode) {
-//     case "invalid-email":
-//       return "The email address is not valid.";
-//     case "user-disabled":
-//       return "This user account has been disabled.";
-//     case "user-not-found":
-//       return "No user found for this email. Please check your email or sign up.";
-//     case "wrong-password":
-//       return "Incorrect password. Please try again.";
-//     case "email-already-in-use":
-//       return "An account already exists for this email.";
-//     case "operation-not-allowed":
-//       return "Signing in with email/password is not enabled.";
-//     case "weak-password":
-//       return "Your password is too weak. Please use a stronger password.";
-//     default:
-//       return "An unknown error occurred. Please try again.";
-//   }
-// }
