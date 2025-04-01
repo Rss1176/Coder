@@ -658,9 +658,8 @@ class _SettingsPageState extends State<SettingsPage> {
                       size: 35,
                       color: Colors.white,
                     ),
-                    onPressed: () async {
-                      DocumentSnapshot userDoc = await data; // awaits the function call at the top of the class for the firebase data
-                      showMyAccountDialog(context, userDoc); // passes the firebase data into the dialog box constructor;
+                    onPressed: (){// awaits the function call at the top of the class for the firebase data
+                      showMyAccountDialog(context); // passes the firebase data into the dialog box constructor;
                     },
                   ),
                 ],

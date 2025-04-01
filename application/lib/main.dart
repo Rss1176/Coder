@@ -469,7 +469,7 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () async {
                       DocumentSnapshot userDoc = await data; // awaits the function call at the top of the class for the firebase data
                       if (userDoc["isAnonymous"] == false){
-                        showMyAccountDialog(context, userDoc);// passes the firebase data into the dialog box constructor
+                        showMyAccountDialog(context);// passes the firebase data into the dialog box constructor
                       }
                       else {
                         guestContinueDialog(context, true); // shows the sign in feature to access the account features
