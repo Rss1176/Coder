@@ -282,6 +282,8 @@ class _QuestionsPage extends State<QuestionsPage>{
           // button to select the programing language of the question
           DropdownButtonFormField<String>(
                 dropdownColor: Colors.grey[850],
+                iconEnabledColor: Colors.white, 
+                iconDisabledColor: Colors.white,
                 value: pLanguage,
                 decoration: InputDecoration(
                   prefixIcon: Visibility(
@@ -294,10 +296,20 @@ class _QuestionsPage extends State<QuestionsPage>{
                   floatingLabelBehavior: FloatingLabelBehavior.always, 
                   floatingLabelStyle: TextStyle(fontSize: 20, color: Color.fromARGB(255, 208, 208, 208)),
                   filled: true,
-                  fillColor: const Color.fromARGB(11, 225, 225, 225),
-                  border: OutlineInputBorder(
+                  fillColor: const Color.fromARGB(120, 105, 190, 255),
+                  enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15.0),
-                    
+                    borderSide: BorderSide(
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      width: 1.0,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                    borderSide: BorderSide(
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      width: 1.0,
+                    ),
                   ),
                 ),
                 items: [

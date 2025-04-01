@@ -41,6 +41,7 @@ class _SettingsPageState extends State<SettingsPage> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance; // variables for getting user details, used in dialog box
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late Future<DocumentSnapshot> data;
+  bool _isNotificationsEnabled = false;
 
   // same function block as used in all other firebase calls, fetches the user data, ensure the ID matches and gets the userdocument
   @override
@@ -83,45 +84,533 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5.0),
+              padding: const EdgeInsets.symmetric(horizontal: 0.0),
               child:Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
 
+                  // Adding whitespace to the top of the page
                   SizedBox(
                     height: 135
                   ),
 
-                    Container(
-                      height: 610,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: const Color.fromARGB(255, 77, 175, 255),
-                          width: 2,
-                        ),
-                        borderRadius: BorderRadius.circular(25),
-                        color: Color.fromARGB(81, 255, 255, 255),
+                  Row(
+                    children: [
+
+                      SizedBox(
+                        width: 25
                       ),
-                    ),
-                  ElevatedButton(onPressed: () async {
-                    await _signOut();
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Splash()));},
-                    child: Text("Sign Out"),
+
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Account",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
 
-                  
+                  SizedBox(
+                    height: 5.0
+                  ),
 
-                  // FOR JOHN: You should be able to add whatever you want here
+                  ElevatedButton(
+                    onPressed: () async {
 
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(120, 0, 77, 193),
+                      minimumSize: Size(double.infinity, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        
+                        Icon(Icons.mail, color: Colors.white, size: 25),
+
+                        SizedBox(
+                          width: 10
+                        ),
+                    
+                        Text("Change Account Email",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
 
                   SizedBox(
-                    height: 650.0
+                    height: 3.0
+                  ),
+
+                  ElevatedButton(
+                    onPressed: () async {
+
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(120, 0, 77, 193),
+                      minimumSize: Size(double.infinity, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        
+                        Icon(Icons.verified_user, color: Colors.white, size: 25),
+
+                        SizedBox(
+                          width: 10
+                        ),
+                    
+                        Text("Change Account Password",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 20.0
+                  ),
+
+                  Row(
+                    children: [
+
+                      SizedBox(
+                        width: 25
+                      ),
+
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "App settings",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(
+                    height: 5.0
+                  ),
+
+                  ElevatedButton(
+                    onPressed: () async {
+
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(120, 0, 77, 193),
+                      minimumSize: Size(double.infinity, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        
+                        Icon(Icons.edit_square, color: Colors.white, size: 25),
+
+                        SizedBox(
+                          width: 10
+                        ),
+                    
+                        Text("Change App Icon",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 3.0
+                  ),
+
+                  ElevatedButton(
+                    onPressed: () async {
+
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(120, 0, 77, 193),
+                      minimumSize: Size(double.infinity, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        
+                        Icon(Icons.verified_user, color: Colors.white, size: 25),
+
+                        SizedBox(
+                          width: 10
+                        ),
+                    
+                        Text("Notifications",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+
+                        SizedBox(
+                          width: 159
+                        ),
+
+                        Switch(
+                          value: _isNotificationsEnabled,
+                          onChanged: (bool value) {
+                            setState(() {
+                              _isNotificationsEnabled = value;
+                            });
+                          },
+                          activeColor: const Color.fromARGB(255, 57, 255, 143), // Color when the switch is ON
+                          inactiveThumbColor: Colors.grey, // Thumb color when OFF
+                          inactiveTrackColor: Colors.grey[300], // Track color when OFF
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 20.0
+                  ),
+
+                  Row(
+                    children: [
+
+                      SizedBox(
+                        width: 25
+                      ),
+
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Contact",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(
+                    height: 5.0
+                  ),
+
+                  ElevatedButton(
+                    onPressed: () async {
+
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(120, 0, 77, 193),
+                      minimumSize: Size(double.infinity, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        
+                        Icon(Icons.contact_support, color: Colors.white, size: 25),
+
+                        SizedBox(
+                          width: 10
+                        ),
+                    
+                        Text("Help",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 3.0
+                  ),
+
+                  ElevatedButton(
+                    onPressed: () async {
+
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(120, 0, 77, 193),
+                      minimumSize: Size(double.infinity, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        
+                        Icon(Icons.article, color: Colors.white, size: 25),
+
+                        SizedBox(
+                          width: 10
+                        ),
+                    
+                        Text("Terms & Conditions",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 3.0
+                  ),
+
+                  ElevatedButton(
+                    onPressed: () async {
+
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(120, 0, 77, 193),
+                      minimumSize: Size(double.infinity, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        
+                        Icon(Icons.lock, color: Colors.white, size: 25),
+
+                        SizedBox(
+                          width: 10
+                        ),
+                    
+                        Text("Privacy Policy",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 20.0
+                  ),
+
+                  Row(
+                    children: [
+
+                      SizedBox(
+                        width: 25
+                      ),
+
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Danger zone",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(
+                    height: 5.0
+                  ),
+
+                  ElevatedButton(
+                    onPressed: () async {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text("Submit Account Deletion Request"),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min, // Ensures the dialog adjusts to its content
+                              crossAxisAlignment: CrossAxisAlignment.start, // Aligns text to the left
+                              children: [
+                                Text(
+                                  "To request account deletion, please enter your account email below, and hit 'Submit Request'.",
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                                SizedBox(height: 10), // Add spacing between text and the TextFormField
+                                TextFormField(
+                                  decoration: InputDecoration(
+                                    labelText: 'Email',
+                                    labelStyle: TextStyle(
+                                      color: Colors.black,
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: Colors.black),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: Colors.black),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop(); // Close the dialog
+                                },
+                                child: Text("Cancel"),
+                              ),
+                              TextButton(
+                                onPressed: () async {
+                                  // Add your submission logic here
+                                  Navigator.of(context).pop(); // Close the dialog
+                                },
+                                child: Text("Submit Request"),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(120, 0, 77, 193),
+                      minimumSize: Size(double.infinity, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0),
+                        //side: BorderSide(
+                          //color: Colors.white,
+                          //width: 0.0,
+                        //),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        
+                        Icon(Icons.delete, color: Colors.white, size: 25),
+
+                        SizedBox(
+                          width: 10
+                        ),
+                    
+                        Text("Request Account Deletion",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 35.0
+                  ),
+
+                  ElevatedButton(
+                    onPressed: () async {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text("This will sign you out"),
+                          content: Text("Pressing 'Yes' will log you out and return you to the Login Screen"),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text("No"),
+                            ),
+                            TextButton(
+                              onPressed: () async {
+                                await _signOut();
+                                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Splash()));
+                              },
+                              child: Text("Yes",
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(204, 255, 79, 79),
+                      minimumSize: Size(320, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        side: BorderSide(
+                          color: Colors.white,
+                          width: 1,
+                        ),
+                      ),
+                    ),
+                    child: Text("LOG OUT", 
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 50.0
+                  ),
+
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Coder Version 0.0.1\n© 2025 Coder. All rights reserved.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 160.0
                   )
+
                 ],
               ),
             ),
           ),
+
+          // App Bar
           Positioned(
             top: 0,
             left: 0,
@@ -162,6 +651,8 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ),
           ),
+          
+          // Bottom Navigation Bar
           Positioned(
             bottom: 50,
             left: 60,
@@ -208,7 +699,6 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ),
           ),
-          
         ],
       ),
     );

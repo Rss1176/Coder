@@ -314,7 +314,7 @@ class _HomePageState extends State<HomePage> {
 
                                     Image(image: AssetImage("assets/images/questions.png"),
                                       width: 150.0, 
-                                      height: 40.0,
+                                      height: 30.0,
                                     ),
                                     
                                     Text(
