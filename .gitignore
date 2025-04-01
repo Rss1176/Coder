@@ -153,3 +153,4 @@ yarn-error.log*
 /.env.*
 
 application/macos/Flutter/GeneratedPluginRegistrant.swift
+application/linux/flutter/generated_plugin_registrant.cc
