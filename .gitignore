@@ -152,3 +152,4 @@ yarn-error.log*
 # Environment files (local configs)
 /.env.*
 
+application/macos/Flutter/GeneratedPluginRegistrant.swift

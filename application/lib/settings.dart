@@ -6,6 +6,8 @@ import 'main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'my_progress.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 class AppSettings extends StatelessWidget {
   const AppSettings({super.key});
@@ -287,9 +289,9 @@ class _SettingsPageState extends State<SettingsPage> {
                               _isNotificationsEnabled = value;
                             });
                           },
-                          activeColor: const Color.fromARGB(255, 57, 255, 143), // Color when the switch is ON
-                          inactiveThumbColor: Colors.grey, // Thumb color when OFF
-                          inactiveTrackColor: Colors.grey[300], // Track color when OFF
+                          activeColor: const Color.fromARGB(255, 57, 255, 143),
+                          inactiveThumbColor: Colors.grey,
+                          inactiveTrackColor: Colors.grey[300],
                         ),
                       ],
                     ),
@@ -325,7 +327,21 @@ class _SettingsPageState extends State<SettingsPage> {
 
                   ElevatedButton(
                     onPressed: () async {
-
+                      print("Button pressed");
+                      const url = "https://classes.myplace.strath.ac.uk/";
+                      final Uri uri = Uri.parse(url);
+                      if (await canLaunchUrl(uri)) {
+                        print("Launching URL: $url");
+                        await launchUrl(
+                          uri,
+                          mode: LaunchMode.externalApplication,
+                        );
+                      } else {
+                        print("Cannot launch URL: $url");
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Could not launch $url")),
+                        );
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(120, 0, 77, 193),
