@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+// import 'package:firebase_storage/firebase_storage.dart';
 
 class MyAccountDialog extends StatefulWidget {
   final DocumentSnapshot userData;
@@ -18,6 +18,7 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
   XFile? _imageFile;
   final ImagePicker _picker = ImagePicker();
   // this class had the implementation to connect to firebase and save account images however it currently does not work as firebase storage costs
+  // all lines using this have been commented out
 
   Future<void> _pickImage(ImageSource source) async {
     try {
@@ -36,13 +37,13 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
   Future<void> _uploadImage(File image) async {
     try {
       String userId = FirebaseAuth.instance.currentUser!.uid;
-      Reference storageRef = FirebaseStorage.instance.ref().child('profile_images/$userId.png');
-      UploadTask uploadTask = storageRef.putFile(image);
-      TaskSnapshot snapshot = await uploadTask;
-      String downloadURL = await snapshot.ref.getDownloadURL();
-      print("Download URL: $downloadURL");
+//      Reference storageRef = FirebaseStorage.instance.ref().child('profile_images/$userId.png');
+//      UploadTask uploadTask = storageRef.putFile(image);
+//      TaskSnapshot snapshot = await uploadTask;
+//      String downloadURL = await snapshot.ref.getDownloadURL();
+//      print("Download URL: $downloadURL");
 
-      await FirebaseFirestore.instance.collection('users').doc(userId).update({'profileImage': downloadURL});
+//      await FirebaseFirestore.instance.collection('users').doc(userId).update({'profileImage': downloadURL});
 
       DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection('users').doc(userId).get();
     } catch (e) {
