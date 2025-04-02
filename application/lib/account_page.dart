@@ -105,8 +105,7 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
                   radius: 80,
                   backgroundImage: _imageFile != null //if the file is not null
                       ? FileImage(File(_imageFile!.path)) as ImageProvider // the the image path ..
-                      : widget.userData["profileImage"] != null && widget.userData["profileImage"].toString().isNotEmpty // if the image is not null
-                      ? NetworkImage(widget.userData["profileImage"]) // from firebase
+                      : (widget.userData.data() as Map<String, dynamic>?)?.containsKey("profileImage") == true && widget.userData["profileImage"].toString().isNotEmpty                      ? NetworkImage(widget.userData["profileImage"]) // from firebase
                       : const AssetImage("assets/images/profile_image_placeholder.png"), // if null or error use placeholder image
                   backgroundColor: const Color.fromARGB(255, 205, 205, 205),
                 ),
