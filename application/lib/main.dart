@@ -7,6 +7,7 @@ import 'page_animation.dart';
 import 'account_page.dart';
 import 'my_progress.dart';
 import 'settings.dart';
+import 'leaderboard.dart';
 
 // app should be run from the splash screen not main
 
@@ -521,7 +522,7 @@ class _HomePageState extends State<HomePage> {
                   IconButton(
                     icon: Icon(Icons.leaderboard, color: Color.fromARGB(75, 255, 255, 255)),
                     onPressed: () {
-                      //Navigator.of(context).push(createPageRoute2(Leaderboard()));
+                      Navigator.of(context).push(createPageRoute2(Leaderboard()));
                     },
                   ),
 
