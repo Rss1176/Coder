@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'settings.dart';
 import 'questions.dart';
 import 'show_Rank_Dialog.dart';
+import 'leaderboard.dart';
 
 class Progress extends StatelessWidget {
   const Progress({super.key});
@@ -636,7 +637,7 @@ class _ProgressPageState extends State<ProgressPage> {
                   IconButton(
                     icon: Icon(Icons.leaderboard, color: Color.fromARGB(75, 255, 255, 255)),
                     onPressed: () {
-                      //Navigator.of(context).push(createPageRoute2(Leaderboard()));
+                      Navigator.of(context).push(createPageRoute2(Leaderboard()));
                     },
                   ),
                   IconButton(
