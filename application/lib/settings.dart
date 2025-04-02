@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'my_progress.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'leaderboard.dart';
 
 
 class AppSettings extends StatelessWidget {
@@ -701,7 +702,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   IconButton(
                     icon: Icon(Icons.leaderboard, color: Color.fromARGB(75, 255, 255, 255)),
                     onPressed: () {
-                      //Navigator.of(context).push(createPageRoute2(Leaderboard()));
+                      Navigator.of(context).push(createPageRoute2(Leaderboard()));
                     },
                   ),
                   IconButton(

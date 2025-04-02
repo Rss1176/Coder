@@ -17,7 +17,7 @@ class MyAccountDialog extends StatefulWidget {
 class _MyAccountDialogState extends State<MyAccountDialog> {
   XFile? _imageFile;
   final ImagePicker _picker = ImagePicker();
-  bool _isUploading = false;
+  // this class had the implementation to connect to firebase and save account images however it currently does not work as firebase storage costs
 
   Future<void> _pickImage(ImageSource source) async {
     try {
@@ -45,15 +45,8 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
       await FirebaseFirestore.instance.collection('users').doc(userId).update({'profileImage': downloadURL});
 
       DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection('users').doc(userId).get();
-
-      setState(() {
-        _isUploading = false;
-      });
     } catch (e) {
       print('Error uploading image: $e');
-      setState(() {
-        _isUploading = false;
-      });
     }
   }
 
