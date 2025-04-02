@@ -596,7 +596,7 @@ class _ProgressPageState extends State<ProgressPage> {
                       color: Colors.white,
                     ),
                     onPressed: () async {
-                      DocumentSnapshot userDoc = await data; // awaits the function call at the top of the class for the firebase data
+                      DocumentSnapshot userDoc = await data; // awaits the function call at the top of the class for the firebase data (doesnt work as firebase storage is paid)
                       showMyAccountDialog(context); // passes the firebase data into the dialog box constructor;
                     },
                   ),
