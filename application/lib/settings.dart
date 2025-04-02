@@ -69,6 +69,74 @@ class _SettingsPageState extends State<SettingsPage> {
     await FirebaseAuth.instance.signOut();
   }
 
+  Future<void> _deleteAccount(String password) async {
+  try {
+    // Reauthenticate the user
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      AuthCredential credential = EmailAuthProvider.credential(
+        email: user.email!,
+        password: password,
+      );
+
+      await user.reauthenticateWithCredential(credential);
+
+      // Delete the account after reauthentication
+      await user.delete();
+      print("Account deleted successfully");
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => Splash()),
+      );
+    } else {
+      throw Exception("No user is currently signed in");
+    }
+  } catch (e) {
+    print("Error deleting account: $e");
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Failed to delete account: $e")),
+    );
+  }
+}
+
+void _showDeleteAccountDialog() {
+  TextEditingController passwordController = TextEditingController();
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Delete Account"),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text("Please enter your password to confirm account deletion."),
+            TextField(
+              controller: passwordController,
+              obscureText: true,
+              decoration: InputDecoration(labelText: "Password"),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () async {
+              Navigator.of(context).pop();
+              await _deleteAccount(passwordController.text);
+            },
+            child: Text("Delete"),
+          ),
+        ],
+      );
+    },
+  );
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -471,92 +539,6 @@ class _SettingsPageState extends State<SettingsPage> {
 
                   ElevatedButton(
                     onPressed: () async {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text("Submit Account Deletion Request"),
-                            content: Column(
-                              mainAxisSize: MainAxisSize.min, // Ensures the dialog adjusts to its content
-                              crossAxisAlignment: CrossAxisAlignment.start, // Aligns text to the left
-                              children: [
-                                Text(
-                                  "To request account deletion, please enter your account email below, and hit 'Submit Request'.",
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                                SizedBox(height: 10), // Add spacing between text and the TextFormField
-                                TextFormField(
-                                  decoration: InputDecoration(
-                                    labelText: 'Email',
-                                    labelStyle: TextStyle(
-                                      color: Colors.black,
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.black),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.black),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop(); // Close the dialog
-                                },
-                                child: Text("Cancel"),
-                              ),
-                              TextButton(
-                                onPressed: () async {
-                                  // Add your submission logic here
-                                  Navigator.of(context).pop(); // Close the dialog
-                                },
-                                child: Text("Submit Request"),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(120, 0, 77, 193),
-                      minimumSize: Size(double.infinity, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(0),
-                        //side: BorderSide(
-                          //color: Colors.white,
-                          //width: 0.0,
-                        //),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        
-                        Icon(Icons.delete, color: Colors.white, size: 25),
-
-                        SizedBox(
-                          width: 10
-                        ),
-                    
-                        Text("Request Account Deletion",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  SizedBox(
-                    height: 35.0
-                  ),
-
-                  ElevatedButton(
-                    onPressed: () async {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
@@ -595,6 +577,56 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                     ),
                     child: Text("LOG OUT", 
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 25.0
+                  ),
+
+                   ElevatedButton(
+                    onPressed: () async {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text("This will delete your account"),
+                          content: Text("Pressing 'Yes' delete your account permanently"),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text("No"),
+                            ),
+                            TextButton(
+                              onPressed: () async {
+                                _showDeleteAccountDialog();
+                              },
+                              child: Text("Yes",
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(204, 255, 79, 79),
+                      minimumSize: Size(320, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        side: BorderSide(
+                          color: Colors.white,
+                          width: 1,
+                        ),
+                      ),
+                    ),
+                    child: Text("DELETE ACCOUNT", 
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
