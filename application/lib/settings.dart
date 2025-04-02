@@ -69,6 +69,26 @@ class _SettingsPageState extends State<SettingsPage> {
     await FirebaseAuth.instance.signOut();
   }
 
+  void _showErrorDialog(String message) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Error"),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // Close the dialog
+            },
+            child: Text("OK"),
+          ),
+        ],
+      );
+    },
+  );
+}
+
   Future<void> _deleteAccount(String password) async {
   try {
     // Reauthenticate the user
@@ -82,8 +102,16 @@ class _SettingsPageState extends State<SettingsPage> {
       await user.reauthenticateWithCredential(credential);
 
       // Delete the account after reauthentication
-      await user.delete();
-      print("Account deleted successfully");
+      String userId = user.uid;
+      await _firestore.collection('users').doc(userId).delete(); // delete user database data
+      await user.delete(); // delete user account
+      
+      // Close all open dialogs
+      while (Navigator.of(context).canPop()) {
+        Navigator.of(context).pop();
+      }
+
+      // push to splash (first) page
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => Splash()),
       );
@@ -91,10 +119,7 @@ class _SettingsPageState extends State<SettingsPage> {
       throw Exception("No user is currently signed in");
     }
   } catch (e) {
-    print("Error deleting account: $e");
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("Failed to delete account: $e")),
-    );
+      _showErrorDialog("Failed to delete account: $e");
   }
 }
 
@@ -605,7 +630,8 @@ void _showDeleteAccountDialog() {
                             ),
                             TextButton(
                               onPressed: () async {
-                                _showDeleteAccountDialog();
+                                Navigator.of(context).pop(); // close dialog
+                                _showDeleteAccountDialog(); // show delete dialog
                               },
                               child: Text("Yes",
                               ),
