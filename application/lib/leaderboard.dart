@@ -114,12 +114,93 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                     height: 5.0
                   ),
 
-                  SizedBox(
-                    height: 800
-                  ),
+                  // Leaderboard List
+                  FutureBuilder<QuerySnapshot>(
+                    future: _firestore.collection('users').where('isAnonymous',isEqualTo: false).get(), // only get users with full accounts)
+                    builder: (context, snapshot){
+                      if (snapshot.connectionState == ConnectionState.waiting){ // show a loading symbol when users are coming from firebase
+                        return CircularProgressIndicator();
+                      }
+                      if (snapshot.hasError){
+                        return Text('${snapshot.error}');
+                      }
+                      if (!snapshot.hasData || snapshot.data!.docs.isEmpty){ // logic for no data/failed fetch
+                        return Text("No data");
+                      }
 
+                    final users = snapshot.data!.docs;
+                    final leaderboard = users.map((user){ // create a dictionary with key user and value a total score
+                      final data = user.data() as Map<String, dynamic>;
+                      int score1 = data['pythonLevel'] ?? 0; // individual score, default value of 0 to stop crashes
+                      int score2 = data['c#Level'] ?? 0;
+                      int score3 = data['javaLevel'] ?? 0;
+                      int totalScore = score1 + score2 + score3;
+                      String name = "${data['firstName']} ${data['lastName']}";
 
-                ],
+                      return {
+                        'username': name, // set dictionary with 2 fields username, and calculated score
+                        'totalScore': totalScore,
+                      };
+                    }).toList(); // list of dictionaries
+                  
+                  // sort the data
+                  leaderboard.sort((a, b) {
+                    final int scoreA = a['totalScore'] as int; // Ensure totalScore is an integer
+                    final int scoreB = b['totalScore'] as int; // Ensure totalScore is an integer
+                    return scoreB.compareTo(scoreA); // Sort in descending order
+                  });
+
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: leaderboard.length,
+                    itemBuilder: (context, index) {
+                      final user = leaderboard[index];
+                      return Column(
+                        children: [
+                          ListTile(
+                            leading: Text(
+                              "#${index + 1}",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 40,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            title: Text(
+                              user['username'] as String,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            trailing: Text(
+                              user['totalScore'].toString(),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 40,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          if (index < leaderboard.length - 1) // Add Divider only if it's not the last item
+                            Divider(
+                              color: Colors.white,
+                              thickness: 1,
+                              indent: 20,
+                              endIndent: 20,
+                            ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                ),
+
+                SizedBox(
+                  height: 700,
+                )
+                ], 
               ),
             ),
           ),
