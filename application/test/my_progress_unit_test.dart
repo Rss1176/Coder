@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:coder_application/my_progress.dart';
 
 // tests my progress update functions
 // function from my progress witg stype switched to map instead of document snapshot
@@ -56,7 +55,7 @@ num csharpXP = 0;
   }
 
 
-// dummy firebase user 
+// mock firebase user 
 Map<String, dynamic> user = {
   "pythonLevel": 0,
   "javaLevel": 0,
