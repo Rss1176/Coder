@@ -800,7 +800,7 @@ class _HomePageState extends State<HomePage> {
                             ),
 
                             Container(
-                              height: 300,
+                              height: 350,
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color: Colors.white,
@@ -812,13 +812,14 @@ class _HomePageState extends State<HomePage> {
                               child: Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
 
                                     Align(
                                       alignment: Alignment.topCenter,
                                         child:Text(
-                                        "PROFILE AWARDS",
+                                        "TOP PROFILE AWARDS",
                                         textAlign: TextAlign.center,
                                         style: GoogleFonts.luckiestGuy(
                                           color: Colors.white,
@@ -826,34 +827,30 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                     ),
+                                    
+                                    Align(
+                                    alignment: Alignment.center,
+                                    child: Image(
+                                      image: AssetImage("assets/images/$pAward.png"),
+                                      width: 75.0,
+                                      height: 75.0),
+                                    ),
 
                                     Align(
-                                      alignment: Alignment.center,
-                                      child:
-                                      Text(
-                                        "Here's a snapshot of your profile awards!",
-                                        style: GoogleFonts.anton(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        ),
-                                        )
+                                    alignment: Alignment.center,
+                                    child: Image(
+                                      image: AssetImage("assets/images/$jAward.png"),
+                                      width: 75.0,
+                                      height: 75.0),
                                     ),
-                                    Row(children: [
-                                      Image(
-                                        image: AssetImage("assets/images/$pAward.png"),
-                                        width: 50.0,
-                                        height: 50.0,),
 
-                                        Image(
-                                        image: AssetImage("assets/images/$jAward.png"),
-                                        width: 50.0,
-                                        height: 50.0,),
-
-                                        Image(
-                                        image: AssetImage("assets/images/$cAward.png"),
-                                        width: 50.0,
-                                        height: 50.0,)
-                                    ],)
+                                    Align(
+                                    alignment: Alignment.center,
+                                    child: Image(
+                                      image: AssetImage("assets/images/$cAward.png"),
+                                      width: 75.0,
+                                      height: 75.0),
+                                    ),
 
                                   ],
                                 )
@@ -953,7 +950,7 @@ class _HomePageState extends State<HomePage> {
 
                             // adding template container for Settings Page
                             Container(
-                              height: 200,
+                              height: 150,
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color: Colors.white,
@@ -979,10 +976,6 @@ class _HomePageState extends State<HomePage> {
                                           fontSize: 25,
                                         ),
                                       ),
-                                    ),
-
-                                    SizedBox(
-                                      height: 20.0
                                     ),
 
                                     Align(
