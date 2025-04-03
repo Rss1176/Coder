@@ -6,6 +6,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'my_progress.dart';
 import 'settings.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 
 
 class Leaderboard extends StatelessWidget {
@@ -80,39 +82,40 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
           ),
           SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 0.0),
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child:Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  
                   // Adding whitespace to the top of the page
                   SizedBox(
                     height: 135
                   ),
 
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-
-                      SizedBox(
-                        width: 25
-                      ),
 
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "Leaderboard",
-                          style: TextStyle(
+                          "Global Users",
+                          style: GoogleFonts.luckiestGuy(
                             color: Colors.white,
-                            fontSize: 16,
+                            fontSize: 30,
                           ),
                         ),
                       ),
-                    ],
-                  ),
 
-                  SizedBox(
-                    height: 5.0
-                  ),
+                      SizedBox(
+                        width: 50,
+                      ),
+
+                     // Icon(Icons.language, color: Colors.white, size: 30),
+
+                    ],
+                  ),    
 
                   // Leaderboard List
                   FutureBuilder<QuerySnapshot>(
@@ -151,6 +154,7 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                   });
 
                   return ListView.builder(
+                    padding: EdgeInsets.zero,
                     shrinkWrap: true,
                     itemCount: leaderboard.length,
                     itemBuilder: (context, index) {
@@ -158,27 +162,36 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                       return Column(
                         children: [
                           ListTile(
-                            leading: Text(
-                              "#${index + 1}",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 40,
-                                fontWeight: FontWeight.bold,
+                            leading: Container(
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: Colors.blue,
+                                borderRadius: BorderRadius.circular(25),
+                              ),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "#${index + 1}",
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.anton(
+                                  color: Colors.white,
+                                  fontSize: 25,
+                                ),
                               ),
                             ),
                             title: Text(
                               user['username'] as String,
-                              style: TextStyle(
+                              style: GoogleFonts.luckiestGuy(
                                 color: Colors.white,
-                                fontSize: 30,
+                                fontSize: 25,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             trailing: Text(
                               user['totalScore'].toString(),
-                              style: TextStyle(
+                              style: GoogleFonts.anton(
                                 color: Colors.white,
-                                fontSize: 40,
+                                fontSize: 30,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -198,7 +211,7 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                 ),
 
                 SizedBox(
-                  height: 700,
+                  height: 300,
                 )
                 ], 
               ),
@@ -223,11 +236,10 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                 children: [
 
                   Text(
-                    "Leaderboards",
-                    style: TextStyle(
+                    "Coder Leaderboards",
+                    style: GoogleFonts.anton(
                       color: Colors.white,
                       fontSize: 25,
-                      fontFamily: 'LuckiestGuy',
                     ),
                   ),
 

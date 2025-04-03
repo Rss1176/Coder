@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_fonts/google_fonts.dart';
 // import 'package:firebase_storage/firebase_storage.dart';
 
 class MyAccountDialog extends StatefulWidget {
@@ -76,9 +77,9 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     "My Coder Profile",
-                    style: TextStyle(
+                    style: GoogleFonts.anton(
                       color: Colors.white,
                       fontSize: 25,
                     ),
@@ -99,19 +100,45 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
               const SizedBox(height: 20),
 
               // Profile Picture
-              GestureDetector(
-                onTap: () => _pickImage(ImageSource.gallery),
-                child: CircleAvatar(
-                  radius: 80,
-                  backgroundImage: _imageFile != null //if the file is not null
-                      ? FileImage(File(_imageFile!.path)) as ImageProvider // the the image path ..
-                      : (widget.userData.data() as Map<String, dynamic>?)?.containsKey("profileImage") == true && widget.userData["profileImage"].toString().isNotEmpty 
-                      ? NetworkImage(widget.userData["profileImage"]) // from firebase
-                      : const AssetImage("assets/images/profile_image_placeholder.png"), // if null or error use placeholder image
-                  backgroundColor: const Color.fromARGB(255, 205, 205, 205),
+              Stack(
+                children: [
+                  GestureDetector(
+                  onTap: () => _pickImage(ImageSource.gallery),
+                  child: CircleAvatar(
+                    radius: 80,
+                    backgroundImage: _imageFile != null //if the file is not null
+                        ? FileImage(File(_imageFile!.path)) as ImageProvider // the the image path ..
+                        : (widget.userData.data() as Map<String, dynamic>?)?.containsKey("profileImage") == true && widget.userData["profileImage"].toString().isNotEmpty                      ? NetworkImage(widget.userData["profileImage"]) // from firebase
+                        : const AssetImage("assets/images/profile_image_placeholder.png"), // if null or error use placeholder image
+                    backgroundColor: const Color.fromARGB(255, 205, 205, 205),
+                  ),
                 ),
+
+                Positioned(
+                bottom: 0,
+                left: 120,
+                right: 0,
+                  child: Container(
+                    height: 40,
+                    width: 40,
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 0, 85, 155),
+                      borderRadius: BorderRadius.circular(25),
+                      border: Border.all(
+                        color: Colors.white,
+                        width: 1,
+                      ),
+                    ),
+                    child: Icon(Icons.edit, color: Colors.white, size: 30),
+                    
+                  )
+                )
+
+              ],
               ),
+
               const SizedBox(height: 20),
+
               Text(
                 "${widget.userData["firstName"] ?? "First Name"} ${widget.userData["lastName"] ?? "Last Name"}",
                 style: const TextStyle(

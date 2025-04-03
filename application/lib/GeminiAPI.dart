@@ -20,7 +20,7 @@ class GeminiAIService {
               "text": 
                 'Generate a multiple-choice question about $codingLanguage. No single part of the response should be longer than 20 words, try to avoid asking print questions\n'
                 'It should be aimed at someone at a $abilityLevel level.\n'
-                'Return the response in JSON format following this structure:\n'
+                'Please verify your question and answer before sending. Return the response in JSON format following this structure, ensuring the answer only returns a letter:\n'
                 '{\n'
                 '  "question": "The question itself",\n'
                 '  "options": ["A", "B", "C", "D"],\n'

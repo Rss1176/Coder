@@ -572,10 +572,9 @@ class _ProgressPageState extends State<ProgressPage> {
 
                   Text(
                     "My Progress",
-                    style: TextStyle(
+                    style: GoogleFonts.anton(
                       color: Colors.white,
                       fontSize: 25,
-                      fontFamily: 'LuckiestGuy',
                     ),
                   ),
 

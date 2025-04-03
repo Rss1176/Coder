@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'main.dart';
 import 'page_animation.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 
 class Questions extends StatelessWidget {
   const Questions({super.key});
@@ -36,11 +38,10 @@ class Questions extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Question Page",
-                    style: TextStyle(
+                    "Questions",
+                    style: GoogleFonts.anton(
                       color: Colors.white,
                       fontSize: 25,
-                      fontFamily: 'LuckiestGuy',
                     ),
                   ),
 
