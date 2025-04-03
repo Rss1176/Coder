@@ -84,6 +84,184 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  Expanded buildDailyQuesionContainer(DocumentSnapshot userDoc){
+    if (userDoc["dailyAnswered"] < 6){
+      return Expanded(
+        child:Container(
+          height: 231,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.white,
+              width: 1,
+            ),
+            borderRadius: BorderRadius.circular(10),
+            color: Color.fromARGB(120, 105, 190, 255),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+
+                Text(
+                  "DAILY QUIZ",
+                  style: GoogleFonts.luckiestGuy(
+                    color: Colors.white,
+                    fontSize: 40,
+                    ),
+                ),
+
+                Divider(
+                  color: Colors.white,
+                  thickness: 1,
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Todays Coder Quiz is to answer\n5 Python programming questions!\n\nThis quiz will award double progress,\ngood luck!",
+                      style: GoogleFonts.anton(
+                        color: Colors.white,
+                        fontSize: 16,
+                        ),
+                    ),
+
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).push(createPageRoute2(Questions()));
+                      },
+                      
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(255, 0, 85, 155),
+                        minimumSize: Size(40, 140),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6),
+                          side: BorderSide(
+                            color: Colors.white,
+                            width: 1,
+                          ),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children:[
+
+                          Text("START", 
+                            style: GoogleFonts.anton(
+                              color: Colors.white)
+                          ),
+
+                          SizedBox(
+                            width: 5.0
+                          ),
+
+                          Icon(Icons.arrow_forward_ios, 
+                            color: Colors.white,
+                          ),
+
+                        ],
+                      ),
+                    ),
+
+                  ],
+                )
+
+              ],
+            )
+          ),
+        ),
+      );
+    } else {
+      return Expanded(
+        child:Container(
+          height: 231,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.white,
+              width: 1,
+            ),
+            borderRadius: BorderRadius.circular(10),
+            color: Color.fromARGB(120, 105, 190, 255),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+
+                Text(
+                  "DAILY QUIZ",
+                  style: GoogleFonts.luckiestGuy(
+                    color: Colors.white,
+                    fontSize: 40,
+                    ),
+                ),
+
+                Divider(
+                  color: Colors.white,
+                  thickness: 1,
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Daily Done",
+                      style: GoogleFonts.anton(
+                        color: Colors.white,
+                        fontSize: 16,
+                        ),
+                    ),
+
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).push(createPageRoute2(Questions()));
+                      },
+                      
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(255, 0, 85, 155),
+                        minimumSize: Size(40, 140),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6),
+                          side: BorderSide(
+                            color: Colors.white,
+                            width: 1,
+                          ),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children:[
+
+                          Text("START", 
+                            style: GoogleFonts.anton(
+                              color: Colors.white)
+                          ),
+
+                          SizedBox(
+                            width: 5.0
+                          ),
+
+                          Icon(Icons.arrow_forward_ios, 
+                            color: Colors.white,
+                          ),
+
+                        ],
+                      ),
+                    ),
+
+                  ],
+                )
+
+              ],
+            )
+          ),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,93 +296,23 @@ class _HomePageState extends State<HomePage> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      
-                      Expanded(
-                        child:Container(
-                          height: 231,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.white,
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(10),
-                            color: Color.fromARGB(120, 105, 190, 255),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              children: [
-
-                                Text(
-                                  "DAILY QUIZ",
-                                  style: GoogleFonts.luckiestGuy(
-                                    color: Colors.white,
-                                    fontSize: 40,
-                                    ),
-                                ),
-
-                                Divider(
-                                  color: Colors.white,
-                                  thickness: 1,
-                                ),
-
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "Todays Coder Quiz is to answer\n5 Python programming questions!\n\nThis quiz will award double progress,\ngood luck!",
-                                      style: GoogleFonts.anton(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        ),
-                                    ),
-
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.of(context).push(createPageRoute2(Questions()));
-                                      },
-                                      
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: const Color.fromARGB(255, 0, 85, 155),
-                                        minimumSize: Size(40, 140),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(6),
-                                          side: BorderSide(
-                                            color: Colors.white,
-                                            width: 1,
-                                          ),
-                                        ),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children:[
-
-                                          Text("TAKE\nTHE QUIZ", 
-                                            textAlign: TextAlign.center,
-                                            style: GoogleFonts.anton(
-                                              color: Colors.white)
-                                          ),
-
-                                          SizedBox(
-                                            width: 5.0
-                                          ),
-
-                                          Icon(Icons.arrow_forward_ios, 
-                                            color: Colors.white,
-                                          ),
-
-                                        ],
-                                      ),
-                                    ),
-
-                                  ],
-                                )
-
-                              ],
-                            )
-                          ),
-                        ),
+                      FutureBuilder<DocumentSnapshot>(
+                        future: data, 
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            // Show a loading when data not ready
+                            return CircularProgressIndicator();
+                          } else if (snapshot.hasError) {
+                            // Handle errors
+                            return Text('Error: ${snapshot.error}');
+                          } else if (snapshot.hasData) {
+                            // Once the data is available, build the daily banner
+                            return buildDailyQuesionContainer(snapshot.data!);
+                          } else {
+                            // Handle case where data is not available
+                            return Text('No data available');
+                          }
+                        },
                       ),
                     ],
                   ),
