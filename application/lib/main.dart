@@ -9,6 +9,7 @@ import 'account_page.dart';
 import 'my_progress.dart';
 import 'settings.dart';
 import 'leaderboard.dart';
+import 'show_Rank_Dialog.dart';
 
 
 // app should be run from the splash screen not main
@@ -324,7 +325,7 @@ class _HomePageState extends State<HomePage> {
                             ),
 
                             Container(
-                              height: 150,
+                              height: 200,
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color: Colors.white,
@@ -333,6 +334,74 @@ class _HomePageState extends State<HomePage> {
                                 borderRadius: BorderRadius.circular(10),
                                 color: Color.fromARGB(120, 105, 190, 255),
                               ),
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+
+                                    Align(
+                                      alignment: Alignment.topCenter,
+                                        child:Text(
+                                        "PROGRESS",
+                                        textAlign: TextAlign.center,
+                                        style: GoogleFonts.luckiestGuy(
+                                          color: Colors.white,
+                                          fontSize: 25,
+                                        ),
+                                      ),
+                                    ),
+
+                                    Align(
+                                      alignment: Alignment.center,
+                                      child:Image(
+                                        image: AssetImage("assets/images/csharp-logo.png"),
+                                        width: 70.0,
+                                        height: 70.0,
+                                      ),
+                                    ),
+                                    
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.of(context).push(createPageRoute2(Progress()));
+                                      },
+                                      
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: const Color.fromARGB(255, 0, 85, 155),
+                                        minimumSize: Size(20, 50),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(6),
+                                          side: BorderSide(
+                                            color: Colors.white,
+                                            width: 1,
+                                          ),
+                                        ),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children:[
+
+                                          Text("C#", 
+                                            style: GoogleFonts.anton(
+                                              color: Colors.white)
+                                          ),
+
+                                          SizedBox(
+                                            width: 5.0
+                                          ),
+
+                                          Icon(Icons.arrow_forward_ios, 
+                                            color: Colors.white,
+                                          ),
+
+                                        ],
+                                      ),
+                                    ),
+
+                                  ],
+                                )
+                              )
                             ),
 
                             // adding white space
@@ -489,7 +558,7 @@ class _HomePageState extends State<HomePage> {
 
                             // adding template container for ----
                             Container(
-                              height: 150,
+                              height: 200,
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color: Colors.white,
@@ -498,6 +567,74 @@ class _HomePageState extends State<HomePage> {
                                 borderRadius: BorderRadius.circular(10),
                                 color: Color.fromARGB(120, 105, 190, 255),
                               ),
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+
+                                    Align(
+                                      alignment: Alignment.topCenter,
+                                        child:Text(
+                                        "PROGRESS",
+                                        textAlign: TextAlign.center,
+                                        style: GoogleFonts.luckiestGuy(
+                                          color: Colors.white,
+                                          fontSize: 25,
+                                        ),
+                                      ),
+                                    ),
+
+                                    Align(
+                                      alignment: Alignment.center,
+                                      child:Image(
+                                        image: AssetImage("assets/images/python-logo.png"),
+                                        width: 70.0,
+                                        height: 70.0,
+                                      ),
+                                    ),
+                                    
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.of(context).push(createPageRoute2(Progress()));
+                                      },
+                                      
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: const Color.fromARGB(255, 0, 85, 155),
+                                        minimumSize: Size(20, 50),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(6),
+                                          side: BorderSide(
+                                            color: Colors.white,
+                                            width: 1,
+                                          ),
+                                        ),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children:[
+
+                                          Text("PYTHON", 
+                                            style: GoogleFonts.anton(
+                                              color: Colors.white)
+                                          ),
+
+                                          SizedBox(
+                                            width: 5.0
+                                          ),
+
+                                          Icon(Icons.arrow_forward_ios, 
+                                            color: Colors.white,
+                                          ),
+
+                                        ],
+                                      ),
+                                    ),
+
+                                  ],
+                                )
+                              )
                             ),
 
                             // adding white space
@@ -507,7 +644,7 @@ class _HomePageState extends State<HomePage> {
 
                             // adding template container for ----
                             Container(
-                              height: 250,
+                              height: 200,
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color: Colors.white,
@@ -516,6 +653,74 @@ class _HomePageState extends State<HomePage> {
                                 borderRadius: BorderRadius.circular(10),
                                 color: Color.fromARGB(120, 105, 190, 255),
                               ),
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+
+                                    Align(
+                                      alignment: Alignment.topCenter,
+                                        child:Text(
+                                        "PROGRESS",
+                                        textAlign: TextAlign.center,
+                                        style: GoogleFonts.luckiestGuy(
+                                          color: Colors.white,
+                                          fontSize: 25,
+                                        ),
+                                      ),
+                                    ),
+
+                                    Align(
+                                      alignment: Alignment.center,
+                                      child:Image(
+                                        image: AssetImage("assets/images/java-logo-simple.png"),
+                                        width: 70.0,
+                                        height: 70.0,
+                                      ),
+                                    ),
+                                    
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.of(context).push(createPageRoute2(Progress()));
+                                      },
+                                      
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: const Color.fromARGB(255, 0, 85, 155),
+                                        minimumSize: Size(20, 50),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(6),
+                                          side: BorderSide(
+                                            color: Colors.white,
+                                            width: 1,
+                                          ),
+                                        ),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children:[
+
+                                          Text("JAVA", 
+                                            style: GoogleFonts.anton(
+                                              color: Colors.white)
+                                          ),
+
+                                          SizedBox(
+                                            width: 5.0
+                                          ),
+
+                                          Icon(Icons.arrow_forward_ios, 
+                                            color: Colors.white,
+                                          ),
+
+                                        ],
+                                      ),
+                                    ),
+
+                                  ],
+                                )
+                              )
                             ),
 
                             // adding white space
@@ -525,15 +730,46 @@ class _HomePageState extends State<HomePage> {
                             
                             // adding template container for ----
                             Container(
-                              height: 150,
+                              height: 140,
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color: Colors.white,
                                   width: 1,
                                 ),
                                 borderRadius: BorderRadius.circular(10),
-                                color: Color.fromARGB(120, 105, 190, 255),
+                                color: Color.fromARGB(0, 105, 190, 255),
                               ),
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+
+                                    Align(
+                                      alignment: Alignment.topCenter,
+                                        child:Text(
+                                        "ADD WIDGET",
+                                        textAlign: TextAlign.center,
+                                        style: GoogleFonts.luckiestGuy(
+                                          color: Colors.white,
+                                          fontSize: 25,
+                                        ),
+                                      ),
+                                    ),
+
+                                    Align(
+                                      alignment: Alignment.center,
+                                      child:IconButton(
+                                        onPressed: () {
+
+                                         },
+                                        icon: Icon(Icons.add, size: 70.0), color: Colors.white,
+                                      ),  
+                                    ),
+                                  ],
+                                )
+                              )
                             ),
 
                             // Container to seperate from Nav Bar
