@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                       
                       Expanded(
                         child:Container(
-                          height: 250,
+                          height: 231,
                           width: double.infinity,
                           decoration: BoxDecoration(
                             border: Border.all(
@@ -135,6 +135,57 @@ class _HomePageState extends State<HomePage> {
                                   thickness: 1,
                                 ),
 
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Todays Coder Quiz is to answer\n5 Python programming questions!\n\nThis quiz will award double progress,\ngood luck!",
+                                      style: GoogleFonts.anton(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        ),
+                                    ),
+
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.of(context).push(createPageRoute2(Questions()));
+                                      },
+                                      
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: const Color.fromARGB(255, 0, 85, 155),
+                                        minimumSize: Size(40, 140),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(6),
+                                          side: BorderSide(
+                                            color: Colors.white,
+                                            width: 1,
+                                          ),
+                                        ),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children:[
+
+                                          Text("START", 
+                                            style: GoogleFonts.anton(
+                                              color: Colors.white)
+                                          ),
+
+                                          SizedBox(
+                                            width: 5.0
+                                          ),
+
+                                          Icon(Icons.arrow_forward_ios, 
+                                            color: Colors.white,
+                                          ),
+
+                                        ],
+                                      ),
+                                    ),
+
+                                  ],
+                                )
+
                               ],
                             )
                           ),
@@ -154,10 +205,12 @@ class _HomePageState extends State<HomePage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
 
+                            // adding whitespace
                             SizedBox(
                               height: 10,
                             ),
 
+                            // adding template container for Leaderboard
                             Container(
                               height: 375,
                               decoration: BoxDecoration(
@@ -175,17 +228,16 @@ class _HomePageState extends State<HomePage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
 
-                                    Text(
-                                      "LEADERBOARDS",
+                                    Align(
+                                      alignment: Alignment.topCenter,
+                                      child: Text(
+                                      "GLOBAL LEADERBOARDS",
+                                      textAlign: TextAlign.center,
                                       style: GoogleFonts.luckiestGuy(
                                         color: Colors.white,
                                         fontSize: 25,
                                         ),
                                     ),
-
-                                    Divider(
-                                      color: Colors.white,
-                                      thickness: 1,
                                     ),
 
                                     FutureBuilder<QuerySnapshot>(
@@ -227,7 +279,7 @@ class _HomePageState extends State<HomePage> {
                                       mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
                                           SizedBox(
-                                            height: 255,
+                                            height: 235,
                                             child: Align(
                                               alignment: Alignment.topCenter,
                                             child: ListView.builder(
@@ -409,9 +461,9 @@ class _HomePageState extends State<HomePage> {
                               height:10
                             ),
 
-                            // adding template container for ----
+                            // adding template container for Java progress
                             Container(
-                              height: 250,
+                              height: 200,
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color: Colors.white,
@@ -420,6 +472,74 @@ class _HomePageState extends State<HomePage> {
                                 borderRadius: BorderRadius.circular(10),
                                 color: Color.fromARGB(120, 105, 190, 255),
                               ),
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+
+                                    Align(
+                                      alignment: Alignment.topCenter,
+                                        child:Text(
+                                        "PROGRESS",
+                                        textAlign: TextAlign.center,
+                                        style: GoogleFonts.luckiestGuy(
+                                          color: Colors.white,
+                                          fontSize: 25,
+                                        ),
+                                      ),
+                                    ),
+
+                                    Align(
+                                      alignment: Alignment.center,
+                                      child:Image(
+                                        image: AssetImage("assets/images/java-logo-simple.png"),
+                                        width: 70.0,
+                                        height: 70.0,
+                                      ),
+                                    ),
+                                    
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.of(context).push(createPageRoute2(Progress()));
+                                      },
+                                      
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: const Color.fromARGB(255, 0, 85, 155),
+                                        minimumSize: Size(20, 50),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(6),
+                                          side: BorderSide(
+                                            color: Colors.white,
+                                            width: 1,
+                                          ),
+                                        ),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children:[
+
+                                          Text("JAVA", 
+                                            style: GoogleFonts.anton(
+                                              color: Colors.white)
+                                          ),
+
+                                          SizedBox(
+                                            width: 5.0
+                                          ),
+
+                                          Icon(Icons.arrow_forward_ios, 
+                                            color: Colors.white,
+                                          ),
+
+                                        ],
+                                      ),
+                                    ),
+
+                                  ],
+                                )
+                              )
                             ),
 
                             // adding white space
@@ -427,7 +547,7 @@ class _HomePageState extends State<HomePage> {
                               height:10
                             ),
                             
-                            // adding template container for ----
+                            // adding template container for the add widget button
                             Container(
                               height: 150,
                               decoration: BoxDecoration(
@@ -436,8 +556,39 @@ class _HomePageState extends State<HomePage> {
                                   width: 1,
                                 ),
                                 borderRadius: BorderRadius.circular(10),
-                                color: Color.fromARGB(120, 105, 190, 255),
+                                color: Color.fromARGB(0, 105, 190, 255),
                               ),
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+
+                                    Align(
+                                      alignment: Alignment.topCenter,
+                                        child:Text(
+                                        "ADD WIDGET",
+                                        textAlign: TextAlign.center,
+                                        style: GoogleFonts.luckiestGuy(
+                                          color: Colors.white,
+                                          fontSize: 25,
+                                        ),
+                                      ),
+                                    ),
+
+                                    Align(
+                                      alignment: Alignment.center,
+                                      child:IconButton(
+                                        onPressed: () {
+
+                                         },
+                                        icon: Icon(Icons.add, size: 70.0), color: Colors.white,
+                                      ),  
+                                    ),
+                                  ],
+                                )
+                              )
                             ),
 
                             // Container to seperate from Nav Bar
@@ -478,13 +629,13 @@ class _HomePageState extends State<HomePage> {
                                 padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
                                 child:Column(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
 
                                     Align(
                                       alignment: Alignment.topCenter,
                                         child:Text(
-                                        "QUESTIONS",
+                                        "LANGUAGE QUESTIONS",
                                         textAlign: TextAlign.center,
                                         style: GoogleFonts.luckiestGuy(
                                           color: Colors.white,
@@ -492,61 +643,30 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                     ),
-                                    
-
-                                    Divider(
-                                      color: Colors.white,
-                                      thickness: 1,
+                                  
+                                    Align(
+                                      alignment: Alignment.center,
+                                      child: IconButton(
+                                        onPressed: () {
+                                          Navigator.of(context).push(createPageRoute2(Questions()));
+                                        },
+                                        icon: Icon(
+                                          Icons.question_answer,
+                                          size: 70.0,
+                                          color: Colors.white,
+                                        )
+                                      ),
                                     ),
-                                    
-                                    Text(
-                                      "Answer questions to improve your coding skills and level up!",
-                                      style: GoogleFonts.anton(
+
+                                    Text("Tap to Start!"
+                                      , style: GoogleFonts.anton(
                                         color: Colors.white,
                                         fontSize: 16,
                                         ),
                                     ),
 
-                                    SizedBox(
-                                      height: 35,
-                                    ),
+                                    SizedBox(height: 10),
 
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.of(context).push(createPageRoute2(Questions()));
-                                      },
-                                      
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: const Color.fromARGB(255, 0, 85, 155),
-                                        minimumSize: Size(20, 50),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(6),
-                                          side: BorderSide(
-                                            color: Colors.white,
-                                            width: 1,
-                                          ),
-                                        ),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children:[
-
-                                          Text("GENERATE", 
-                                            style: GoogleFonts.anton(
-                                              color: Colors.white)
-                                          ),
-
-                                          SizedBox(
-                                            width: 5.0
-                                          ),
-
-                                          Icon(Icons.arrow_forward_ios, 
-                                            color: Colors.white,
-                                          ),
-
-                                        ],
-                                      ),
-                                    ),
                                   ],
                                 ),
                               ),
@@ -554,6 +674,56 @@ class _HomePageState extends State<HomePage> {
 
                             SizedBox(
                               height: 10.0
+                            ),
+
+                            Container(
+                              height: 300,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                                color: Color.fromARGB(120, 105, 190, 255),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+
+                                    Align(
+                                      alignment: Alignment.topCenter,
+                                        child:Text(
+                                        "PROFILE AWARDS",
+                                        textAlign: TextAlign.center,
+                                        style: GoogleFonts.luckiestGuy(
+                                          color: Colors.white,
+                                          fontSize: 25,
+                                        ),
+                                      ),
+                                    ),
+
+                                    Align(
+                                      alignment: Alignment.center,
+                                      child:
+                                      Text(
+                                        "Here's a snapshot of your profile awards!",
+                                        style: GoogleFonts.anton(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        ),
+                                        )
+                                    ),
+
+                                  ],
+                                )
+                              )
+                            ),
+
+                            // adding white space
+                            SizedBox(
+                              height:10
                             ),
 
                             // adding template container for ----
@@ -642,95 +812,9 @@ class _HomePageState extends State<HomePage> {
                               height:10
                             ),
 
-                            // adding template container for ----
+                            // adding template container for Settings Page
                             Container(
                               height: 200,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.white,
-                                  width: 1,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                                color: Color.fromARGB(120, 105, 190, 255),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-
-                                    Align(
-                                      alignment: Alignment.topCenter,
-                                        child:Text(
-                                        "PROGRESS",
-                                        textAlign: TextAlign.center,
-                                        style: GoogleFonts.luckiestGuy(
-                                          color: Colors.white,
-                                          fontSize: 25,
-                                        ),
-                                      ),
-                                    ),
-
-                                    Align(
-                                      alignment: Alignment.center,
-                                      child:Image(
-                                        image: AssetImage("assets/images/java-logo-simple.png"),
-                                        width: 70.0,
-                                        height: 70.0,
-                                      ),
-                                    ),
-                                    
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.of(context).push(createPageRoute2(Progress()));
-                                      },
-                                      
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: const Color.fromARGB(255, 0, 85, 155),
-                                        minimumSize: Size(20, 50),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(6),
-                                          side: BorderSide(
-                                            color: Colors.white,
-                                            width: 1,
-                                          ),
-                                        ),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children:[
-
-                                          Text("JAVA", 
-                                            style: GoogleFonts.anton(
-                                              color: Colors.white)
-                                          ),
-
-                                          SizedBox(
-                                            width: 5.0
-                                          ),
-
-                                          Icon(Icons.arrow_forward_ios, 
-                                            color: Colors.white,
-                                          ),
-
-                                        ],
-                                      ),
-                                    ),
-
-                                  ],
-                                )
-                              )
-                            ),
-
-                            // adding white space
-                            SizedBox(
-                              height:10
-                            ),
-                            
-                            // adding template container for ----
-                            Container(
-                              height: 140,
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color: Colors.white,
@@ -742,14 +826,14 @@ class _HomePageState extends State<HomePage> {
                               child: Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
 
                                     Align(
                                       alignment: Alignment.topCenter,
                                         child:Text(
-                                        "ADD WIDGET",
+                                        "APP SETTINGS",
                                         textAlign: TextAlign.center,
                                         style: GoogleFonts.luckiestGuy(
                                           color: Colors.white,
@@ -758,18 +842,32 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
 
+                                    SizedBox(
+                                      height: 20.0
+                                    ),
+
                                     Align(
                                       alignment: Alignment.center,
-                                      child:IconButton(
+                                      child: IconButton(
                                         onPressed: () {
-
-                                         },
-                                        icon: Icon(Icons.add, size: 70.0), color: Colors.white,
-                                      ),  
+                                          Navigator.of(context).push(createPageRoute2(AppSettings()));
+                                        },
+                                        icon: Icon(
+                                          Icons.settings,
+                                          size: 70.0,
+                                          color: Colors.white,
+                                        )
+                                      ),
                                     ),
+
                                   ],
                                 )
                               )
+                            ),
+
+                            // adding white space
+                            SizedBox(
+                              height:10
                             ),
 
                             // Container to seperate from Nav Bar
@@ -892,4 +990,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
