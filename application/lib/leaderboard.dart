@@ -44,6 +44,8 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance; // variables for getting user details, used in dialog box
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late Future<DocumentSnapshot> data;
+  String? myLocation;
+  bool local = false;
 
   // same function block as used in all other firebase calls, fetches the user data, ensure the ID matches and gets the userdocument
   @override
@@ -61,6 +63,9 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
     if (!userDoc.exists){
       throw Exception("failed to find user document");
     }
+    setState(() {
+      myLocation = userDoc["location"];
+    });
     return userDoc;
   }
 
@@ -100,26 +105,53 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "Global Users",
-                          style: GoogleFonts.luckiestGuy(
+                          "Global",
+                          style: GoogleFonts.anton(
                             color: Colors.white,
-                            fontSize: 30,
+                            fontSize: 25,
                           ),
                         ),
                       ),
 
-                      SizedBox(
-                        width: 50,
+                      Icon(Icons.language, color: Colors.white, size: 30),
+
+                      SizedBox(width: 20),
+
+
+                      // switch to change between global and local users
+                      Switch(
+                        value: local,
+                        onChanged: (bool value) {
+                        setState(() {
+                          local = value;
+                        });
+                       },
+                        activeColor: Colors.grey,
+                        inactiveThumbColor: Colors.grey,
+                        inactiveTrackColor: Colors.grey[300],
                       ),
 
-                     // Icon(Icons.language, color: Colors.white, size: 30),
+                      SizedBox(width: 20),
 
+                      Icon(Icons.location_city, color: Colors.white, size: 30),
+
+                      Text(
+                        "Local",
+                        style: GoogleFonts.anton(
+                          color: Colors.white,
+                          fontSize: 25,
+                        ),
+                      ),
                     ],
-                  ),    
+                  ), 
+
+                  
 
                   // Leaderboard List
                   FutureBuilder<QuerySnapshot>(
-                    future: _firestore.collection('users').where('isAnonymous',isEqualTo: false).get(), // only get users with full accounts)
+                    future: local ? // switches the leaderboard so that it is global users or users with the same location as the signed in user
+                      _firestore.collection('users').where('isAnonymous',isEqualTo: false).where('location', isEqualTo: myLocation).get(): // users with full accounts and near user location
+                      _firestore.collection('users').where('isAnonymous',isEqualTo: false).get(), // users with full accounts globally
                     builder: (context, snapshot){
                       if (snapshot.connectionState == ConnectionState.waiting){ // show a loading symbol when users are coming from firebase
                         return CircularProgressIndicator();
@@ -133,12 +165,12 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
 
                     final users = snapshot.data!.docs;
                     final leaderboard = users.map((user){ // create a dictionary with key user and value a total score
-                      final data = user.data() as Map<String, dynamic>;
-                      int score1 = data['pythonLevel'] ?? 0; // individual score, default value of 0 to stop crashes
-                      int score2 = data['c#Level'] ?? 0;
-                      int score3 = data['javaLevel'] ?? 0;
-                      int totalScore = score1 + score2 + score3;
-                      String name = "${data['firstName']} ${data['lastName']}";
+                    final data = user.data() as Map<String, dynamic>;
+                    int score1 = data['pythonLevel'] ?? 0; // individual score, default value of 0 to stop crashes
+                    int score2 = data['c#Level'] ?? 0;
+                    int score3 = data['javaLevel'] ?? 0;
+                    int totalScore = score1 + score2 + score3;
+                    String name = "${data['firstName']} ${data['lastName']}";
 
                       return {
                         'username': name, // set dictionary with 2 fields username, and calculated score
