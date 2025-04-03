@@ -8,6 +8,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'my_progress.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'leaderboard.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 
 
 class AppSettings extends StatelessWidget {
@@ -740,10 +742,9 @@ void _showDeleteAccountDialog() {
 
                   Text(
                     "Settings",
-                    style: TextStyle(
+                    style: GoogleFonts.anton(
                       color: Colors.white,
                       fontSize: 25,
-                      fontFamily: 'LuckiestGuy',
                     ),
                   ),
 

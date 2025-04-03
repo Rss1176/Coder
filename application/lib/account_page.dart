@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_fonts/google_fonts.dart';
 // import 'package:firebase_storage/firebase_storage.dart';
 
 class MyAccountDialog extends StatefulWidget {
@@ -76,9 +77,9 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     "My Coder Profile",
-                    style: TextStyle(
+                    style: GoogleFonts.anton(
                       color: Colors.white,
                       fontSize: 25,
                     ),
