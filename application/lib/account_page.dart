@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'medals.dart';
 // import 'package:firebase_storage/firebase_storage.dart';
 
 class MyAccountDialog extends StatefulWidget {
@@ -20,6 +21,16 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
   final ImagePicker _picker = ImagePicker();
   // this class had the implementation to connect to firebase and save account images however it currently does not work as firebase storage costs
   // all lines using this have been commented out
+
+  String cAward = "c1"; // variables that denote what award should be displayed as a medal for language efficiency
+  String pAward = "p1"; // default to the bronze shield so that if firebase fails to be fetched and update it has a default value
+  String jAward = "j1";
+
+  @override
+  void initState(){
+    super.initState();
+    _loadData(); // set the medals to appropriate level
+  }
 
   Future<void> _pickImage(ImageSource source) async {
     try {
@@ -50,6 +61,14 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
     } catch (e) {
       print('Error uploading image: $e');
     }
+  }
+
+  Future<void> _loadData() async { // loads the data from the medals.dart function for the home page// Fetch data of user
+    setState(() {
+      cAward = getMedalString("csharp", widget.userData); // access the constructor to get userData
+      pAward = getMedalString("python", widget.userData); 
+      jAward = getMedalString("java", widget.userData); 
+    });
   }
 
   @override
@@ -199,6 +218,24 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
                   ),
                 ],
               ),
+
+              Row(children: [
+                Image(
+                  image: AssetImage("assets/images/$pAward.png"),
+                  width: 50.0,
+                  height: 50.0,),
+
+                  Image(
+                  image: AssetImage("assets/images/$jAward.png"),
+                  width: 50.0,
+                  height: 50.0,),
+
+                  Image(
+                  image: AssetImage("assets/images/$cAward.png"),
+                  width: 50.0,
+                  height: 50.0,)
+                ]
+              )
             ],
           ),
         ),
