@@ -470,7 +470,21 @@ void _showDeleteAccountDialog() {
 
                   ElevatedButton(
                     onPressed: () async {
-
+                      print("Button pressed");
+                      const url = "https://classes.myplace.strath.ac.uk/";
+                      final Uri uri = Uri.parse(url);
+                      if (await canLaunchUrl(uri)) {
+                        print("Launching URL: $url");
+                        await launchUrl(
+                          uri,
+                          mode: LaunchMode.externalApplication,
+                        );
+                      } else {
+                        print("Cannot launch URL: $url");
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Could not launch $url")),
+                        );
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(120, 0, 77, 193),
@@ -505,7 +519,21 @@ void _showDeleteAccountDialog() {
 
                   ElevatedButton(
                     onPressed: () async {
-
+                      print("Button pressed");
+                      const url = "https://classes.myplace.strath.ac.uk/";
+                      final Uri uri = Uri.parse(url);
+                      if (await canLaunchUrl(uri)) {
+                        print("Launching URL: $url");
+                        await launchUrl(
+                          uri,
+                          mode: LaunchMode.externalApplication,
+                        );
+                      } else {
+                        print("Cannot launch URL: $url");
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Could not launch $url")),
+                        );
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(120, 0, 77, 193),
@@ -568,6 +596,65 @@ void _showDeleteAccountDialog() {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
+                          title: Text("This will delete your account"),
+                          content: Text("Pressing 'Yes' delete your account permanently"),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text("No"),
+                            ),
+                            TextButton(
+                              onPressed: () async {
+                                Navigator.of(context).pop(); // close dialog
+                                _showDeleteAccountDialog(); // show delete dialog
+                              },
+                              child: Text("Yes",
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(120, 0, 77, 193),
+                      minimumSize: Size(double.infinity, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        
+                        Icon(Icons.delete_outlined, color: Colors.white, size: 25),
+
+                        SizedBox(
+                          width: 10
+                        ),
+                    
+                        Text("Delete Account",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 30.0
+                  ),
+
+                  ElevatedButton(
+                    onPressed: () async {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
                           title: Text("This will sign you out"),
                           content: Text("Pressing 'Yes' will log you out and return you to the Login Screen"),
                           actions: [
@@ -610,58 +697,7 @@ void _showDeleteAccountDialog() {
                   ),
 
                   SizedBox(
-                    height: 25.0
-                  ),
-
-                   ElevatedButton(
-                    onPressed: () async {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text("This will delete your account"),
-                          content: Text("Pressing 'Yes' delete your account permanently"),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: Text("No"),
-                            ),
-                            TextButton(
-                              onPressed: () async {
-                                Navigator.of(context).pop(); // close dialog
-                                _showDeleteAccountDialog(); // show delete dialog
-                              },
-                              child: Text("Yes",
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(204, 255, 79, 79),
-                      minimumSize: Size(320, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        side: BorderSide(
-                          color: Colors.white,
-                          width: 1,
-                        ),
-                      ),
-                    ),
-                    child: Text("DELETE ACCOUNT", 
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-
-                  SizedBox(
-                    height: 50.0
+                    height: 30.0
                   ),
 
                   Align(

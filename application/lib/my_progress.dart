@@ -4,6 +4,7 @@ import 'account_page.dart';
 import 'main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'settings.dart';
 import 'questions.dart';
 import 'show_Rank_Dialog.dart';
@@ -193,10 +194,9 @@ class _ProgressPageState extends State<ProgressPage> {
                                   children: [
                                     Text(
                                       "Python Rank",
-                                      style: TextStyle(
+                                      style: GoogleFonts.luckiestGuy(
                                         color: Colors.white,
                                         fontSize: 18,
-                                        fontFamily: 'LuckiestGuy',
                                         decoration: TextDecoration.underline,
                                         decorationColor: Colors.white,
                                         decorationThickness: 0.8,
@@ -205,10 +205,9 @@ class _ProgressPageState extends State<ProgressPage> {
                                     
                                     Text(
                                       "$pythonDescription",
-                                      style: TextStyle(
+                                      style: GoogleFonts.anton(
                                         color: Colors.white,
                                         fontSize: 25,
-                                        fontFamily: 'LuckiestGuy',
                                       ),
                                     ),
                                   ],
@@ -226,8 +225,8 @@ class _ProgressPageState extends State<ProgressPage> {
                                 child: Row(
                                   children:[
 
-                                    Text("View", 
-                                      style: TextStyle(
+                                    Text("VIEW", 
+                                      style: GoogleFonts.anton(
                                         color: Colors.white)
                                     ),
 
@@ -301,10 +300,9 @@ class _ProgressPageState extends State<ProgressPage> {
                                   children: [
                                     Text(
                                       "Java Rank",
-                                      style: TextStyle(
+                                      style: GoogleFonts.luckiestGuy(
                                         color: Colors.white,
                                         fontSize: 18,
-                                        fontFamily: 'LuckiestGuy',
                                         decoration: TextDecoration.underline,
                                         decorationColor: Colors.white,
                                         decorationThickness: 0.8,
@@ -313,10 +311,9 @@ class _ProgressPageState extends State<ProgressPage> {
                                     
                                     Text(
                                       "$javaDescription",
-                                      style: TextStyle(
+                                      style: GoogleFonts.anton(
                                         color: Colors.white,
                                         fontSize: 25,
-                                        fontFamily: 'LuckiestGuy',
                                       ),
                                     ),
                                   ],
@@ -334,8 +331,8 @@ class _ProgressPageState extends State<ProgressPage> {
                                 child: Row(
                                   children:[
 
-                                    Text("View", 
-                                      style: TextStyle(
+                                    Text("VIEW", 
+                                      style: GoogleFonts.anton(
                                         color: Colors.white)
                                     ),
 
@@ -410,10 +407,9 @@ class _ProgressPageState extends State<ProgressPage> {
                                   children: [
                                     Text(
                                       "C# Rank",
-                                      style: TextStyle(
+                                      style: GoogleFonts.luckiestGuy(
                                         color: Colors.white,
                                         fontSize: 18,
-                                        fontFamily: 'LuckiestGuy',
                                         decoration: TextDecoration.underline,
                                         decorationColor: Colors.white,
                                         decorationThickness: 0.8,
@@ -422,10 +418,9 @@ class _ProgressPageState extends State<ProgressPage> {
                                     
                                     Text(
                                       "$csharpDescription",
-                                      style: TextStyle(
+                                      style: GoogleFonts.anton(
                                         color: Colors.white,
                                         fontSize: 25,
-                                        fontFamily: 'LuckiestGuy',
                                       ),
                                     ),
                                   ],
@@ -443,8 +438,8 @@ class _ProgressPageState extends State<ProgressPage> {
                                 child: Row(
                                   children:[
 
-                                    Text("View", 
-                                      style: TextStyle(
+                                    Text("VIEW", 
+                                      style: GoogleFonts.anton(
                                         color: Colors.white)
                                     ),
 
