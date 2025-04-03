@@ -165,6 +165,282 @@ void _showDeleteAccountDialog() {
   );
 }
 
+void _updateAccount(DocumentSnapshot user){
+    TextEditingController firstNameController = TextEditingController();
+    TextEditingController lastNameController = TextEditingController();
+    String firstName = user["firstName"];
+    String lastName = user["lastName"];
+    String pronoun = user["pronoun"] ?? "";
+    String location = user["location"];
+
+    showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Change Account Details"),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text("Please make your changes."),
+            TextField(
+              controller: firstNameController = TextEditingController(text: firstName),
+              obscureText: false,
+              decoration: InputDecoration(labelText: "First Name"),
+            ),
+            TextField(
+              controller: lastNameController = TextEditingController(text: lastName),
+              obscureText: false,
+              decoration: InputDecoration(labelText: "Last Name"),
+            ),
+            DropdownButtonFormField<String>(
+              value: pronoun,
+              items: [ // Dropdown menu items
+                      DropdownMenuItem(value: 'He/Him', child: Text('He/Him')),
+                      DropdownMenuItem(value: 'She/Her', child: Text('She/Her')),
+                      DropdownMenuItem(value: 'They/Them', child: Text('They/Them')),
+                      DropdownMenuItem(value: 'Non-Bindary', child: Text('Non-binary')),
+                      DropdownMenuItem(value: 'Other', child: Text('Other')),
+                    ],
+            onChanged: (value){
+              pronoun = value ?? ""; // update pronoun in a null safe way
+            }),
+             DropdownButtonFormField<String>(
+              value: location,
+              items: [
+                      DropdownMenuItem(value: 'United Kingdom', child: Text('United Kingdom')),
+                      DropdownMenuItem(value: 'United States', child: Text('United States')),
+                      DropdownMenuItem(value: 'Canada', child: Text('Canada')),
+                      DropdownMenuItem(value: 'Australia', child: Text('Australia')),
+                      DropdownMenuItem(value: 'Germany', child: Text('Germany')),
+                      DropdownMenuItem(value: 'France', child: Text('France')),
+                      DropdownMenuItem(value: 'India', child: Text('India')),
+                      DropdownMenuItem(value: 'China', child: Text('China')),
+                      DropdownMenuItem(value: 'Japan', child: Text('Japan')),
+                      DropdownMenuItem(value: 'Brazil', child: Text('Brazil')),
+                      DropdownMenuItem(value: 'South Africa', child: Text('South Africa')),
+                      DropdownMenuItem(value: 'Mexico', child: Text('Mexico')),
+                      DropdownMenuItem(value: 'Italy', child: Text('Italy')),
+                      DropdownMenuItem(value: 'Spain', child: Text('Spain')),
+                      ],
+            onChanged: (value){
+            location = value ?? "";
+            }) 
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () async {
+              Navigator.of(context).pop();
+              await _firestore.collection('users').doc(user.id).update({
+                'firstName': firstNameController.text,
+                'lastName': lastNameController.text,
+                'pronoun': pronoun,
+                'location': location,
+              });
+            },
+            child: Text("Save Changes"),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+void _updateEmail(DocumentSnapshot user){
+    TextEditingController emailController = TextEditingController(text: user["email"]);
+    TextEditingController passwordController = TextEditingController();
+    bool _isLoading = false;
+  
+    // currently does not work properly as firebase is meant to send emails to users as authentication but we do not have email authentication
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Update Email"),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text("Please enter your new email adress."),
+            TextField(
+              controller: emailController,
+              obscureText: false,
+              decoration: InputDecoration(labelText: "Email"),
+            ),
+            SizedBox(height: 10),
+            Text("Please enter your password to continue"),
+            TextField(
+              controller: passwordController,
+              obscureText: true,
+              decoration: InputDecoration(labelText: "Password"),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () async {
+              String newEmail = emailController.text.trim();
+              String password = passwordController.text.trim();
+
+              if (newEmail.isEmpty || password.isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("Email and password cannot be empty")),
+                );
+                return;
+              }
+
+              setState(() {
+                _isLoading = true; // Show loading indicator
+              });
+
+              try {
+                User? firebaseUser = FirebaseAuth.instance.currentUser;
+                if (firebaseUser != null) {
+                  // Reauthenticate the user
+                  AuthCredential credential = EmailAuthProvider.credential(
+                    email: firebaseUser.email!,
+                    password: password,
+                  );
+                  await firebaseUser.reauthenticateWithCredential(credential);
+
+                  // Update email in Firebase Authentication
+                  await firebaseUser.updateEmail(newEmail);
+
+                  // Update email in Firestore
+                  await FirebaseFirestore.instance.collection('users').doc(firebaseUser.uid).update({
+                    "email": newEmail,
+                  });
+
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("Email updated successfully")),
+                  );
+
+                  Navigator.of(context).pop(); // Close the dialog
+                }
+              } catch (e) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("Failed to update email: $e")),
+                );
+              } finally {
+                setState(() {
+                  _isLoading = false; // Hide loading indicator
+                });
+              }
+            },
+            child: _isLoading
+                ? CircularProgressIndicator(color: Colors.white)
+                : Text("Save"),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+void _updatePassword(DocumentSnapshot user){
+    TextEditingController newPasswordController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+    bool _isLoading = false;
+
+    // currently does not work properly as firebase is meant to send emails to users as authentication but we do not have email authentication
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Update Password"),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text("Please enter your old password."),
+            TextField(
+              controller: passwordController,
+              obscureText: true,
+              decoration: InputDecoration(labelText: "Old Password"),
+            ),
+            SizedBox(height: 10),
+            Text("Please enter your new password to continue"),
+            TextField(
+              controller: newPasswordController,
+              obscureText: true,
+              decoration: InputDecoration(labelText: "New Password"),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () async {
+              String password = passwordController.text.trim();
+              String newPassword = newPasswordController.text.trim();
+
+              if (newPassword.isEmpty || password.isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("Password cannot be empty")),
+                );
+                return;
+              }
+
+              setState(() {
+                _isLoading = true; // Show loading indicator
+              });
+
+              try {
+                User? firebaseUser = FirebaseAuth.instance.currentUser;
+                if (firebaseUser != null) {
+                  // Reauthenticate the user
+                  AuthCredential credential = EmailAuthProvider.credential(
+                    email: firebaseUser.email!,
+                    password: password,
+                  );
+                  await firebaseUser.reauthenticateWithCredential(credential);
+
+                  // Update email in Firebase Authentication
+                  await firebaseUser.updatePassword(newPassword);
+
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("Password updated successfully")),
+                  );
+
+                  Navigator.of(context).pop(); // Close the dialog
+                }
+              } catch (e) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("Failed to update password: $e")),
+                );
+              } finally {
+                setState(() {
+                  _isLoading = false; // Hide loading indicator
+                });
+              }
+            },
+            child: _isLoading
+                ? CircularProgressIndicator(color: Colors.white)
+                : Text("Save"),
+          ),
+        ],
+      );
+    },
+  );
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -222,7 +498,8 @@ void _showDeleteAccountDialog() {
 
                   ElevatedButton(
                     onPressed: () async {
-
+                      DocumentSnapshot data = await getFirebaseData();
+                      _updateAccount(data);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(120, 0, 77, 193),
@@ -257,7 +534,8 @@ void _showDeleteAccountDialog() {
 
                   ElevatedButton(
                     onPressed: () async {
-
+                      DocumentSnapshot data = await getFirebaseData();
+                      _updateEmail(data);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(120, 0, 77, 193),
@@ -292,6 +570,8 @@ void _showDeleteAccountDialog() {
 
                   ElevatedButton(
                     onPressed: () async {
+                      DocumentSnapshot data = await getFirebaseData();
+                      _updatePassword(data);
 
                     },
                     style: ElevatedButton.styleFrom(

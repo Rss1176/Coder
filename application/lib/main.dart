@@ -9,7 +9,6 @@ import 'account_page.dart';
 import 'my_progress.dart';
 import 'settings.dart';
 import 'leaderboard.dart';
-import 'show_Rank_Dialog.dart';
 
 
 // app should be run from the splash screen not main
