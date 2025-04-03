@@ -82,7 +82,7 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
           ),
           SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 0.0),
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child:Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -93,28 +93,28 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                   ),
 
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-
-                      SizedBox(
-                        width: 25
-                      ),
 
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "Leaderboard",
-                          style: TextStyle(
+                          "Global Users",
+                          style: GoogleFonts.luckiestGuy(
                             color: Colors.white,
-                            fontSize: 16,
+                            fontSize: 30,
                           ),
                         ),
                       ),
-                    ],
-                  ),
 
-                  SizedBox(
-                    height: 5.0
-                  ),
+                      SizedBox(
+                        width: 50,
+                      ),
+
+                     // Icon(Icons.language, color: Colors.white, size: 30),
+
+                    ],
+                  ),    
 
                   // Leaderboard List
                   FutureBuilder<QuerySnapshot>(
@@ -153,6 +153,7 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                   });
 
                   return ListView.builder(
+                    padding: EdgeInsets.zero,
                     shrinkWrap: true,
                     itemCount: leaderboard.length,
                     itemBuilder: (context, index) {
@@ -160,19 +161,28 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                       return Column(
                         children: [
                           ListTile(
-                            leading: Text(
-                              "#${index + 1}",
-                              style: GoogleFonts.anton(
-                                color: Colors.white,
-                                fontSize: 35,
-                                fontWeight: FontWeight.bold,
+                            leading: Container(
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: Colors.blue,
+                                borderRadius: BorderRadius.circular(25),
+                              ),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "#${index + 1}",
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.anton(
+                                  color: Colors.white,
+                                  fontSize: 25,
+                                ),
                               ),
                             ),
                             title: Text(
                               user['username'] as String,
                               style: GoogleFonts.luckiestGuy(
                                 color: Colors.white,
-                                fontSize: 30,
+                                fontSize: 25,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -180,7 +190,7 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                               user['totalScore'].toString(),
                               style: GoogleFonts.anton(
                                 color: Colors.white,
-                                fontSize: 35,
+                                fontSize: 30,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -200,7 +210,7 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                 ),
 
                 SizedBox(
-                  height: 700,
+                  height: 300,
                 )
                 ], 
               ),

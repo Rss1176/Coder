@@ -111,7 +111,9 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
                   backgroundColor: const Color.fromARGB(255, 205, 205, 205),
                 ),
               ),
+
               const SizedBox(height: 20),
+              
               Text(
                 "${widget.userData["firstName"] ?? "First Name"} ${widget.userData["lastName"] ?? "Last Name"}",
                 style: const TextStyle(
