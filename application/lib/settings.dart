@@ -47,6 +47,7 @@ class _SettingsPageState extends State<SettingsPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late Future<DocumentSnapshot> data;
   bool _isNotificationsEnabled = false;
+  bool _isDarkModeEnabled = true;
 
   // same function block as used in all other firebase calls, fetches the user data, ensure the ID matches and gets the userdocument
   @override
@@ -234,6 +235,41 @@ void _showDeleteAccountDialog() {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         
+                        Icon(Icons.manage_accounts, color: Colors.white, size: 25),
+
+                        SizedBox(
+                          width: 10
+                        ),
+                    
+                        Text("Update Account Information",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 3.0
+                  ),
+
+                  ElevatedButton(
+                    onPressed: () async {
+
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(120, 0, 77, 193),
+                      minimumSize: Size(double.infinity, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        
                         Icon(Icons.mail, color: Colors.white, size: 25),
 
                         SizedBox(
@@ -328,41 +364,6 @@ void _showDeleteAccountDialog() {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         
-                        Icon(Icons.dark_mode, color: Colors.white, size: 25),
-
-                        SizedBox(
-                          width: 10
-                        ),
-                    
-                        Text("Change App Theme",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  SizedBox(
-                    height: 3.0
-                  ),
-
-                  ElevatedButton(
-                    onPressed: () async {
-
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(120, 0, 77, 193),
-                      minimumSize: Size(double.infinity, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(0),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        
                         Icon(Icons.edit_square, color: Colors.white, size: 25),
 
                         SizedBox(
@@ -378,6 +379,63 @@ void _showDeleteAccountDialog() {
                       ],
                     ),
                   ),
+                  
+                  SizedBox(
+                    height: 3.0
+                  ),
+
+                  ElevatedButton(
+                    onPressed: () async {
+
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(120, 0, 77, 193),
+                      minimumSize: Size(double.infinity, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        
+                        Icon(Icons.contrast, color: Colors.white, size: 25),
+
+                        SizedBox(
+                          width: 10
+                        ),
+                    
+                        Text("App Theme",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+
+                        SizedBox(
+                          width: 140
+                        ),
+
+                        Icon(
+                          _isDarkModeEnabled ? Icons.dark_mode : Icons.wb_sunny,
+                          color: Colors.white,
+                          size: 25,
+                        ),
+
+                        Switch(
+                          value: _isDarkModeEnabled,
+                          onChanged: (bool value) {
+                            setState(() {
+                              _isDarkModeEnabled = value;
+                            });
+                          },
+                          activeColor: const Color.fromARGB(255, 57, 255, 143),
+                          inactiveThumbColor: Colors.grey,
+                          inactiveTrackColor: Colors.grey[300],
+                        ),
+                      ],
+                    ),
+                  ),
 
                   SizedBox(
                     height: 3.0
@@ -398,7 +456,7 @@ void _showDeleteAccountDialog() {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         
-                        Icon(Icons.verified_user, color: Colors.white, size: 25),
+                        Icon(Icons.notifications, color: Colors.white, size: 25),
 
                         SizedBox(
                           width: 10
@@ -412,7 +470,13 @@ void _showDeleteAccountDialog() {
                         ),
 
                         SizedBox(
-                          width: 159
+                          width: 130
+                        ),
+
+                        Icon(
+                          _isNotificationsEnabled ? Icons.notifications : Icons.notifications_off,
+                          color: Colors.white,
+                          size: 25,
                         ),
 
                         Switch(
