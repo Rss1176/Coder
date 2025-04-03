@@ -145,7 +145,9 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                     ],
                   ), 
 
-                  
+                  SizedBox(
+                    height: 20,
+                  ),
 
                   // Leaderboard List
                   FutureBuilder<QuerySnapshot>(

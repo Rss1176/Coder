@@ -9,6 +9,7 @@ import 'account_page.dart';
 import 'my_progress.dart';
 import 'settings.dart';
 import 'leaderboard.dart';
+import 'feature_not_avaliable.dart';
 
 
 // app should be run from the splash screen not main
@@ -580,7 +581,7 @@ class _HomePageState extends State<HomePage> {
                                       alignment: Alignment.center,
                                       child:IconButton(
                                         onPressed: () {
-
+                                          showFeatureNotAvailableDialog(context);
                                          },
                                         icon: Icon(Icons.add, size: 70.0), color: Colors.white,
                                       ),  
