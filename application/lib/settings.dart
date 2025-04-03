@@ -193,6 +193,8 @@ void _showDeleteAccountDialog() {
                     height: 135
                   ),
 
+                  
+
                   Row(
                     children: [
 
@@ -309,6 +311,41 @@ void _showDeleteAccountDialog() {
 
                   SizedBox(
                     height: 5.0
+                  ),
+
+                  ElevatedButton(
+                    onPressed: () async {
+
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(120, 0, 77, 193),
+                      minimumSize: Size(double.infinity, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        
+                        Icon(Icons.dark_mode, color: Colors.white, size: 25),
+
+                        SizedBox(
+                          width: 10
+                        ),
+                    
+                        Text("Change App Theme",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 3.0
                   ),
 
                   ElevatedButton(

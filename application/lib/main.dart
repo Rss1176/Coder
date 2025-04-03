@@ -230,7 +230,7 @@ class _HomePageState extends State<HomePage> {
                                             child: Align(
                                               alignment: Alignment.topCenter,
                                             child: ListView.builder(
-                                              padding: EdgeInsets.zero, // Remove any default padding
+                                              padding: EdgeInsets.zero,
                                               physics: AlwaysScrollableScrollPhysics(),
                                               reverse: false,
                                               itemCount: leaderboard.length,
