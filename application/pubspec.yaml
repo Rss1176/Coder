@@ -38,6 +38,7 @@ flutter:
   - assets/images/background_simple.png
   - assets/images/daily_quiz.png
   - assets/images/java-logo-simple.png
+  - assets/images/languages.png
 
 fonts:
   - family: LuckiestGuy
