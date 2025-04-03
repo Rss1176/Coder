@@ -132,6 +132,7 @@ class _QuestionsPage extends State<QuestionsPage>{
   bool _questionChecked = false;
   String _buttonText = "Submit";
   String _resultText = "";
+  bool daily = false;
 
   void generateQuestions() async { //set inital state of function so the page can be built, will be recalled every time the drop down box is pressed
   setState(() {
@@ -162,10 +163,12 @@ class _QuestionsPage extends State<QuestionsPage>{
     if (_selectedAnswer == null || _selectedAnswer!.isEmpty || _selectedAnswer == "") return;
     String apiAnswer = response["answer"];
     bool isCorrect = _selectedAnswer == apiAnswer;
+    incrementDailyAnswered();
 
     setState((){
       _questionChecked = true;
       _buttonText = "Next Question";
+      data = getFirebaseData(); // updates daily question banner
     });
 
     _resultText = isCorrect ? "Correct!" : "Incorrect, the answer is $apiAnswer";
@@ -174,6 +177,21 @@ class _QuestionsPage extends State<QuestionsPage>{
       updateUserScore(pLanguage);
     }
   }
+
+  Future<void> incrementDailyAnswered() async {
+  try {
+    String? userId = _auth.currentUser?.uid;
+    if (userId == null) {
+      throw Exception("User not found");
+    }
+    DocumentReference userRef = _firestore.collection('users').doc(userId);
+    await userRef.update({
+      "dailyAnswered": FieldValue.increment(1),  // Increment by 1
+    });
+  } catch (e) {
+    throw Exception("Error updating dailyAnswered: $e");
+  }
+}
 
 
   void setButtonToActive(String? value){
@@ -235,7 +253,38 @@ class _QuestionsPage extends State<QuestionsPage>{
   });
   }
 
+  Row buildDailyBanner(DocumentSnapshot userDoc){
+    if (userDoc["dailyAnswered"] < 6){
+      daily = true;
+      return Row(children: [
+         Text(
+            "You have answered ${userDoc["dailyAnswered"]} of 5 Daily Questions",
+            style: GoogleFonts.anton(
+              color: Colors.white,
+              fontSize: 16,
+              ),
+         )
+      ],
+      );
+    } else{
+      daily = false;
+      return Row(children: [
+        Text(
+          "Daily Questions Complete!",
+          style: GoogleFonts.anton(
+            color: Colors.white,
+            fontSize: 16,
+            ),
+        )
+      ],);
+    }
+  }
+
   Future<void> updateUserScore(String? progLanguage) async {
+    int increment = 1;
+    if (daily == true) {
+      increment = 2;
+    }
     try{
       String? userId = _auth.currentUser?.uid;
       if (userId == null) {
@@ -247,7 +296,7 @@ class _QuestionsPage extends State<QuestionsPage>{
       if (userDoc.exists) {
         if (progLanguage == "Python"){
           int currentScore = userDoc["pythonLevel"];
-          await userRef.update({"pythonLevel": currentScore + 1});
+          await userRef.update({"pythonLevel": currentScore + increment});
         }
           if (progLanguage == "C#"){
           int currentScore = userDoc["c#Level"];
@@ -279,6 +328,25 @@ class _QuestionsPage extends State<QuestionsPage>{
           SizedBox(
             height:110.0
           ),
+
+            FutureBuilder<DocumentSnapshot>(
+              future: data, 
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  // Show a loading when data not ready
+                  return CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  // Handle errors
+                  return Text('Error: ${snapshot.error}');
+                } else if (snapshot.hasData) {
+                  // Once the data is available, build the daily banner
+                  return buildDailyBanner(snapshot.data!);
+                } else {
+                  // Handle case where data is not available
+                  return Text('No data available');
+                }
+              },
+            ),
 
           // button to select the programing language of the question
           DropdownButtonFormField<String>(
