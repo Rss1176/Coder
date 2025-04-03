@@ -568,10 +568,9 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Text(
                     "My Dashboard",
-                    style: TextStyle(
+                    style: GoogleFonts.anton(
                       color: Colors.white,
                       fontSize: 25,
-                      fontFamily: 'LuckiestGuy',
                     ),
                   ),
 
