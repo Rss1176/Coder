@@ -9,6 +9,7 @@ import 'my_progress.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'leaderboard.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'feature_not_avaliable.dart';
 
 
 
@@ -631,7 +632,7 @@ void _updatePassword(DocumentSnapshot user){
 
                   ElevatedButton(
                     onPressed: () async {
-
+                      showFeatureNotAvailableDialog(context);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(120, 0, 77, 193),
