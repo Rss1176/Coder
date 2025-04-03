@@ -197,7 +197,6 @@ class _ProgressPageState extends State<ProgressPage> {
                                       style: GoogleFonts.luckiestGuy(
                                         color: Colors.white,
                                         fontSize: 18,
-                                        decoration: TextDecoration.underline,
                                         decorationColor: Colors.white,
                                         decorationThickness: 0.8,
                                       ),
@@ -303,7 +302,6 @@ class _ProgressPageState extends State<ProgressPage> {
                                       style: GoogleFonts.luckiestGuy(
                                         color: Colors.white,
                                         fontSize: 18,
-                                        decoration: TextDecoration.underline,
                                         decorationColor: Colors.white,
                                         decorationThickness: 0.8,
                                       ),
@@ -410,7 +408,6 @@ class _ProgressPageState extends State<ProgressPage> {
                                       style: GoogleFonts.luckiestGuy(
                                         color: Colors.white,
                                         fontSize: 18,
-                                        decoration: TextDecoration.underline,
                                         decorationColor: Colors.white,
                                         decorationThickness: 0.8,
                                       ),
@@ -497,20 +494,18 @@ class _ProgressPageState extends State<ProgressPage> {
                                   children: [
                                     Text(
                                       "Question Portal",
-                                      style: TextStyle(
+                                      style: GoogleFonts.luckiestGuy(
                                         color: Colors.white,
                                         fontSize: 18,
-                                        fontFamily: 'LuckiestGuy',
                                         decorationThickness: 0.8,
                                       ),
                                     ),
                                     
                                     Text(
                                       "Let's Practice!",
-                                      style: TextStyle(
+                                      style: GoogleFonts.anton(
                                         color: Colors.white,
                                         fontSize: 20,
-                                        fontFamily: 'LuckiestGuy',
                                       ),
                                     ),
                                   ],
@@ -529,7 +524,7 @@ class _ProgressPageState extends State<ProgressPage> {
                                   children:[
 
                                     Text("View", 
-                                      style: TextStyle(
+                                      style: GoogleFonts.anton(
                                         color: Colors.white)
                                     ),
 
@@ -591,6 +586,7 @@ class _ProgressPageState extends State<ProgressPage> {
                       color: Colors.white,
                     ),
                     onPressed: () async {
+                      DocumentSnapshot userDoc = await data; // awaits the function call at the top of the class for the firebase data
                       showMyAccountDialog(context); // passes the firebase data into the dialog box constructor;
                     },
                   ),
