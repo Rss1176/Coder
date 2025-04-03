@@ -191,7 +191,7 @@ void _showDeleteAccountDialog() {
 
                   // Adding whitespace to the top of the page
                   SizedBox(
-                    height: 135
+                    height: 200
                   ),
 
                   
