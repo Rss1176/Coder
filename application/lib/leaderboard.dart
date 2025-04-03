@@ -87,6 +87,7 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  
                   // Adding whitespace to the top of the page
                   SizedBox(
                     height: 135
