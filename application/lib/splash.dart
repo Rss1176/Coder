@@ -18,7 +18,7 @@ class Splash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      showSemanticsDebugger: false,
+      showSemanticsDebugger: true,
       title: 'Splash Screen',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 77, 175, 255)),
@@ -71,7 +71,6 @@ class _SplashScreen extends State<SplashScreen>{
 
           // Adding 'Welcome to' Image
           Semantics (label: "Welcome to image",
-          image: true,
           child: Image(
             image: AssetImage("assets/images/image_welcometo.png"),
             width: 375.0, 
@@ -79,11 +78,12 @@ class _SplashScreen extends State<SplashScreen>{
           )),
           
           // Adding 'Coder' Image
-          Image(
+          Semantics(label: "Coder image",
+            child: Image(
             image: AssetImage("assets/images/logo_darkmode.png"), 
             width: 375.0, 
             height: 125.0,
-          ),
+          )),
           
           // Adding Whitespace
           SizedBox(

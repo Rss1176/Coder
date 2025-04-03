@@ -62,6 +62,7 @@ class _CreatePageState extends State<CreatePage> {
         'javaLevel': 0,
         'isAnonymous': false, // this is true for guest users, not sure how it will be used yet but better to have it and not need it than need it and not have it
         'profileImage': '', // empty profile image for use later
+        'dailyAnswered': 0,
       });
     } catch (e) {
       print("Error creating user document: $e");
@@ -146,6 +147,7 @@ String getFirebaseAuthErrorMessage(String errorCode) {
 
               // Adding 'Close' Button
               FloatingActionButton(
+                tooltip: "Press this button to go back to the home screen",
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -185,7 +187,8 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                         Expanded(  
 
                           // Adding First Name Form Field
-                          child: TextFormField(
+                          child: Semantics(label: "Enter your first name here",
+                            child: TextFormField(
                             onChanged: (value) => setButtonActive(),
                             style:TextStyle(color: Color.fromARGB(255, 208, 208, 208), fontSize:16),
                             controller: _firstNameController,
@@ -210,7 +213,7 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                               return null; // ensures the form is not inputed if invalid
                             },
                           ),
-                        ),
+                        )),
 
                         // Adding Whitespace
                         SizedBox(
@@ -227,7 +230,7 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                             value: _selectedPronoun,
                             decoration: InputDecoration(
                               hintText: "",
-                              labelText: "",
+                              labelText: "Select your pronoun with this drop down button", // built in semantics
                               floatingLabelBehavior: FloatingLabelBehavior.always, 
                               floatingLabelStyle: TextStyle(fontSize: 20),
                               filled: true,
@@ -270,7 +273,8 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                     ),
 
                     // Adding Last Name Form Field
-                    TextFormField(
+                    Semantics (label: "Enter your last name here",
+                      child: TextFormField(
                       onChanged: (value) => setButtonActive(),
                       style:TextStyle(color: Color.fromARGB(255, 208, 208, 208), fontSize:16),
                       controller: _lastNameController,
@@ -294,7 +298,7 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                         }
                         return null; // ensures the form is not inputed if invalid
                       },
-                    ),
+                    )),
 
                     // Adding Whitespace
                     SizedBox(
@@ -313,7 +317,7 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                         
                         hintText: "Location",
                         hintStyle: TextStyle(color: Color.fromARGB(255, 208, 208, 208)),
-                        labelText: "",
+                        labelText: "Input a valid Email Address", // built in semantic
                         floatingLabelBehavior: FloatingLabelBehavior.always, 
                         floatingLabelStyle: TextStyle(fontSize: 20),
                         filled: true,
