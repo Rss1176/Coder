@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coder_application/continue_as_guest.dart';
+import 'package:coder_application/medals.dart';
 import 'package:coder_application/questions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -49,12 +50,16 @@ class _HomePageState extends State<HomePage> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance; // variables for getting user details, used in dialog box
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late Future<DocumentSnapshot> data;
+  String cAward = "c1"; // variables that denote what award should be displayed as a medal for language efficiency
+  String pAward = "p1"; // default to the bronze shield so that if firebase fails to be fetched and update it has a default value
+  String jAward = "j1";
 
   // same function block as used in all other firebase calls, fetches the user data, ensure the ID matches and gets the userdocument
   @override
   void initState() {
-    super.initState();
     data = getFirebaseData(); // Fetch data of user
+    _loadData();
+     super.initState(); // load data to set awards on screen
   }
     Future<DocumentSnapshot> getFirebaseData() async{
       String? iD = _auth.currentUser?.uid;
@@ -68,6 +73,15 @@ class _HomePageState extends State<HomePage> {
       }
       return userDoc;
     }
+
+  Future<void> _loadData() async { // loads the data from the medals.dart function for the home page
+  DocumentSnapshot data = await getFirebaseData(); // Fetch data of user
+    setState(() {
+      cAward = getMedalString("csharp", data); 
+      pAward = getMedalString("python", data); 
+      jAward = getMedalString("java", data); 
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -714,6 +728,22 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                         )
                                     ),
+                                    Row(children: [
+                                      Image(
+                                        image: AssetImage("assets/images/$pAward.png"),
+                                        width: 50.0,
+                                        height: 50.0,),
+
+                                        Image(
+                                        image: AssetImage("assets/images/$jAward.png"),
+                                        width: 50.0,
+                                        height: 50.0,),
+
+                                        Image(
+                                        image: AssetImage("assets/images/$cAward.png"),
+                                        width: 50.0,
+                                        height: 50.0,)
+                                    ],)
 
                                   ],
                                 )
