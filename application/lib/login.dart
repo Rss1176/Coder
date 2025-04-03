@@ -130,6 +130,7 @@ String getFirebaseAuthErrorMessage(String errorCode) {
 
                 // Adding a close button to the top right of the screen
                 FloatingActionButton(
+                  tooltip: "Return to splash screen", // built in semantic
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -170,7 +171,8 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                     children: [
 
                       // The first text entry field, covering username for firebase verification
-                      TextFormField(
+                      Semantics(label: "Please enter a valid email",
+                      child: TextFormField(
                         style:TextStyle(color: Color.fromARGB(255, 208, 208, 208)),
                         controller: _emailController,
                         decoration: InputDecoration(
@@ -195,7 +197,7 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                             // ensures that the form is not valid as the email is wrong
                             return null;
                         },
-                      ),
+                      )),
 
                       // Adding Whitespace
                       SizedBox(
@@ -203,7 +205,8 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                       ),
 
                       // The second text entry field, covering password for firebase verification
-                      TextFormField(
+                      Semantics(label: "Please enter your password, must be at least 6 characters",
+                      child: TextFormField(
                         style:TextStyle(color: Color.fromARGB(255, 208, 208, 208)),
                         controller: _passwordController,
                         obscureText: true,
@@ -227,7 +230,7 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                           }
                           return null;
                         },
-                      ),
+                      )),
                     ],
                   ),
                 ),
@@ -264,12 +267,13 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                           onPressed: (){
                             Navigator.of(context).push(createPageRoute2(Create()));
                           },
+                          child: Semantics(label:"Press this button to go to the create an account screen",
                           child: Text("Register", 
                           style: TextStyle(
                             color: Color.fromARGB(255, 208, 208, 208),
                             fontWeight: FontWeight.bold,
                             )
-                          ),
+                          )),
                         )
                       ],
                     ),
