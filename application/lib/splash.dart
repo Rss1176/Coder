@@ -18,6 +18,7 @@ class Splash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      showSemanticsDebugger: false,
       title: 'Splash Screen',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 77, 175, 255)),
@@ -69,11 +70,13 @@ class _SplashScreen extends State<SplashScreen>{
           ),
 
           // Adding 'Welcome to' Image
-          Image(
+          Semantics (label: "Welcome to image",
+          image: true,
+          child: Image(
             image: AssetImage("assets/images/image_welcometo.png"),
             width: 375.0, 
             height: 50.0,
-          ),
+          )),
           
           // Adding 'Coder' Image
           Image(
@@ -97,11 +100,11 @@ class _SplashScreen extends State<SplashScreen>{
               minimumSize: Size(350, 50),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             ),
-            child: Text("Sign in", 
+            child: Semantics(child: Text("Sign in", 
               style: TextStyle(
                 color: Colors.white,
               ),
-            ),
+            ),),
           ),
 
           // Adding Whitespace
@@ -118,12 +121,13 @@ class _SplashScreen extends State<SplashScreen>{
               backgroundColor: const Color.fromARGB(255, 0, 85, 155),
               minimumSize: Size(350, 50),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+
             ),
-            child: Text("Create an Account", 
+            child: Semantics(child: Text("Create an Account", 
               style: TextStyle(
                 color: Colors.white,
               ),
-            ),
+            ),)
           ),
 
           // Adding Whitespace
@@ -133,11 +137,13 @@ class _SplashScreen extends State<SplashScreen>{
 
           // Adding 'Continue as Guest' Button, which opens a pop-up menu
           TextButton(
+            child: Semantics(
+            button: true,
             child: Text("Continue as Guest",
               style: TextStyle(
                 color: const Color.fromARGB(255, 208, 208, 208),
               ),
-            ),
+            ),),
             onPressed: (){
               guestContinueDialog(context, false);
             },             

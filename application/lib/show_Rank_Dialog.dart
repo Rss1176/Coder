@@ -92,7 +92,7 @@ Future<void>showRankDialog(BuildContext context, String pLanguage, num pRank, pD
 
             Text(pDescription == "Expert" ? "You are already an expert!" : "",   // if statement to show only if expert
             style: TextStyle(fontSize: 15)), 
-            Text(pDescription == "Expert" ? "You have completed enough questions!"  : "",   // if statement to show only if expert
+            Text(pDescription == "Expert" ? "You have completed $pRank questions!"  : "",   // if statement to show only if expert
             style: TextStyle(fontSize: 15)),
             Text(pDescription != "Expert" ? "$pRank questions till next rank!" : "",   // if statement to show only if intermediate or beginner rank
             style: TextStyle(fontSize: 15)),
