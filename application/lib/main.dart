@@ -3,11 +3,13 @@ import 'package:coder_application/continue_as_guest.dart';
 import 'package:coder_application/questions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'page_animation.dart';
 import 'account_page.dart';
 import 'my_progress.dart';
 import 'settings.dart';
 import 'leaderboard.dart';
+
 
 // app should be run from the splash screen not main
 
@@ -111,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                               color: Colors.white,
                               width: 1,
                             ),
-                            borderRadius: BorderRadius.circular(25),
+                            borderRadius: BorderRadius.circular(10),
                             color: Color.fromARGB(120, 105, 190, 255),
                           ),
                           child: Padding(
@@ -119,9 +121,17 @@ class _HomePageState extends State<HomePage> {
                             child: Column(
                               children: [
 
-                                Image(image: AssetImage("assets/images/daily_quiz.png"),
-                                  width: 200.0, 
-                                  height: 80.0,
+                                Text(
+                                  "DAILY QUIZ",
+                                  style: GoogleFonts.luckiestGuy(
+                                    color: Colors.white,
+                                    fontSize: 40,
+                                    ),
+                                ),
+
+                                Divider(
+                                  color: Colors.white,
+                                  thickness: 1,
                                 ),
 
                               ],
@@ -154,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                                   color: Colors.white,
                                   width: 1,
                                 ),
-                                borderRadius: BorderRadius.circular(25),
+                                borderRadius: BorderRadius.circular(10),
                                 color: Color.fromARGB(120, 105, 190, 255),
                               ),
                               child:Padding(
@@ -164,30 +174,119 @@ class _HomePageState extends State<HomePage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
 
-                                    Image(image: AssetImage("assets/images/leaderboards_txt.png"),
-                                      width: 180.0, 
-                                      height: 50.0,
-                                    ),
-                                    
                                     Text(
-                                      "Let's Practice!",
-                                      style: TextStyle(
+                                      "LEADERBOARDS",
+                                      style: GoogleFonts.luckiestGuy(
                                         color: Colors.white,
-                                        fontSize: 18,
-                                        fontFamily: 'LuckiestGuy',
-                                      ),
+                                        fontSize: 25,
+                                        ),
                                     ),
+
+                                    Divider(
+                                      color: Colors.white,
+                                      thickness: 1,
+                                    ),
+
+                                    FutureBuilder<QuerySnapshot>(
+                                      future: _firestore.collection('users').where('isAnonymous',isEqualTo: false).get(), // only get users with full accounts)
+                                      builder: (context, snapshot){
+                                        if (snapshot.connectionState == ConnectionState.waiting){ // show a loading symbol when users are coming from firebase
+                                          return CircularProgressIndicator();
+                                        }
+                                        if (snapshot.hasError){
+                                          return Text('${snapshot.error}');
+                                        }
+                                        if (!snapshot.hasData || snapshot.data!.docs.isEmpty){ // logic for no data/failed fetch
+                                          return Text("No data");
+                                        }
+
+                                      final users = snapshot.data!.docs;
+                                      final leaderboard = users.map((user){ // create a dictionary with key user and value a total score
+                                        final data = user.data() as Map<String, dynamic>;
+                                        int score1 = data['pythonLevel'] ?? 0; // individual score, default value of 0 to stop crashes
+                                        int score2 = data['c#Level'] ?? 0;
+                                        int score3 = data['javaLevel'] ?? 0;
+                                        int totalScore = score1 + score2 + score3;
+                                        String name = "${data['firstName']} ${data['lastName']}";
+
+                                        return {
+                                          'username': name, // set dictionary with 2 fields username, and calculated score
+                                          'totalScore': totalScore,
+                                        };
+                                      }).toList(); // list of dictionaries
+                                    
+                                    // sort the data
+                                    leaderboard.sort((a, b) {
+                                      final int scoreA = a['totalScore'] as int; // Ensure totalScore is an integer
+                                      final int scoreB = b['totalScore'] as int; // Ensure totalScore is an integer
+                                      return scoreB.compareTo(scoreA); // Sort in descending order
+                                    });
+
+                                    return Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            height: 255,
+                                            child: Align(
+                                              alignment: Alignment.topCenter,
+                                            child: ListView.builder(
+                                              padding: EdgeInsets.zero, // Remove any default padding
+                                              physics: AlwaysScrollableScrollPhysics(),
+                                              reverse: false,
+                                              itemCount: leaderboard.length,
+                                              itemBuilder: (context, index) {
+                                                final user = leaderboard[index];
+                                                return Column(
+                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                  children: [
+                                                    ListTile(
+                                                      leading: 
+                                                      Container(
+                                                        width: 25,
+                                                        height: 25,
+                                                        decoration: BoxDecoration(
+                                                          color: Colors.blue,
+                                                          borderRadius: BorderRadius.circular(25),
+                                                        ),
+                                                        alignment: Alignment.center,
+                                                        child: Text(
+                                                          "#${index + 1}",
+                                                          textAlign: TextAlign.center,
+                                                          style: GoogleFonts.anton(
+                                                            color: Colors.white,
+                                                            fontSize: 16,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      title: Text(
+                                                        user['username'] as String,
+                                                        style: GoogleFonts.anton(
+                                                          color: Colors.white,
+                                                          fontSize: 16,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            ),
+                                          )
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                  ),
 
                                     ElevatedButton(
                                       onPressed: () {
-                                        Navigator.of(context).push(createPageRoute2(Questions()));
+                                        Navigator.of(context).push(createPageRoute2(Leaderboard()));
                                       },
                                       
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: const Color.fromARGB(255, 0, 85, 155),
                                         minimumSize: Size(20, 50),
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(22),
+                                          borderRadius: BorderRadius.circular(6),
                                           side: BorderSide(
                                             color: Colors.white,
                                             width: 1,
@@ -198,8 +297,8 @@ class _HomePageState extends State<HomePage> {
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children:[
 
-                                          Text("View", 
-                                            style: TextStyle(
+                                          Text("VIEW", 
+                                            style: GoogleFonts.anton(
                                               color: Colors.white)
                                           ),
 
@@ -231,7 +330,7 @@ class _HomePageState extends State<HomePage> {
                                   color: Colors.white,
                                   width: 1,
                                 ),
-                                borderRadius: BorderRadius.circular(25),
+                                borderRadius: BorderRadius.circular(10),
                                 color: Color.fromARGB(120, 105, 190, 255),
                               ),
                             ),
@@ -249,7 +348,7 @@ class _HomePageState extends State<HomePage> {
                                   color: Colors.white,
                                   width: 1,
                                 ),
-                                borderRadius: BorderRadius.circular(25),
+                                borderRadius: BorderRadius.circular(10),
                                 color: Color.fromARGB(120, 105, 190, 255),
                               ),
                             ),
@@ -267,7 +366,7 @@ class _HomePageState extends State<HomePage> {
                                   color: Colors.white,
                                   width: 1,
                                 ),
-                                borderRadius: BorderRadius.circular(25),
+                                borderRadius: BorderRadius.circular(10),
                                 color: Color.fromARGB(120, 105, 190, 255),
                               ),
                             ),
@@ -303,7 +402,7 @@ class _HomePageState extends State<HomePage> {
                                   color: Colors.white,
                                   width: 1,
                                 ),
-                                borderRadius: BorderRadius.circular(25),
+                                borderRadius: BorderRadius.circular(10),
                                 color: Color.fromARGB(120, 105, 190, 255),
                               ),
                               child:Padding(
@@ -313,18 +412,34 @@ class _HomePageState extends State<HomePage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
 
-                                    Image(image: AssetImage("assets/images/questions.png"),
-                                      width: 150.0, 
-                                      height: 30.0,
+                                    Align(
+                                      alignment: Alignment.topCenter,
+                                        child:Text(
+                                        "QUESTIONS",
+                                        textAlign: TextAlign.center,
+                                        style: GoogleFonts.luckiestGuy(
+                                          color: Colors.white,
+                                          fontSize: 25,
+                                        ),
+                                      ),
+                                    ),
+                                    
+
+                                    Divider(
+                                      color: Colors.white,
+                                      thickness: 1,
                                     ),
                                     
                                     Text(
-                                      "Let's Practice!",
-                                      style: TextStyle(
+                                      "Answer questions to improve your coding skills and level up!",
+                                      style: GoogleFonts.anton(
                                         color: Colors.white,
-                                        fontSize: 18,
-                                        fontFamily: 'LuckiestGuy',
-                                      ),
+                                        fontSize: 16,
+                                        ),
+                                    ),
+
+                                    SizedBox(
+                                      height: 35,
                                     ),
 
                                     ElevatedButton(
@@ -336,7 +451,7 @@ class _HomePageState extends State<HomePage> {
                                         backgroundColor: const Color.fromARGB(255, 0, 85, 155),
                                         minimumSize: Size(20, 50),
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(22),
+                                          borderRadius: BorderRadius.circular(6),
                                           side: BorderSide(
                                             color: Colors.white,
                                             width: 1,
@@ -347,8 +462,8 @@ class _HomePageState extends State<HomePage> {
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children:[
 
-                                          Text("Generate", 
-                                            style: TextStyle(
+                                          Text("GENERATE", 
+                                            style: GoogleFonts.anton(
                                               color: Colors.white)
                                           ),
 
@@ -380,7 +495,7 @@ class _HomePageState extends State<HomePage> {
                                   color: Colors.white,
                                   width: 1,
                                 ),
-                                borderRadius: BorderRadius.circular(25),
+                                borderRadius: BorderRadius.circular(10),
                                 color: Color.fromARGB(120, 105, 190, 255),
                               ),
                             ),
@@ -398,7 +513,7 @@ class _HomePageState extends State<HomePage> {
                                   color: Colors.white,
                                   width: 1,
                                 ),
-                                borderRadius: BorderRadius.circular(25),
+                                borderRadius: BorderRadius.circular(10),
                                 color: Color.fromARGB(120, 105, 190, 255),
                               ),
                             ),
@@ -416,7 +531,7 @@ class _HomePageState extends State<HomePage> {
                                   color: Colors.white,
                                   width: 1,
                                 ),
-                                borderRadius: BorderRadius.circular(25),
+                                borderRadius: BorderRadius.circular(10),
                                 color: Color.fromARGB(120, 105, 190, 255),
                               ),
                             ),

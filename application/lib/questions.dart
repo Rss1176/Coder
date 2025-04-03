@@ -276,7 +276,7 @@ class _QuestionsPage extends State<QuestionsPage>{
 
           // adding white sppace
           SizedBox(
-            height:65.0
+            height:110.0
           ),
 
           // button to select the programing language of the question
