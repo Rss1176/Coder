@@ -33,6 +33,7 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
   }
 
   Future<void> _pickImage(ImageSource source) async {
+    // function to pick the image for an account
     try {
       final pickedFile = await _picker.pickImage(source: source);
       if (pickedFile != null) {
@@ -47,6 +48,7 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
   }
 
   Future<void> _uploadImage(File image) async {
+    // upload the image to firebase - currently cannot be used
     try {
       String userId = FirebaseAuth.instance.currentUser!.uid;
 //      Reference storageRef = FirebaseStorage.instance.ref().child('profile_images/$userId.png');
@@ -63,7 +65,7 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
     }
   }
 
-  Future<void> _loadData() async { // loads the data from the medals.dart function for the home page// Fetch data of user
+  Future<void> _loadData() async { // loads the data from the medals.dart function for the home page
     setState(() {
       cAward = getMedalString("csharp", widget.userData); // access the constructor to get userData
       pAward = getMedalString("python", widget.userData); 
@@ -73,12 +75,15 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
 
   @override
   Widget build(BuildContext context) {
+    // create dialog box
     return Dialog(
       insetPadding: EdgeInsets.zero,
       alignment: Alignment.topCenter,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
+
+      // create a container the width of the screen
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: 600,
@@ -86,6 +91,8 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
           color: const Color.fromARGB(255, 0, 85, 155),
           borderRadius: BorderRadius.circular(15),
         ),
+
+        // adding padding around the container
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Column(
@@ -93,6 +100,8 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 65),
+
+              // add row showing profile 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -103,6 +112,8 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
                       fontSize: 25,
                     ),
                   ),
+
+                  // icon button to close dialog
                   IconButton(
                     icon: const Icon(
                       Icons.close,
@@ -115,7 +126,11 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
                   ),
                 ],
               ),
+
+              // divider between the top 3rd of the dialog and the rest
               const Divider(color: Colors.white, thickness: 1),
+
+              // adding white space
               const SizedBox(height: 20),
 
               // Profile Picture
@@ -133,6 +148,7 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
                   ),
                 ),
 
+                // "edit" icon on the image insert
                 Positioned(
                 bottom: 0,
                 left: 120,
@@ -156,8 +172,10 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
               ],
               ),
 
+              // white space
               const SizedBox(height: 20),
 
+              // user details
               Text(
                 "${widget.userData["firstName"] ?? "First Name"} ${widget.userData["lastName"] ?? "Last Name"}",
                 style: const TextStyle(
@@ -167,8 +185,10 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
                 ),
               ),
 
+              // white space
               const SizedBox(height: 10),
 
+              // the rest of the user details
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -222,6 +242,7 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
               SizedBox(height:5),
 
               Row(children: [
+                // python rank image
                 Image(
                   image: AssetImage("assets/images/$pAward.png"),
                   width: 80.0,
@@ -229,14 +250,16 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
 
                   SizedBox(width: 10),
 
-                  Image(
+                // java rank image    
+                Image(
                   image: AssetImage("assets/images/$jAward.png"),
                   width: 80.0,
                   height: 80.0,),
 
                   SizedBox(width: 10),
 
-                  Image(
+                // c# rank image
+                Image(
                   image: AssetImage("assets/images/$cAward.png"),
                   width: 80.0,
                   height: 80.0,)
@@ -250,8 +273,9 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
   }
 }
 
-// Function to show dialog
+// Function to show dialog box
 Future<void> showMyAccountDialog(BuildContext context) async {
+  // ensure data is passed in and calls for the dialog build
   try {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final FirebaseFirestore _firestore = FirebaseFirestore.instance;
