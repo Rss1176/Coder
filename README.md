@@ -7,12 +7,9 @@ CodeR
 ## Description
 An academic project for CS991: Mobile Application Development. 
 
-## Visuals
-TO BE UPLOADED
-
 ## Authors and acknowledgment
-Cameron MacLean 
-Ross MacPherson
+Cameron MacLean <br />
+Ross MacPherson <br />
 John Magennis
 
 ## Project status
