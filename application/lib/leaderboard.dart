@@ -9,7 +9,6 @@ import 'settings.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
-
 class Leaderboard extends StatelessWidget {
   const Leaderboard({super.key});
 
@@ -98,10 +97,12 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                     height: 135
                   ),
 
+                  // Adding the title of the page
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
 
+                      // Adding title for 'Global' leaderboard
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -113,10 +114,13 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                         ),
                       ),
 
+                      // Icon to show the user that they can switch between local and global users
                       Icon(Icons.language, color: Colors.white, size: 30),
 
-                      SizedBox(width: 20),
-
+                      // Adding whitespace
+                      SizedBox(
+                        width: 20
+                        ),
 
                       // switch to change between global and local users
                       Switch(
@@ -131,10 +135,15 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                         inactiveTrackColor: Colors.grey[300],
                       ),
 
-                      SizedBox(width: 20),
+                      // Adding whitespace
+                      SizedBox(
+                        width: 20
+                      ),
 
+                      // Icon to show the user that they can switch between local and global users
                       Icon(Icons.location_city, color: Colors.white, size: 30),
 
+                      // Adding title for 'Local' leaderboard
                       Text(
                         "Local",
                         style: GoogleFonts.anton(
@@ -145,6 +154,7 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                     ],
                   ), 
 
+                  // Adding whitespace
                   SizedBox(
                     height: 20,
                   ),
@@ -244,6 +254,7 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                 },
                 ),
 
+                // Adding whitespace to cover bottom of page in instance of loading or no data
                 SizedBox(
                   height: 700,
                 )
