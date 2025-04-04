@@ -60,20 +60,21 @@ class _ProgressPageState extends State<ProgressPage> {
   num csharpXP = 0;
   num javaXP = 0;
 
-    void getFirebaseDataAndUpdateRank() async{
-      String? iD = _auth.currentUser?.uid;
-      if (iD == null){
-        throw Exception("You are not logged in");
-      }
-      DocumentSnapshot userDoc = await _firestore.collection('users').doc(iD).get();
-
-      if (!userDoc.exists){
-        throw Exception("failed to find user document");
-      }
-      setState(() {
-        updateRanks(userDoc);
-      });
+  // Function to get the firebase data and update the ranks
+  void getFirebaseDataAndUpdateRank() async{
+    String? iD = _auth.currentUser?.uid;
+    if (iD == null){
+      throw Exception("You are not logged in");
     }
+    DocumentSnapshot userDoc = await _firestore.collection('users').doc(iD).get();
+
+    if (!userDoc.exists){
+      throw Exception("failed to find user document");
+    }
+    setState(() {
+      updateRanks(userDoc);
+    });
+  }
 
   // function to update users rank based on questions answered - pass in document snapshot of user
   void updateRanks(DocumentSnapshot userDoc) async{
@@ -459,10 +460,12 @@ class _ProgressPageState extends State<ProgressPage> {
                     ),
                   ),
 
+                  // Adding Whitespace
                   SizedBox(
                     height: 175.0
                   ),
 
+                  // Questions Widget
                   Container(
                     height: 100,
                     decoration: BoxDecoration(
@@ -547,13 +550,16 @@ class _ProgressPageState extends State<ProgressPage> {
                     ),
                   ),
 
+                  // Adding Whitespace
                   SizedBox(
                     height: 250.0
                   ),
+                
                 ],
               ),
             )
           ),
+          // Adding AppBar
           Positioned(
             top: 0,
             left: 0,
@@ -593,6 +599,8 @@ class _ProgressPageState extends State<ProgressPage> {
               ),
             ),
           ),
+          
+          // Adding Nav bar
           Positioned(
             bottom: 50,
             left: 60,

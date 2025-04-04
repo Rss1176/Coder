@@ -239,25 +239,30 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
                 ],
               ),
 
+              SizedBox(height:5),
 
               Row(children: [
                 // python rank image
                 Image(
                   image: AssetImage("assets/images/$pAward.png"),
-                  width: 50.0,
-                  height: 50.0,),
+                  width: 80.0,
+                  height: 80.0,),
+
+                  SizedBox(width: 10),
 
                 // java rank image    
                 Image(
                   image: AssetImage("assets/images/$jAward.png"),
-                  width: 50.0,
-                  height: 50.0,),
+                  width: 80.0,
+                  height: 80.0,),
+
+                  SizedBox(width: 10),
 
                 // c# rank image
                 Image(
                   image: AssetImage("assets/images/$cAward.png"),
-                  width: 50.0,
-                  height: 50.0,)
+                  width: 80.0,
+                  height: 80.0,)
                 ]
               )
             ],

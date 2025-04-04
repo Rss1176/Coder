@@ -12,7 +12,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'feature_not_avaliable.dart';
 
 
-
 class AppSettings extends StatelessWidget {
   const AppSettings({super.key});
 
@@ -93,7 +92,8 @@ class _SettingsPageState extends State<SettingsPage> {
   );
 }
 
-  Future<void> _deleteAccount(String password) async {
+// Function to delete user account
+Future<void> _deleteAccount(String password) async {
   try {
     // Reauthenticate the user
     User? user = FirebaseAuth.instance.currentUser;
@@ -127,6 +127,8 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 }
 
+  // Function to show the delete account dialog
+  // It prompts the user to enter their password to confirm account deletion
 void _showDeleteAccountDialog() {
   TextEditingController passwordController = TextEditingController();
 
@@ -166,6 +168,7 @@ void _showDeleteAccountDialog() {
   );
 }
 
+// Function to update account details, firstname, lastname, pronoun and location
 void _updateAccount(DocumentSnapshot user){
     TextEditingController firstNameController = TextEditingController();
     TextEditingController lastNameController = TextEditingController();
@@ -253,6 +256,7 @@ void _updateAccount(DocumentSnapshot user){
   );
 }
 
+// Function for updating user password
 void _updateEmail(DocumentSnapshot user){
     TextEditingController emailController = TextEditingController(text: user["email"]);
     TextEditingController passwordController = TextEditingController();
@@ -260,6 +264,7 @@ void _updateEmail(DocumentSnapshot user){
   
     // currently does not work properly as firebase is meant to send emails to users as authentication but we do not have email authentication
 
+  // Dialogue box for updating users email address
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -350,6 +355,7 @@ void _updateEmail(DocumentSnapshot user){
   );
 }
 
+// Function for updating user password
 void _updatePassword(DocumentSnapshot user){
     TextEditingController newPasswordController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
@@ -357,6 +363,7 @@ void _updatePassword(DocumentSnapshot user){
 
     // currently does not work properly as firebase is meant to send emails to users as authentication but we do not have email authentication
 
+  // Dialogue box for updating users password
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -471,8 +478,7 @@ void _updatePassword(DocumentSnapshot user){
                     height: 200
                   ),
 
-                  
-
+                  // Adding 'Sub-heading' for account options
                   Row(
                     children: [
 
@@ -493,10 +499,12 @@ void _updatePassword(DocumentSnapshot user){
                     ],
                   ),
 
+                  // Adding whitespace
                   SizedBox(
                     height: 5.0
                   ),
 
+                  // Adding buttons for account change/update options
                   ElevatedButton(
                     onPressed: () async {
                       DocumentSnapshot data = await getFirebaseData();
@@ -529,10 +537,12 @@ void _updatePassword(DocumentSnapshot user){
                     ),
                   ),
 
+                  // Adding whitespace
                   SizedBox(
                     height: 3.0
                   ),
 
+                  // Adding buttons for email change option
                   ElevatedButton(
                     onPressed: () async {
                       DocumentSnapshot data = await getFirebaseData();
@@ -565,10 +575,12 @@ void _updatePassword(DocumentSnapshot user){
                     ),
                   ),
 
+                  // Adding whitespace
                   SizedBox(
                     height: 3.0
                   ),
 
+                  // Adding buttons for password change option
                   ElevatedButton(
                     onPressed: () async {
                       DocumentSnapshot data = await getFirebaseData();
@@ -602,10 +614,12 @@ void _updatePassword(DocumentSnapshot user){
                     ),
                   ),
 
+                  // Adding whitespace
                   SizedBox(
                     height: 20.0
                   ),
 
+                  // Adding 'Sub-heading' for app settings
                   Row(
                     children: [
 
@@ -626,10 +640,12 @@ void _updatePassword(DocumentSnapshot user){
                     ],
                   ),
 
+                  // Adding whitespace
                   SizedBox(
                     height: 5.0
                   ),
 
+                  // Adding buttons for app icon settings  
                   ElevatedButton(
                     onPressed: () async {
                       showFeatureNotAvailableDialog(context);
@@ -661,10 +677,12 @@ void _updatePassword(DocumentSnapshot user){
                     ),
                   ),
                   
+                  // Adding whitespace
                   SizedBox(
                     height: 3.0
                   ),
 
+                  // Adding buttons for app theme settings
                   ElevatedButton(
                     onPressed: () async {
 
@@ -718,10 +736,12 @@ void _updatePassword(DocumentSnapshot user){
                     ),
                   ),
 
+                  // Adding whitespace
                   SizedBox(
                     height: 3.0
                   ),
 
+                  // Adding buttons for app notification settings
                   ElevatedButton(
                     onPressed: () async {
 
@@ -775,10 +795,12 @@ void _updatePassword(DocumentSnapshot user){
                     ),
                   ),
 
+                  // Adding whitespace
                   SizedBox(
                     height: 20.0
                   ),
 
+                  // Adding 'Sub-heading' for contact section
                   Row(
                     children: [
 
@@ -799,10 +821,12 @@ void _updatePassword(DocumentSnapshot user){
                     ],
                   ),
 
+                  // Adding whitespace
                   SizedBox(
                     height: 5.0
                   ),
 
+                  // Adding button for help option, which launches a URL
                   ElevatedButton(
                     onPressed: () async {
                       print("Button pressed");
@@ -848,10 +872,12 @@ void _updatePassword(DocumentSnapshot user){
                     ),
                   ),
 
+                  // Adding whitespace
                   SizedBox(
                     height: 3.0
                   ),
 
+                  // Adding button for terms and conditions option, which launches a URL
                   ElevatedButton(
                     onPressed: () async {
                       print("Button pressed");
@@ -897,10 +923,12 @@ void _updatePassword(DocumentSnapshot user){
                     ),
                   ),
 
+                  // Adding whitespace
                   SizedBox(
                     height: 3.0
                   ),
 
+                  // Adding button for privacy policy option, which launches a URL
                   ElevatedButton(
                     onPressed: () async {
                       print("Button pressed");
@@ -946,10 +974,12 @@ void _updatePassword(DocumentSnapshot user){
                     ),
                   ),
 
+                  // Adding whitespace
                   SizedBox(
                     height: 20.0
                   ),
 
+                  // Adding 'Sub-heading' for account deletion and logout buttons
                   Row(
                     children: [
 
@@ -970,10 +1000,12 @@ void _updatePassword(DocumentSnapshot user){
                     ],
                   ),
 
+                  // Adding whitespace
                   SizedBox(
                     height: 5.0
                   ),
 
+                  // Adding button for deleting account option
                   ElevatedButton(
                     onPressed: () async {
                     showDialog(
@@ -1029,10 +1061,12 @@ void _updatePassword(DocumentSnapshot user){
                     ),
                   ),
 
+                  // Adding whitespace
                   SizedBox(
                     height: 30.0
                   ),
 
+                  // Adding button for log out option
                   ElevatedButton(
                     onPressed: () async {
                     showDialog(
@@ -1080,10 +1114,12 @@ void _updatePassword(DocumentSnapshot user){
                     ),
                   ),
 
+                  // Adding whitespace
                   SizedBox(
                     height: 30.0
                   ),
 
+                  // Adding app version and rights reserved notice
                   Align(
                     alignment: Alignment.center,
                     child: Text(
@@ -1096,6 +1132,7 @@ void _updatePassword(DocumentSnapshot user){
                     ),
                   ),
 
+                  // Adding whitespace
                   SizedBox(
                     height: 160.0
                   )
@@ -1192,6 +1229,7 @@ void _updatePassword(DocumentSnapshot user){
               ),
             ),
           ),
+        
         ],
       ),
     );

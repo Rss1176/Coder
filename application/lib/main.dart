@@ -111,11 +111,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                 ),
 
-                Divider(
-                  color: Colors.white,
-                  thickness: 1,
-                ),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -143,24 +138,15 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children:[
-
-                          Text("START", 
-                            style: GoogleFonts.anton(
-                              color: Colors.white)
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "TAKE\nTHE QUIZ", 
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.anton(
+                            color: Colors.white
                           ),
-
-                          SizedBox(
-                            width: 5.0
-                          ),
-
-                          Icon(Icons.arrow_forward_ios, 
-                            color: Colors.white,
-                          ),
-
-                        ],
+                        ),
                       ),
                     ),
 
@@ -175,7 +161,7 @@ class _HomePageState extends State<HomePage> {
     } else {
       return Expanded(
         child:Container(
-          height: 231,
+          height: 140,
           width: double.infinity,
           decoration: BoxDecoration(
             border: Border.all(
@@ -188,6 +174,7 @@ class _HomePageState extends State<HomePage> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
 
                 Text(
@@ -198,61 +185,16 @@ class _HomePageState extends State<HomePage> {
                     ),
                 ),
 
-                Divider(
-                  color: Colors.white,
-                  thickness: 1,
+                Text(
+                  "Nice! You have answered all 5 questions!\nYou can come back tomorrow for a new quiz!",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.anton(
+                    color: Colors.white,
+                    fontSize: 16,
+                    ),
                 ),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Daily Done",
-                      style: GoogleFonts.anton(
-                        color: Colors.white,
-                        fontSize: 16,
-                        ),
-                    ),
-
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).push(createPageRoute2(Questions()));
-                      },
-                      
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 0, 85, 155),
-                        minimumSize: Size(40, 140),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(6),
-                          side: BorderSide(
-                            color: Colors.white,
-                            width: 1,
-                          ),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children:[
-
-                          Text("START", 
-                            style: GoogleFonts.anton(
-                              color: Colors.white)
-                          ),
-
-                          SizedBox(
-                            width: 5.0
-                          ),
-
-                          Icon(Icons.arrow_forward_ios, 
-                            color: Colors.white,
-                          ),
-
-                        ],
-                      ),
-                    ),
-
-                  ],
-                )
+                SizedBox(height: 10),
 
               ],
             )
@@ -800,7 +742,7 @@ class _HomePageState extends State<HomePage> {
                             ),
 
                             Container(
-                              height: 300,
+                              height: 350,
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color: Colors.white,
@@ -812,13 +754,14 @@ class _HomePageState extends State<HomePage> {
                               child: Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
 
                                     Align(
                                       alignment: Alignment.topCenter,
                                         child:Text(
-                                        "PROFILE AWARDS",
+                                        "TOP PROFILE AWARDS",
                                         textAlign: TextAlign.center,
                                         style: GoogleFonts.luckiestGuy(
                                           color: Colors.white,
@@ -826,34 +769,30 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                     ),
+                                    
+                                    Align(
+                                    alignment: Alignment.center,
+                                    child: Image(
+                                      image: AssetImage("assets/images/$pAward.png"),
+                                      width: 75.0,
+                                      height: 75.0),
+                                    ),
 
                                     Align(
-                                      alignment: Alignment.center,
-                                      child:
-                                      Text(
-                                        "Here's a snapshot of your profile awards!",
-                                        style: GoogleFonts.anton(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        ),
-                                        )
+                                    alignment: Alignment.center,
+                                    child: Image(
+                                      image: AssetImage("assets/images/$jAward.png"),
+                                      width: 75.0,
+                                      height: 75.0),
                                     ),
-                                    Row(children: [
-                                      Image(
-                                        image: AssetImage("assets/images/$pAward.png"),
-                                        width: 50.0,
-                                        height: 50.0,),
 
-                                        Image(
-                                        image: AssetImage("assets/images/$jAward.png"),
-                                        width: 50.0,
-                                        height: 50.0,),
-
-                                        Image(
-                                        image: AssetImage("assets/images/$cAward.png"),
-                                        width: 50.0,
-                                        height: 50.0,)
-                                    ],)
+                                    Align(
+                                    alignment: Alignment.center,
+                                    child: Image(
+                                      image: AssetImage("assets/images/$cAward.png"),
+                                      width: 75.0,
+                                      height: 75.0),
+                                    ),
 
                                   ],
                                 )
@@ -953,7 +892,7 @@ class _HomePageState extends State<HomePage> {
 
                             // adding template container for Settings Page
                             Container(
-                              height: 200,
+                              height: 150,
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color: Colors.white,
@@ -979,10 +918,6 @@ class _HomePageState extends State<HomePage> {
                                           fontSize: 25,
                                         ),
                                       ),
-                                    ),
-
-                                    SizedBox(
-                                      height: 20.0
                                     ),
 
                                     Align(
