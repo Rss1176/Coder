@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 Future<void> showFeatureNotAvailableDialog(BuildContext context) {
+  // placeholder dialog for features not yet implemented within the app, currently only used on the widget editer on the home screen
   return showDialog(
     context: context,
     builder: (BuildContext context) {

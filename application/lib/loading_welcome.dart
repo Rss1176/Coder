@@ -41,6 +41,9 @@ class _LoadingPage extends State<LoadingPage> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late Future<DocumentSnapshot> data;
+  // page to be displayed between sign in and home page
+  // originally this was to be for firebase intilisation - this was uncessary as it was fast enough
+  // kept as the design is nice and "future proofs" the app potentially if we decide to do any long loading stuff on main in the future
 
   @override
   void initState() {
@@ -48,12 +51,12 @@ class _LoadingPage extends State<LoadingPage> {
     data = getFirebaseData(); // Fetch data of user
   }
 
-  Future<DocumentSnapshot> getFirebaseData() async{//could add a "try" later for better error checking
+  Future<DocumentSnapshot> getFirebaseData() async{
       String? iD = _auth.currentUser?.uid;
       if (iD == null){
         throw Exception("You are not logged in");
       }
-        DocumentReference userDocRef = _firestore.collection('users').doc(iD);
+      DocumentReference userDocRef = _firestore.collection('users').doc(iD);
       DocumentSnapshot userDoc = await userDocRef.get();
 
       if (!userDoc.exists){
@@ -116,6 +119,8 @@ class _LoadingPage extends State<LoadingPage> {
                         ),
                         textAlign: TextAlign.center,
                       ),
+                      
+                      // show the users name, if the user is a guest then hide the text
                       if (widget.fromGuest == false)
                         FutureBuilder<DocumentSnapshot>(
                           future: data,
@@ -130,6 +135,7 @@ class _LoadingPage extends State<LoadingPage> {
                             var userData = snapshot.data?.data() as Map<String, dynamic>?;//save all user data in dictionary
                             var firstName = userData?['firstName'] ?? 'Guest';//get the first name out of the dict/map
 
+                            // display the users name
                             return SizedBox(
                               child:
                               Text(firstName+'!', 
@@ -143,7 +149,13 @@ class _LoadingPage extends State<LoadingPage> {
               ],
             ),
           ),
-          SizedBox(height: 180),
+
+          // adding white space 
+          SizedBox(
+            height: 180
+            ),
+
+          // button to push to the main screen of the app
           ElevatedButton(
             onPressed: () {
               Navigator.of(context).push(createPageRoute1(Home()));
@@ -155,7 +167,13 @@ class _LoadingPage extends State<LoadingPage> {
             ),
             child: Text("Lets Go!", style: TextStyle(color: Colors.white)),
           ),
-          SizedBox(height: 20.0),
+
+          // adding white space
+          SizedBox(
+            height: 20.0
+          ),
+
+          // button to return to the sign in screen
           TextButton(
             child: Text("Return to Sign In",
                 style: TextStyle(color: Color.fromARGB(255, 208, 208, 208))),

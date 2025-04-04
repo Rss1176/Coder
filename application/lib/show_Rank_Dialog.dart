@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 String convertStringForC(pLanguage){
   // bandaid fix for poor planning, the image asset is "Csharp", but we want the string to read C#
   // function creates a seperate variable to make this easy
+  // full file is this one function
   String formattedString;
-  if (pLanguage == "CSharp"){
+  if (pLanguage == "CSharp"){ 
     formattedString = "C#";
+    // save a variable with 2 versions of c#, saved in firebase as c# but images cannot be called this, therefore 2 differnt string variables are needed
   }
   else{
     formattedString = pLanguage;
@@ -14,6 +16,7 @@ String convertStringForC(pLanguage){
 }
 
 Future<void>showRankDialog(BuildContext context, String pLanguage, num pRank, pDescription){
+  // create a dialog of user aptitude with each language
   String lowerCaseLanguage = pLanguage.toLowerCase();
   String formattedString = convertStringForC(pLanguage);
   return showDialog(
@@ -25,22 +28,26 @@ Future<void>showRankDialog(BuildContext context, String pLanguage, num pRank, pD
         borderRadius: BorderRadius.circular(15),
     ),
     children: [
-
+      
+      // adding padding round full dialog
       Padding(
         padding: const EdgeInsets.all(15),
         child:Column(
           children: [
             
+            //show the image based on the language seleceted
             Image(
               image: AssetImage("assets/images/$lowerCaseLanguage-logo.png"),
               width: 50.0,
               height: 50.0,
             ),
 
+            // adding white space
             SizedBox(
               height: 10
             ),
 
+            // row to show the proficiency level for the language
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -53,6 +60,7 @@ Future<void>showRankDialog(BuildContext context, String pLanguage, num pRank, pD
                   ),
                 ),
 
+                // button to get out of the dialog box
                 FloatingActionButton(
                   onPressed: () {
                     Navigator.pop(context);
