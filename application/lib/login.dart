@@ -21,7 +21,7 @@ class Login extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            LoginPage(email: email), // take in optional parameter from constructor
+            LoginPage(email: email), // take in optional parameter from constructor - used for the email to persist from the create screen
           ],
         ),
       );
@@ -37,6 +37,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPage extends State<LoginPage>{
+  // class level variables for form completion and firebase entry
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
@@ -54,7 +55,7 @@ class _LoginPage extends State<LoginPage>{
   }
 
   void _showErrorDialog(BuildContext context, String errorMessage){
-    // dialog box shown on an unsucessfuly sign in
+    // dialog box shown on an unsucessfuly sign in due to incorrect credentials
     showDialog(context: context, 
     builder: (errorBox) => AlertDialog(
       title: Text("Error", style: TextStyle(color: Colors.red,
@@ -69,7 +70,7 @@ class _LoginPage extends State<LoginPage>{
   }
 
     void _showCreateDialog(BuildContext context){
-    // dialog box shown on an unsucessfuly sign in
+    // dialog box shown on an unsucessfuly sign in due to the user not being found - has option to push to the create an account screen
     showDialog(context: context, 
     builder: (errorBox) => AlertDialog(
       title: Text("Create Account", style: TextStyle(color: Colors.black,
@@ -267,7 +268,7 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                           onPressed: (){
                             Navigator.of(context).push(createPageRoute2(Create()));
                           },
-                          child: Semantics(label:"Press this button to go to the create an account screen",
+                          child: Semantics(label:"Press this button to go to the create screen",
                           child: Text("Register", 
                           style: TextStyle(
                             color: Color.fromARGB(255, 208, 208, 208),
@@ -286,20 +287,20 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                     // Adding a button to sign in after entering email and password
                     ElevatedButton(
                       onPressed: () async {
-                        try{ // Try to sign in
+                        try{ // Try to sign in with _auth function
                           await _auth.signInWithEmailAndPassword(
                             email: _emailController.text,
                             password: _passwordController.text,
                           );
+                          // async await, stops app and waits for firebase connection
                           final userDoc = await _firestore.collection('users').doc(_auth.currentUser!.uid).get();
-                          if (!userDoc.exists){
+                          if (!userDoc.exists){ // if user doesnt exist show the dialog that asks if they want to create
                             _showCreateDialog(context);
-                          } else {
+                          } else { // if user does exist push to their loading screen
                             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Loading(fromGuest: false,)));
                           }
                         } 
                         on FirebaseAuthException catch (e) { // catches the error for incorrect sign in
-                        print("Firebase Auth Error Code: ${e.code}");
                         String errorMessage = getFirebaseAuthErrorMessage(e.code); // calls the function to set user friendly error message
                         _showErrorDialog(context, errorMessage); // displays user friendly error message
                         }
@@ -309,11 +310,12 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                         backgroundColor: const Color.fromARGB(255, 0, 85, 155),
                         minimumSize: Size(350, 50),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
-                      child: Text("Sign in", 
+                        child: Semantics(label: "Press this button to sign in with your entered credentials",
+                        child: Text("Sign in", 
                         style: TextStyle(
                           color: Colors.white,
                         ),
-                      )
+                      ))
                     ),
                   ]
                 )

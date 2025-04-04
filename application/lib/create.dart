@@ -36,12 +36,12 @@ class CreatePage extends StatefulWidget {
 class _CreatePageState extends State<CreatePage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
-  final _firstNameController = TextEditingController();
+  final _firstNameController = TextEditingController(); // controllers to hold form fields
   final _lastNameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-  bool formFull = false;
+  bool formFull = false; // boolean that activates create an account if the form is full
   String? _selectedPronoun;
   String? _selectedLocation;
   String? sharedEmail; // global variable for passing email to login screen
@@ -65,7 +65,7 @@ class _CreatePageState extends State<CreatePage> {
         'dailyAnswered': 0,
       });
     } catch (e) {
-      print("Error creating user document: $e");
+      print("Error creating user document: $e"); // technically bad practice to keep as a print but users are shown errors in other places and allows debugging
     };
   }
 
@@ -74,7 +74,7 @@ class _CreatePageState extends State<CreatePage> {
   showDialog(context: context, 
   builder: (errorBox) => AlertDialog(
     title: Text("Error", style: TextStyle(color: Colors.red,
-                                          fontWeight: FontWeight.bold)),
+    fontWeight: FontWeight.bold)),
     content: Text(errorMessage),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
     actions:[
@@ -83,7 +83,9 @@ class _CreatePageState extends State<CreatePage> {
     ]
   ));
 }
-String getFirebaseAuthErrorMessage(String errorCode) {
+
+  String getFirebaseAuthErrorMessage(String errorCode) {
+    // get more user friendly error codes for unsuccessful sign-ins
   switch (errorCode) {
     case "invalid-email":
       return "The email address is not valid.";
@@ -103,6 +105,8 @@ String getFirebaseAuthErrorMessage(String errorCode) {
 }
 
   void setButtonActive(){
+    // function to check if the button to create an account should be set to active
+    // called after every form field is changed and only set to active once they are all not null
     setState(()
     {
       formFull = _firstNameController.text.isNotEmpty &&
@@ -221,16 +225,17 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                           ),
 
                         // Using expanded to fill avaliable space 
-                        Expanded(
+                        Expanded(child:
 
                           // Adding Dropdown Button for Pronouns
+                          Semantics(label:"Dropdown to select your pronouns",
                           child: DropdownButtonFormField<String>(
                             dropdownColor: Colors.grey[850],
                             style:TextStyle(color: Color.fromARGB(255, 208, 208, 208), fontSize:16),
                             value: _selectedPronoun,
                             decoration: InputDecoration(
                               hintText: "",
-                              labelText: "Select your pronoun with this drop down button", // built in semantics
+                              labelText: "", 
                               floatingLabelBehavior: FloatingLabelBehavior.always, 
                               floatingLabelStyle: TextStyle(fontSize: 20),
                               filled: true,
@@ -258,12 +263,12 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                             },
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please make a selection'; //requires user enter a value for middle name
+                                return 'Please make a selection'; //requires user enter a value for pronoun name
                               }
-                              return null; // ensures the form is not inputed if invalid
+                              return null; // ensures the form is not if no value is selected
                             },
                           ),
-                        ),
+                        )),
                       ],
                     ),
 
@@ -294,7 +299,7 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                       ),
                       validator: (value){
                         if (value == null || value.isEmpty){
-                          return 'Please enter a last name'; //requires user enter a value for email
+                          return 'Please enter a last name'; //requires user enter a value for last name
                         }
                         return null; // ensures the form is not inputed if invalid
                       },
@@ -306,6 +311,8 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                     ),
 
                     // Adding Location Dropdown Button
+                    Semantics(label: "Select your location from your the dropdown menu",
+                    child: 
                     DropdownButtonFormField<String>(
                       dropdownColor: Colors.grey[850],
                       style:TextStyle(color: Color.fromARGB(255, 208, 208, 208), fontSize:16),
@@ -317,7 +324,7 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                         
                         hintText: "Location",
                         hintStyle: TextStyle(color: Color.fromARGB(255, 208, 208, 208)),
-                        labelText: "Input a valid Email Address", // built in semantic
+                        labelText: "", 
                         floatingLabelBehavior: FloatingLabelBehavior.always, 
                         floatingLabelStyle: TextStyle(fontSize: 20),
                         filled: true,
@@ -354,11 +361,11 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                       },
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please make a selection'; //requires user enter a value for middle name
+                          return 'Please make a selection'; //requires user enter a value for location
                         }
                         return null; // ensures the form is not inputed if invalid
                       },
-                    ),
+                    )),
 
                     // Adding Whitespace
                     SizedBox(
@@ -366,7 +373,8 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                     ),
 
                     // Adding Email Form Field
-                    TextFormField(
+                    Semantics(label:"Please enter a valid email",
+                      child:TextFormField(
                       onChanged: (value) => setButtonActive(),
                       style:TextStyle(color: Color.fromARGB(255, 208, 208, 208), fontSize:16),
                       controller: _emailController,
@@ -391,7 +399,7 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                         }
                         return null; // ensures the form is not inputed if invalid
                       },
-                    ),
+                    )),
 
                     // Adding Whitespace
                     SizedBox(
@@ -399,7 +407,8 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                     ),
 
                     // Adding Password Form Field
-                    TextFormField(
+                    Semantics(label: "Enter a password for your account. It must be at least 6 characters long",
+                      child: TextFormField(
                       onChanged: (value) => setButtonActive(),
                       style:TextStyle(color: Color.fromARGB(255, 208, 208, 208), fontSize:16),
                       controller: _passwordController,
@@ -425,7 +434,7 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                       }
                       return null;
                       },
-                    ),
+                    )),
 
                     // Adding Whitespace
                     SizedBox(
@@ -433,7 +442,8 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                     ),
 
                     // Adding Confirm Password Form Field
-                    TextFormField(
+                    Semantics(label: "Please re-enter your password to ensure that you have entered it correctly",
+                      child: TextFormField(
                       onChanged: (value) => setButtonActive(),
                       style:TextStyle(color: Color.fromARGB(255, 208, 208, 208), fontSize:16),
                       controller: _confirmPasswordController,
@@ -461,7 +471,7 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                       }
                       return null;
                       },
-                    ),
+                    )),
 
                     // Adding Whitespace
                     SizedBox(
@@ -488,13 +498,14 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                   ),
 
                   // Adding 'Login' Button, which redirects to Login Page
-                  TextButton(
-                    child: Text("Login", 
+                    TextButton(
+                      child: Semantics(label: "Press this button to return to the login screen",
+                      child: Text("Login", 
                       style: TextStyle(
                         color: Color.fromARGB(255, 208, 208, 208),
                         fontWeight: FontWeight.bold,
                       ),
-                    ),
+                    )),
                     onPressed: (){
                       Navigator.of(context).push(createPageRoute2(Login()));
                     },
@@ -528,15 +539,10 @@ String getFirebaseAuthErrorMessage(String errorCode) {
                   backgroundColor: const Color.fromARGB(255, 0, 85, 155),
                   minimumSize: Size(350, 50),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
-                child: Text("Create Account", style: TextStyle(color: Colors.white),
-                ),
+                  child: Semantics(label: "Press this button to save your options and create an account",
+                  child: Text("Create Account", style: TextStyle(color: Colors.white),
+                )),
               ),
-
-              // Adding Whitespace, Currently set to 0.0, however likely to change based on Firebase Service
-              SizedBox(
-                height: 0.0
-                ),
-
               ]
             )
           )

@@ -9,7 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class Questions extends StatelessWidget {
   const Questions({super.key});
-
+  // set background image in stack
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +22,8 @@ class Questions extends StatelessWidget {
               ),
             ),
             QuestionsPage(),
+
+            // set app bar
             Positioned(
             top: 0,
             left: 0,
@@ -45,9 +47,11 @@ class Questions extends StatelessWidget {
                     ),
                   ),
 
+                    // set back button
                     IconButton(
                       icon: Icon(Icons.close, color: Colors.white),
                       onPressed: () {
+                        // show  a dialog between back and questions to people dont accidentally leave on a question theyre working on
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
@@ -97,14 +101,16 @@ class _QuestionsPage extends State<QuestionsPage>{
   late Future<DocumentSnapshot> data;
   bool _isLoading = false;
 
-  // same function block as used in all other firebase calls, fetches the user data, ensure the ID matches and gets the userdocument
+
   @override
   void initState() {
     super.initState();
-    data = getFirebaseData();
+    // start to get data as page is loaded, helps stop waiting time on screen
+    data = getFirebaseData(); 
   }
 
-      Future<DocumentSnapshot> getFirebaseData() async{
+    // same function block as used in all other firebase calls, fetches the user data, ensure the ID matches and gets the userdocument
+    Future<DocumentSnapshot> getFirebaseData() async{
       String? iD = _auth.currentUser?.uid;
       if (iD == null){
         throw Exception("You are not logged in");
@@ -121,18 +127,18 @@ class _QuestionsPage extends State<QuestionsPage>{
   final GeminiAIService geminiService = GeminiAIService(); // get an instantiation of the AI call class so the method can be called off it
   Map<String, dynamic> response = {"Response" : "no : response"} ; // set an base value map that can be changed by function
 
-  String? pLanguage = "Python";
-  String? aptitude;
-  bool languageSelected = false;
+  String? pLanguage = "Python"; // varibles passed into the API setting the language and the levels
+  String? aptitude; // set default values to stop crashes as the page opens
+  bool languageSelected = false; // stops a question being generated until a language has been selected
   Color _buttonColor1 = Colors.white;
   Color _buttonColor2 = Colors.white;
-  Color _buttonColor3 = Colors.white;
+  Color _buttonColor3 = Colors.white; // default colours for multiple choice Q's
   Color _buttonColor4 = Colors.white;
-  String? _selectedAnswer = "";
+  String? _selectedAnswer = ""; // answer to be checked against the API
   bool _questionChecked = false;
-  String _buttonText = "Submit";
+  String _buttonText = "Submit"; // changes button text based on the stage of the question screen
   String _resultText = "";
-  bool daily = false;
+  bool daily = false; // set a variable about wether your daily questions have been used up or not
 
   void generateQuestions() async { //set inital state of function so the page can be built, will be recalled every time the drop down box is pressed
   setState(() {
@@ -171,9 +177,10 @@ class _QuestionsPage extends State<QuestionsPage>{
       data = getFirebaseData(); // updates daily question banner
     });
 
-    _resultText = isCorrect ? "Correct!" : "Incorrect, the answer is $apiAnswer";
+    _resultText = isCorrect ? "Correct!" : "Incorrect, the answer is $apiAnswer"; // check if the users' answer is correct
 
     if (isCorrect){
+      // add a point to the user account if they got a question correct
       updateUserScore(pLanguage);
     }
   }
@@ -184,9 +191,9 @@ class _QuestionsPage extends State<QuestionsPage>{
     if (userId == null) {
       throw Exception("User not found");
     }
-    DocumentReference userRef = _firestore.collection('users').doc(userId);
+    DocumentReference userRef = _firestore.collection('users').doc(userId); // get users reference
     await userRef.update({
-      "dailyAnswered": FieldValue.increment(1),  // Increment by 1
+      "dailyAnswered": FieldValue.increment(1),  // Increment the users daily question count by 1
     });
   } catch (e) {
     throw Exception("Error updating dailyAnswered: $e");
@@ -214,6 +221,7 @@ class _QuestionsPage extends State<QuestionsPage>{
   void updateAptitude(String? pLanguage, DocumentSnapshot userDoc){
     setState((){
     // function that checks the users level with a language and sets it to a valid difficulty
+    // after 5 correct become a intermediate - after 10 an expert - in a real deployment these values would be far higher
     if (pLanguage == "Java"){
       int checker = userDoc["javaLevel"];
       if (checker > 5 &&  checker <= 10){
@@ -254,8 +262,9 @@ class _QuestionsPage extends State<QuestionsPage>{
   }
 
   Row buildDailyBanner(DocumentSnapshot userDoc){
+    // function that returns the row widget at the top of the screen based on if the user still has daily question to answer of not
     if (userDoc["dailyAnswered"] < 6){
-      daily = true;
+      daily = true; // boolean that sets if a user is getting double or single points from a question
       return Row(children: [
          Text(
             "You have answered ${userDoc["dailyAnswered"]} of 5 Daily Questions",
@@ -281,6 +290,8 @@ class _QuestionsPage extends State<QuestionsPage>{
   }
 
   Future<void> updateUserScore(String? progLanguage) async {
+    // update a users score on a successful question answered
+    // 2 points if its a daily question 1 if not (increment sets this)
     int increment = 1;
     if (daily == true) {
       increment = 2;
@@ -324,22 +335,22 @@ class _QuestionsPage extends State<QuestionsPage>{
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children:<Widget>[
 
-          // adding white sppace
-          SizedBox(
-            height:110.0
-          ),
+                // adding white sppace
+                SizedBox(
+                  height:110.0
+                ),
 
-            FutureBuilder<DocumentSnapshot>(
-              future: data, 
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
+                FutureBuilder<DocumentSnapshot>(
+                  future: data, 
+                  builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
                   // Show a loading when data not ready
                   return CircularProgressIndicator();
                 } else if (snapshot.hasError) {
                   // Handle errors
                   return Text('Error: ${snapshot.error}');
                 } else if (snapshot.hasData) {
-                  // Once the data is available, build the daily banner
+                  // Once the data is available build the daily banner
                   return buildDailyBanner(snapshot.data!);
                 } else {
                   // Handle case where data is not available
@@ -349,7 +360,7 @@ class _QuestionsPage extends State<QuestionsPage>{
             ),
 
           // button to select the programing language of the question
-          DropdownButtonFormField<String>(
+              DropdownButtonFormField<String>(
                 dropdownColor: Colors.grey[850],
                 iconEnabledColor: Colors.white, 
                 iconDisabledColor: Colors.white,
@@ -403,6 +414,7 @@ class _QuestionsPage extends State<QuestionsPage>{
             height:25.0
           ),
 
+          // container for questions
           Container(
             decoration: BoxDecoration(
               border: Border.all(
@@ -485,7 +497,7 @@ class _QuestionsPage extends State<QuestionsPage>{
                                              )
                                             ),
   
-                ),        
+                ),
                 Flexible(
                   child: Text(response["optionA"], style: TextStyle(
                     color: Colors.white,

@@ -12,6 +12,7 @@ class GeminiAIService {
     // takes 2 input parameters, one for the ability level of the user pulled from firebase and there self selected coding language of choice
     // a map is used as a JSON is returned by API, returned in parts - questions, options (possible answers), the answer, and an explination are saved seperatly
 
+    // json response
     final Map<String, dynamic> requestBody = {
       "contents": [
         {
@@ -33,6 +34,7 @@ class GeminiAIService {
       ]
     };
 
+    // try to connect to the AI through the generated API URL
     try {
       final response = await http.post(
         Uri.parse('$endpoint?key=$apiKey'),
@@ -40,18 +42,21 @@ class GeminiAIService {
         body: jsonEncode(requestBody),
       );
 
+      // if the URL connects sucessfully (code 200)
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
         final List<dynamic> candidates = data['candidates'] as List<dynamic>;
 
+      // split the full json into seperate strings in a map
         if (candidates.isNotEmpty) {
           final List<dynamic>? contentParts = candidates[0]['content']['parts'] as List<dynamic>?;
 
+      // if the map has been generated successfully and the fields are not empty
           if (contentParts != null && contentParts.isNotEmpty) {
-            String rawJson = contentParts[0]['text']; 
-            rawJson = rawJson.replaceAll("```json", "").replaceAll("```", "").trim();
-            final Map<String, dynamic> content = jsonDecode(rawJson); 
-
+            String rawJson = contentParts[0]['text']; // raw json data taken from map
+            rawJson = rawJson.replaceAll("```json", "").replaceAll("```", "").trim(); // remove the json identifier characters ``` and whitespace
+            final Map<String, dynamic> content = jsonDecode(rawJson); // decode the json into a string 
+            //split json into useable variables
             return {
               'question': content['question'],
               'optionA': content['options'][0],

@@ -145,7 +145,7 @@ class _SplashScreen extends State<SplashScreen>{
               ),
             ),),
             onPressed: (){
-              guestContinueDialog(context, false);
+              guestContinueDialog(context, false); // true for guest accounts false for actual accounts, passed to the constructor of the main page eventually
             },             
           ),
 
