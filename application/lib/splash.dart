@@ -18,7 +18,7 @@ class Splash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      showSemanticsDebugger: true,
+      showSemanticsDebugger: false,
       title: 'Splash Screen',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 77, 175, 255)),
@@ -145,7 +145,7 @@ class _SplashScreen extends State<SplashScreen>{
               ),
             ),),
             onPressed: (){
-              guestContinueDialog(context, false);
+              guestContinueDialog(context, false); // true for guest accounts false for actual accounts, passed to the constructor of the main page eventually
             },             
           ),
 
