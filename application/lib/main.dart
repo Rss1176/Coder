@@ -13,7 +13,7 @@ import 'leaderboard.dart';
 import 'feature_not_avaliable.dart';
 
 
-// app should be run from the splash screen not main
+// App should be run from the splash screen not main
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -75,6 +75,7 @@ class _HomePageState extends State<HomePage> {
       return userDoc;
     }
 
+  // function to get the firebase data, used in the dialog box
   Future<void> _loadData() async { // loads the data from the medals.dart function for the home page
   DocumentSnapshot data = await getFirebaseData(); // Fetch data of user
     setState(() {
@@ -84,8 +85,11 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  // function to show the daily quiz banner, if the user has not answered the quiz yet, show the button to take the quiz
   Expanded buildDailyQuesionContainer(DocumentSnapshot userDoc){
     if (userDoc["dailyAnswered"] < 6){
+
+      // Daily Quiz container and widget, if the user has yet to take the daily quiz
       return Expanded(
         child:Container(
           height: 231,
@@ -159,6 +163,8 @@ class _HomePageState extends State<HomePage> {
         ),
       );
     } else {
+
+      // Daily Quiz container and widget, if the user has already taken the daily quiz
       return Expanded(
         child:Container(
           height: 140,
@@ -222,19 +228,20 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
 
-          // set scrolling widget with padding 
-          
+          // Set scrolling widget with padding 
           SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5.0),
               child:Column(
                 children:[
 
+                  // Adding whitespace
                   SizedBox(
                     height: 135,
                     width: 100,
                   ),
 
+                  // Adding a loading indicator while the data is being fetched re daily quiz
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -270,12 +277,12 @@ class _HomePageState extends State<HomePage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
 
-                            // adding whitespace
+                            // Adding whitespace
                             SizedBox(
                               height: 10,
                             ),
 
-                            // adding template container for Leaderboard
+                            // Adding template container for Leaderboard
                             Container(
                               height: 375,
                               decoration: BoxDecoration(
@@ -305,6 +312,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     ),
 
+                                    // Functinality to get the leaderboard data from firebase
                                     FutureBuilder<QuerySnapshot>(
                                       future: _firestore.collection('users').where('isAnonymous',isEqualTo: false).get(), // only get users with full accounts)
                                       builder: (context, snapshot){
@@ -340,6 +348,7 @@ class _HomePageState extends State<HomePage> {
                                       return scoreB.compareTo(scoreA); // Sort in descending order
                                     });
 
+                                    // Formatting leaderboard data, limited to 10 users
                                     return Column(
                                       mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
@@ -395,6 +404,7 @@ class _HomePageState extends State<HomePage> {
                                   },
                                   ),
 
+                                    // Button to view the leaderboard in the Leaderboard page
                                     ElevatedButton(
                                       onPressed: () {
                                         Navigator.of(context).push(createPageRoute2(Leaderboard()));
@@ -436,11 +446,12 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
 
-                            // adding white space
+                            // Adding whitespace
                             SizedBox(
                               height:10
                             ),
 
+                            // adding template container for C# progress
                             Container(
                               height: 200,
                               decoration: BoxDecoration(
@@ -664,6 +675,8 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
 
+
+                      // adding white space between columns
                       SizedBox(
                         width: 10
                         ),
@@ -680,6 +693,7 @@ class _HomePageState extends State<HomePage> {
                               height:10,
                             ),
 
+                            // adding template container for Programming Language Questions
                             Container(
                               height: 225,
                               decoration: BoxDecoration(
@@ -709,6 +723,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                   
+                                    // Button to start the questions/push to questions page
                                     Align(
                                       alignment: Alignment.center,
                                       child: IconButton(
@@ -737,10 +752,12 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
 
+                            // adding whitespace
                             SizedBox(
                               height: 10.0
                             ),
 
+                            // adding template container for Top Profile Awards
                             Container(
                               height: 350,
                               decoration: BoxDecoration(
@@ -770,6 +787,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                     
+                                    // Adding first award image
                                     Align(
                                     alignment: Alignment.center,
                                     child: Image(
@@ -778,6 +796,7 @@ class _HomePageState extends State<HomePage> {
                                       height: 75.0),
                                     ),
 
+                                    // Adding second award image  
                                     Align(
                                     alignment: Alignment.center,
                                     child: Image(
@@ -786,6 +805,7 @@ class _HomePageState extends State<HomePage> {
                                       height: 75.0),
                                     ),
 
+                                    // Adding third award imageh
                                     Align(
                                     alignment: Alignment.center,
                                     child: Image(
@@ -804,7 +824,7 @@ class _HomePageState extends State<HomePage> {
                               height:10
                             ),
 
-                            // adding template container for ----
+                            // adding template container for Python progress
                             Container(
                               height: 200,
                               decoration: BoxDecoration(
@@ -834,6 +854,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
 
+                                    // Adding python logo
                                     Align(
                                       alignment: Alignment.center,
                                       child:Image(
@@ -843,6 +864,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                     
+                                    // Button to push to progress page
                                     ElevatedButton(
                                       onPressed: () {
                                         Navigator.of(context).push(createPageRoute2(Progress()));
