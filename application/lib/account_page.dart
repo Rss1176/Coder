@@ -241,12 +241,15 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
 
               SizedBox(height:5),
 
-              Row(children: [
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+              child:Row(children: [
+                
                 // python rank image
                 Image(
                   image: AssetImage("assets/images/$pAward.png"),
                   width: 80.0,
-                  height: 80.0,),
+                  height: 80.0),
 
                   SizedBox(width: 10),
 
@@ -254,7 +257,7 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
                 Image(
                   image: AssetImage("assets/images/$jAward.png"),
                   width: 80.0,
-                  height: 80.0,),
+                  height: 80.0),
 
                   SizedBox(width: 10),
 
@@ -262,9 +265,14 @@ class _MyAccountDialogState extends State<MyAccountDialog> {
                 Image(
                   image: AssetImage("assets/images/$cAward.png"),
                   width: 80.0,
-                  height: 80.0,)
+                  height: 80.0),
+
+                // Adding sized box to compensate for lack of awards
+                SizedBox(width:200),
+
                 ]
               )
+              ),
             ],
           ),
         ),
