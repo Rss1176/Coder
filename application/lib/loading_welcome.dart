@@ -71,6 +71,7 @@ class _LoadingPage extends State<LoadingPage> {
             'pythonLevel': 0,
             'c#Level': 0,
             'javaLevel': 0,
+            'dailyAnswered': 0,
           });
           userDoc = await userDocRef.get();
         } else {

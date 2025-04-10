@@ -5,6 +5,7 @@ import 'page_animation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 Future<void> guestContinueDialog(BuildContext context, bool fromMain) async {
+  // shows a dialog for guest users to ensure they want to continue as a guest despite it limiting some functionality 
   final auth = FirebaseAuth.instance;
   return showDialog(
     context: context,
