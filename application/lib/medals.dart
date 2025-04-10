@@ -17,7 +17,7 @@ String getMedalString(String pLanguage,DocumentSnapshot user){
     if (user["javaLevel"] > 5 && user["javaLevel"] <= 10){
       return "j2";
     }
-    else if (user["pythonLevel"] > 10){
+    else if (user["javaLevel"] > 10){
       return "j3";
     }
     else{
@@ -28,7 +28,7 @@ String getMedalString(String pLanguage,DocumentSnapshot user){
         if (user["c#Level"] > 5 && user["c#Level"] <= 10){
       return "c2";
     }
-    else if (user["pythonLevel"] > 10){
+    else if (user["c#Level"] > 10){
       return "c3";
     }
     else{
