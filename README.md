@@ -6,6 +6,7 @@ CodeR
 
 ## Description
 An academic project for CS991: Mobile Application Development. 
+We were tasked with creating an Mobile App with flutter.
 
 ## Authors and acknowledgment
 Cameron MacLean <br />
