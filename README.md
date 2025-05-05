@@ -1,4 +1,4 @@
-# CS991-CodeR
+# CodeR
 
 
 ## Name
