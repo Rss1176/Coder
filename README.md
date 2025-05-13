@@ -6,11 +6,11 @@ CodeR
 
 ## Description
 An academic project for CS991: Mobile Application Development. <br />
-We were tasked with creating an Mobile App with flutter.
+A Mobile learning application for programming. The app uses the Gemini AI to generate random development language questions for the user, and their profficiencies in languages are tracked and awarded.
 
 ## Authors and acknowledgment
 Cameron MacLean <br />
-Ross MacPherson <br />
+Ross Alexander <br />
 
 ## Project status
 In development.
